@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <h:outputStylesheet name="./css/login.css" />
+        <title>Facelet Title</title>
+        
+    </h:head>
+    <h:body>
+        <div class="conteiner" >
+            <h:form id="frmLogin">
+                <p:growl id="mensaje" showDetail="false" sticky="false"/> 
+                <p:panel header="Acceso" >
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <p:outputLabel for="txtNombre" value="Ingrese Nombre de Usuario: "/>
+                        <p:inputText id="txtNombre"  value="#{loginFormBean.nombre}" required="true"/>
+
+                        <p:outputLabel for="txtContraseña" value="Ingrese Password: "/>
+                        <p:password id="txtContraseña" required="true" value="#{loginFormBean.password}"/>
+                        <p:outputLabel for="txtTipo" value="Tipo:" />
+                        <p:selectOneMenu id="txtTipo" value="#{loginFormBean.tipo}" style="width:125px" required="true">
+                            <f:selectItem itemLabel="  " itemValue="" />
+                            <f:selectItem itemLabel="alumno"  itemValue="alumno" />
+                            <f:selectItem itemLabel="profesor"  itemValue="profesor" />
+                            <f:selectItem itemLabel="supervisor"  itemValue="supervisor" />
+                        </p:selectOneMenu>
+                        <h:panelGroup/>
+                        <p:commandButton id="btnValidar" value="Validar Usuario" update="mensaje"
+                                          action="#{loginFormBean.validar()}"/>
+                    </h:panelGrid>
+                    <hr/>
+                    Registrarse como Alumno.
+                </p:panel>
+            </h:form>
+        </div>
+    </h:body>
+</html>
+

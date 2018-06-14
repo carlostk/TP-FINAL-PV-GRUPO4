@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 11/06/2018 16:26:02 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="aplicacion.datos.hibernate.mapeos.Aulas" table="aulas" catalog="aulas" optimistic-lock="version">
+        <id name="aulCodigo" type="java.lang.Integer">
+            <column name="aul_codigo" />
+            <generator class="identity" />
+        </id>
+        <property name="aulNombre" type="string">
+            <column name="aul_nombre" length="45" not-null="true" />
+        </property>
+        <property name="aulDescripcion" type="string">
+            <column name="aul_descripcion" length="100" not-null="true" />
+        </property>
+        <property name="aulCapacidad" type="int">
+            <column name="aul_capacidad" not-null="true" />
+        </property>
+        <property name="aulEstado" type="boolean">
+            <column name="aul_estado" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

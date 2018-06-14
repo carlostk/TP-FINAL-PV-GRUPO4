@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 11/06/2018 16:26:02 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="aplicacion.datos.hibernate.mapeos.Docentes" table="docentes" catalog="aulas" optimistic-lock="version">
+        <id name="docCodigo" type="java.lang.Integer">
+            <column name="doc_codigo" />
+            <generator class="identity" />
+        </id>
+        <property name="docLegajo" type="string">
+            <column name="doc_legajo" length="45" not-null="true" />
+        </property>
+        <property name="docCargo" type="string">
+            <column name="doc_cargo" length="45" not-null="true" />
+        </property>
+        <property name="docEstado" type="boolean">
+            <column name="doc_estado" not-null="true" />
+        </property>
+        <property name="docPerfil" type="int">
+            <column name="doc_perfil" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

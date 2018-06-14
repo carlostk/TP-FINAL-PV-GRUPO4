@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 11/06/2018 16:26:02 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="aplicacion.datos.hibernate.mapeos.Carreras" table="carreras" catalog="aulas" optimistic-lock="version">
+        <id name="carCodigo" type="java.lang.Integer">
+            <column name="car_codigo" />
+            <generator class="identity" />
+        </id>
+        <property name="carNombre" type="string">
+            <column name="car_nombre" length="70" not-null="true" />
+        </property>
+        <property name="carPlan" type="string">
+            <column name="car_plan" length="10" not-null="true" />
+        </property>
+        <property name="carEstado" type="boolean">
+            <column name="car_estado" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

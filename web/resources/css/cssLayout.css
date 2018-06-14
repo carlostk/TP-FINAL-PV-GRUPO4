@@ -1,0 +1,84 @@
+body{
+    background: url(../images/fondo2.jpg) repeat top center fixed ;
+}
+
+#bottom {
+
+    background: rgba(147,206,222,1);
+    background: -moz-linear-gradient(45deg, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);
+    background: -webkit-gradient(left bottom, right top, color-stop(0%, rgba(147,206,222,1)), color-stop(41%, rgba(117,189,209,1)), color-stop(100%, rgba(73,165,191,1)));
+    background: -webkit-linear-gradient(45deg, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);
+    background: -o-linear-gradient(45deg, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);
+    background: -ms-linear-gradient(45deg, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);
+    background: linear-gradient(45deg, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#93cede', endColorstr='#49a5bf', GradientType=1 );
+    color: #00007a ;
+    margin: 10px 0px 0px 0px;
+    padding: 5px;
+    position: relative;
+    text-shadow: 5px 5px 5px #aaa;
+}
+
+#contenedor {
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.7);
+    margin: 0 auto;	/* esto hace que el contenedor se centre verticalmente */
+    padding: 2px;
+    text-align: left; /* debemos colocarlo sino todo el texto se centra por heredar text-align de body*/
+    width: 960px; /* este será el ancho por defecto, lo heredarán encabezado, y pie */
+}
+
+#top {
+    background-color: #036fab;
+    color: white;
+    padding: 0px;
+    position: relative;
+}
+
+.center_content {
+    height: 462px;
+    padding: 0px;
+    background: url(../images/fondocentral.png) repeat top center fixed ;
+}
+
+#tooplate_header {
+    /* background: url(../images/tooplate_header1.jpg) no-repeat; */
+
+    background: -moz-linear-gradient(270deg, rgba(0,87,87,1) 0%, rgba(255,255,255,1) 25%, rgba(5,193,255,1) 50%, rgba(255,255,255,1) 75%, rgba(0,128,128,1) 100%); /* ff3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0,87,87,1)), color-stop(25%, rgba(255,255,255,1)), color-stop(50%, rgba(5,193,255,1)), color-stop(75%, rgba(255,255,255,1)), color-stop(100%, rgba(0,128,128,1))); /* safari4+,chrome */
+    background: -webkit-linear-gradient(270deg, rgba(0,87,87,1) 0%, rgba(255,255,255,1) 25%, rgba(5,193,255,1) 50%, rgba(255,255,255,1) 75%, rgba(0,128,128,1) 100%); /* safari5.1+,chrome10+ */
+    background: -o-linear-gradient(270deg, rgba(0,87,87,1) 0%, rgba(255,255,255,1) 25%, rgba(5,193,255,1) 50%, rgba(255,255,255,1) 75%, rgba(0,128,128,1) 100%); /* opera 11.10+ */
+    background: -ms-linear-gradient(270deg, rgba(0,87,87,1) 0%, rgba(255,255,255,1) 25%, rgba(5,193,255,1) 50%, rgba(255,255,255,1) 75%, rgba(0,128,128,1) 100%); /* ie10+ */
+    background: linear-gradient(180deg, rgba(0,87,87,1) 0%, rgba(255,255,255,1) 25%, rgba(5,193,255,1) 50%, rgba(255,255,255,1) 75%, rgba(0,128,128,1) 100%); /* w3c */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#005757', endColorstr='#008080',GradientType=0 ); /* ie6-9 */ 
+
+    height: 111px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+#tooplate_middle {
+    background: url(../images/tooplate_middle.jpg) no-repeat;
+    clear: both;
+    height: 30px;
+    margin: 0 auto;
+    padding: 20px 40px;
+}
+
+#tooplate_main {
+    background: url(../images/tooplate_main.jpg) no-repeat top;
+    clear: both;
+    height: 330px;
+    margin: 0 auto;
+    padding: 10px 40px 0;
+}
+
+#titulo{
+    float: left;
+    width: 960px;
+    margin-top: 3%;
+    color: #3f3fa8 ;
+    text-align: center ;
+    text-shadow: 5px 5px 5px #aaa;
+}
+
+
