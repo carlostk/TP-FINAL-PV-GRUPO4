@@ -2,19 +2,28 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
+        <h:outputStylesheet name="../css/login.css" />
         <title>Registro de Alumno</title>
     </h:head>
     <h:body>
-        
+
         <h:form>
             <p:panel header="Registro de Alumno" >
                 <p:panelGrid columns="2">
                     <p:outputLabel value="Nombre de Usuario: " />
                     <p:inputText />
                     <p:outputLabel value="Password: " />
-                    <p:inputText/>
+                    <p:password />
+                    <p:outputLabel value="Confirmar Password: " />
+                    <p:password />
+                    <p:outputLabel value="Tipo:" />
+                    <p:selectOneMenu >
+                        <f:selectItem itemLabel="Alumno" />
+                        <f:selectItem itemLabel="Profesor" />
+                    </p:selectOneMenu>
                     <p:outputLabel/>
                     <p:outputLabel/>
                     <p:outputLabel value="Nombres:" />
@@ -30,7 +39,7 @@
                     <p:outputLabel value="N° de Celular"/>
                     <p:inputText/>
                 </p:panelGrid>
-                    <p:commandButton value="Registrar" />    
+                <p:commandButton value="Registrar" />    
             </p:panel>
         </h:form>
     </h:body>

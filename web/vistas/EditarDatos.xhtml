@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../templates/template.xhtml">
+
+            <ui:define name="content">
+                <p:panel header="Editar Datos Personales" >
+                    <p:commandButton value="Editar Usuario" onclick="PF('dlg_usuario').show();" />
+                    <br />
+                    <br />
+                    Datos del Perfil
+                    <p:panelGrid columns="2" >
+                        <p:outputLabel value="Nombre:" />
+                        <p:inputText />
+                        <p:outputLabel value="Apellido:" />
+                        <p:inputText />
+                        <p:outputLabel value="Documento:"/>
+                        <p:inputText />
+                        <p:outputLabel value="Fecha de Nac" />
+                        <p:calendar />
+                        <p:outputLabel value="E-Mail" />
+                        <p:inputText />
+                        <p:outputLabel value="Telefono"/>
+                        <p:inputText />
+                    </p:panelGrid>
+                    <br />
+                    <br />
+                    Datos de Alumno:
+                    <p:outputLabel value="Libreta Universitaria"/>
+                    <p:inputText />
+                    <p:outputLabel value="Carrera"/>
+                    <p:inputText />
+                    <br />
+                    <br />
+                    Datos de Profesor:
+                    <p:outputLabel value="Legajo"/>
+                    <p:inputText />
+                    <p:outputLabel value="Cargo"/>
+                    <p:inputText />                    
+                </p:panel>
+                
+                <p:dialog widgetVar="dlg_usuario" modal="true">
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Nombre de Usuario" />
+                        <p:inputText />
+                        <p:outputLabel value="Password" />
+                        <p:password />
+                        <p:outputLabel value="Confirmar Password" />
+                        <p:password />
+                        <p:commandButton value="Guardar" onclick="PF('dlg_usuario').hide();" />
+                    </p:panelGrid>
+                </p:dialog>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
