@@ -1,29 +1,28 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 11/06/2018 16:26:02 by Hibernate Tools 4.3.1 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/06/2018 06:49:49 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="aplicacion.datos.hibernate.mapeos.Asistencias" table="asistencias" catalog="aulas" optimistic-lock="version">
-        <id name="asiCodigo" type="java.lang.Integer">
-            <column name="asi_codigo" />
-            <generator class="identity" />
-        </id>
-        <property name="asiFecha" type="date">
-            <column name="asi_fecha" length="10" not-null="true" />
-        </property>
-        <property name="asiValor" type="string">
-            <column name="asi_valor" length="45" not-null="true">
-                <comment>{AUSENTE-PRESENTE-TARDANZA}</comment>
-            </column>
-        </property>
-        <property name="asiEstado" type="boolean">
-            <column name="asi_estado" not-null="true" />
-        </property>
-        <property name="asiAulaMateria" type="int">
-            <column name="asi_aula_materia" not-null="true" />
-        </property>
-        <property name="asiAlumnoInscripto" type="int">
-            <column name="asi_alumno_inscripto" not-null="true" />
-        </property>
-    </class>
+  <class catalog="aulas" name="aplicacion.modelo.dominio.Asistencias" optimistic-lock="version" table="asistencias">
+    <id name="asiCodigo" type="java.lang.Integer">
+      <column name="asi_codigo"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="aplicacion.modelo.dominio.AulasMaterias" fetch="select" name="aulasMaterias">
+      <column name="asi_aula_materia" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="aplicacion.modelo.dominio.InscripcionesAlumnos" fetch="select" name="inscripcionesAlumnos">
+      <column name="asi_alumno_inscripto" not-null="true"/>
+    </many-to-one>
+    <property name="asiFecha" type="date">
+      <column length="10" name="asi_fecha" not-null="true"/>
+    </property>
+    <property name="asiValor" type="string">
+      <column length="45" name="asi_valor" not-null="true">
+        <comment>{AUSENTE-PRESENTE-TARDANZA}</comment>
+      </column>
+    </property>
+    <property name="asiEstado" type="boolean">
+      <column name="asi_estado" not-null="true"/>
+    </property>
+  </class>
 </hibernate-mapping>

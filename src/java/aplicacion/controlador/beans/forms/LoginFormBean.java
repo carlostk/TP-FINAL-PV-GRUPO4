@@ -37,9 +37,9 @@ public class LoginFormBean implements Serializable{
     public String validar(){
         
         String resultado = null;
-        usuarioBean.getUsuario().setUsuNombreUsuario(nombre);
-        usuarioBean.getUsuario().setUsuPassword(password);
-        usuarioBean.getUsuario().setUsuTipoUsuario(tipo);
+        usuarioBean.getUsuario().setNombreUsuario(nombre);
+        usuarioBean.getUsuario().setPassword(password);
+        usuarioBean.getUsuario().setTipoUsuario(tipo);
         
         boolean esValido = usuarioBean.validar();
         if(esValido==true){
@@ -54,7 +54,7 @@ public class LoginFormBean implements Serializable{
 
     public String getNombreUsuarioValidado(){
         Usuario usuario1 = (Usuario)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioValidado");
-        return usuario1.getUsuNombreUsuario();
+        return usuario1.getNombreUsuario();
     }
     
     public String cerrarSesion(){
@@ -78,7 +78,7 @@ public class LoginFormBean implements Serializable{
     public boolean verificarAlumno(){
      Usuario usuario1 = (Usuario)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioValidado");
      boolean sesionAlumno=false;
-     if(usuario1.getUsuTipoUsuario().equals("alumno"))
+     if(usuario1.getTipoUsuario().equals("alumno"))
      {
        sesionAlumno=true;
      }
@@ -88,7 +88,7 @@ public class LoginFormBean implements Serializable{
     public boolean verificarProfesor(){
      boolean sesionProfesor=false;
      Usuario usuario1 = (Usuario)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioValidado");
-     if(usuario1.getUsuTipoUsuario().equals("profesor"))
+     if(usuario1.getTipoUsuario().equals("profesor"))
      {
        sesionProfesor=true;
      }
@@ -98,7 +98,7 @@ public class LoginFormBean implements Serializable{
      public boolean verificarSupervisor(){
      boolean sesionSupervisor=false;
      Usuario usuario1 = (Usuario)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioValidado");
-     if(usuario1.getUsuTipoUsuario().equals("supervisor"))
+     if(usuario1.getTipoUsuario().equals("supervisor"))
      {
        sesionSupervisor=true;
      }

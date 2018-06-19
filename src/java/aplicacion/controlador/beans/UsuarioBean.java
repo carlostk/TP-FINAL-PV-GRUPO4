@@ -37,7 +37,7 @@ public class UsuarioBean implements Serializable{
     }
     
     public boolean validar(){
-        return usuarioDAO.validar(usuario.getUsuNombreUsuario(),usuario.getUsuPassword(),usuario.getUsuTipoUsuario());
+        return usuarioDAO.validar(usuario.getNombreUsuario(),usuario.getPassword(),usuario.getTipoUsuario());
     }
 
     public Usuario getUsuario() {
@@ -55,5 +55,23 @@ public class UsuarioBean implements Serializable{
     public void setUsuarioDAO(UsuarioDAO usuarioDAO) {
         this.usuarioDAO = usuarioDAO;
     }
-    
+
+    public void registrarUsuario(){
+        /*
+        if (usuario.getUsuTipoUsuario() == "profesor"){
+            usuario.setUsuEstado(false);
+        }else{
+            usuario.setUsuEstado(true);
+        }
+        
+             private Integer usuCodigo;
+     private String usuNombreUsuario;
+     private String usuPassword;
+     private String usuTipoUsuario;
+     private boolean usuEstado;
+        */
+        Usuario unUsuario = new Usuario("oscarugarte","oscar","alumno",true);
+        UsuarioDAO usuarioDAO2 = new UsuarioDAOImp();
+        usuarioDAO2.crear(unUsuario);
+    }    
 }

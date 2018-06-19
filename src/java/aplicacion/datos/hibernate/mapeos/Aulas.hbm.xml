@@ -1,24 +1,29 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 11/06/2018 16:26:02 by Hibernate Tools 4.3.1 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/06/2018 06:49:49 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="aplicacion.datos.hibernate.mapeos.Aulas" table="aulas" catalog="aulas" optimistic-lock="version">
-        <id name="aulCodigo" type="java.lang.Integer">
-            <column name="aul_codigo" />
-            <generator class="identity" />
-        </id>
-        <property name="aulNombre" type="string">
-            <column name="aul_nombre" length="45" not-null="true" />
-        </property>
-        <property name="aulDescripcion" type="string">
-            <column name="aul_descripcion" length="100" not-null="true" />
-        </property>
-        <property name="aulCapacidad" type="int">
-            <column name="aul_capacidad" not-null="true" />
-        </property>
-        <property name="aulEstado" type="boolean">
-            <column name="aul_estado" not-null="true" />
-        </property>
-    </class>
+  <class catalog="aulas" name="aplicacion.modelo.dominio.Aula" optimistic-lock="version" table="aulas">
+    <id name="aulCodigo" type="java.lang.Integer">
+      <column name="aul_codigo"/>
+      <generator class="identity"/>
+    </id>
+    <property name="aulNombre" type="string">
+      <column length="45" name="aul_nombre" not-null="true"/>
+    </property>
+    <property name="aulDescripcion" type="string">
+      <column length="100" name="aul_descripcion" not-null="true"/>
+    </property>
+    <property name="aulCapacidad" type="int">
+      <column name="aul_capacidad" not-null="true"/>
+    </property>
+    <property name="aulEstado" type="boolean">
+      <column name="aul_estado" not-null="true"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="aulasMateriases" table="aulas_materias">
+      <key>
+        <column name="am_aula" not-null="true"/>
+      </key>
+      <one-to-many class="aplicacion.modelo.dominio.AulasMaterias"/>
+    </set>
+  </class>
 </hibernate-mapping>

@@ -8,16 +8,16 @@
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.current_session_context_class">thread</property>
-    <mapping resource="aplicacion/datos/hibernate/mapeos/Docentes.hbm.xml"/>
     <mapping resource="aplicacion/datos/hibernate/mapeos/Alumnos.hbm.xml"/>
-    <mapping resource="aplicacion/datos/hibernate/mapeos/Asistencias.hbm.xml"/>
-    <mapping resource="aplicacion/datos/hibernate/mapeos/Aulas.hbm.xml"/>
     <mapping resource="aplicacion/datos/hibernate/mapeos/Materias.hbm.xml"/>
-    <mapping resource="aplicacion/datos/hibernate/mapeos/InscripcionesAlumnos.hbm.xml"/>
-    <mapping resource="aplicacion/datos/hibernate/mapeos/Perfiles.hbm.xml"/>
-    <mapping resource="aplicacion/datos/hibernate/mapeos/Carreras.hbm.xml"/>
-    <mapping resource="aplicacion/datos/hibernate/mapeos/DocentesMaterias.hbm.xml"/>
-    <mapping resource="aplicacion/datos/hibernate/mapeos/AulasMaterias.hbm.xml"/>
+    <mapping resource="aplicacion/datos/hibernate/mapeos/Asistencias.hbm.xml"/>
+    <mapping resource="aplicacion/datos/hibernate/mapeos/Docentes.hbm.xml"/>
     <mapping resource="aplicacion/datos/hibernate/mapeos/Usuarios.hbm.xml"/>
+    <mapping resource="aplicacion/datos/hibernate/mapeos/AulasMaterias.hbm.xml"/>
+    <mapping resource="aplicacion/datos/hibernate/mapeos/DocentesMaterias.hbm.xml"/>
+    <mapping resource="aplicacion/datos/hibernate/mapeos/InscripcionesAlumnos.hbm.xml"/>
+    <mapping resource="aplicacion/datos/hibernate/mapeos/Carreras.hbm.xml"/>
+    <mapping resource="aplicacion/datos/hibernate/mapeos/Perfiles.hbm.xml"/>
+    <mapping resource="aplicacion/datos/hibernate/mapeos/Aulas.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

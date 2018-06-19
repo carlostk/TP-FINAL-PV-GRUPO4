@@ -13,5 +13,7 @@ import aplicacion.modelo.dominio.Usuario;
  */
 public interface UsuarioDAO {
     boolean validar(String nombreUsuario,String contraseña,String tipo);
-    
+    void crear(Usuario usuario);
+    void modificar(Usuario usuario);
+    Usuario obtenerUsuario(String nombre) ;
 }

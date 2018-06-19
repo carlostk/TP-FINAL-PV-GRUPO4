@@ -1,45 +1,50 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 11/06/2018 16:26:02 by Hibernate Tools 4.3.1 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/06/2018 06:49:49 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="aplicacion.datos.hibernate.mapeos.AulasMaterias" table="aulas_materias" catalog="aulas" optimistic-lock="version">
-        <id name="amCodigo" type="java.lang.Integer">
-            <column name="am_codigo" />
-            <generator class="identity" />
-        </id>
-        <property name="amPeriodo" type="string">
-            <column name="am_periodo" length="45" not-null="true">
-                <comment>{ANUAL-CUATRIMESTRAL-PARCIAL ANUAL-PARCIAL CUATRIMESTRAL}</comment>
-            </column>
-        </property>
-        <property name="amComentario" type="string">
-            <column name="am_comentario" length="100" not-null="true" />
-        </property>
-        <property name="amDia" type="string">
-            <column name="am_dia" length="45" not-null="true">
-                <comment>{LUNES-MARTES-MIERCOLES-JUEVES-VIERNES-SABADO}</comment>
-            </column>
-        </property>
-        <property name="amHorarioDesde" type="string">
-            <column name="am_horario_desde" length="10" not-null="true" />
-        </property>
-        <property name="amHorarioHasta" type="string">
-            <column name="am_horario_hasta" length="10" not-null="true" />
-        </property>
-        <property name="amEstado" type="boolean">
-            <column name="am_estado" not-null="true" />
-        </property>
-        <property name="amAsignacionMateria" type="int">
-            <column name="am_asignacion_materia" not-null="true" />
-        </property>
-        <property name="amAula" type="int">
-            <column name="am_aula" not-null="true" />
-        </property>
-        <property name="amFranjaHoraria" type="string">
-            <column name="am_franja_horaria" length="45" not-null="true">
-                <comment>{MA&#209;ANA-MEDIA MA&#209;ANA-MEDIA TARDE-TARDE-NOCHE}</comment>
-            </column>
-        </property>
-    </class>
+  <class catalog="aulas" name="aplicacion.modelo.dominio.AulasMaterias" optimistic-lock="version" table="aulas_materias">
+    <id name="amCodigo" type="java.lang.Integer">
+      <column name="am_codigo"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="aplicacion.modelo.dominio.Aula" fetch="select" name="aulas">
+      <column name="am_aula" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="aplicacion.modelo.dominio.DocentesMaterias" fetch="select" name="docentesMaterias">
+      <column name="am_asignacion_materia" not-null="true"/>
+    </many-to-one>
+    <property name="amPeriodo" type="string">
+      <column length="45" name="am_periodo" not-null="true">
+        <comment>{ANUAL-CUATRIMESTRAL-PARCIAL ANUAL-PARCIAL CUATRIMESTRAL}</comment>
+      </column>
+    </property>
+    <property name="amComentario" type="string">
+      <column length="100" name="am_comentario" not-null="true"/>
+    </property>
+    <property name="amDia" type="string">
+      <column length="45" name="am_dia" not-null="true">
+        <comment>{LUNES-MARTES-MIERCOLES-JUEVES-VIERNES-SABADO}</comment>
+      </column>
+    </property>
+    <property name="amHorarioDesde" type="string">
+      <column length="10" name="am_horario_desde" not-null="true"/>
+    </property>
+    <property name="amHorarioHasta" type="string">
+      <column length="10" name="am_horario_hasta" not-null="true"/>
+    </property>
+    <property name="amEstado" type="boolean">
+      <column name="am_estado" not-null="true"/>
+    </property>
+    <property name="amFranjaHoraria" type="string">
+      <column length="45" name="am_franja_horaria" not-null="true">
+        <comment>{MAÑANA-MEDIA MAÑANA-MEDIA TARDE-TARDE-NOCHE}</comment>
+      </column>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="asistenciases" table="asistencias">
+      <key>
+        <column name="asi_aula_materia" not-null="true"/>
+      </key>
+      <one-to-many class="aplicacion.modelo.dominio.Asistencias"/>
+    </set>
+  </class>
 </hibernate-mapping>
