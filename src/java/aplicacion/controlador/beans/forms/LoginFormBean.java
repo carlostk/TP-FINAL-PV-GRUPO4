@@ -78,7 +78,8 @@ public class LoginFormBean implements Serializable{
     public boolean verificarAlumno(){
      Usuario usuario1 = (Usuario)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioValidado");
      boolean sesionAlumno=false;
-     if(usuario1.getTipoUsuario().equals("alumno"))
+     if(usuario1!=null &&
+             usuario1.getTipoUsuario().equals("alumno"))
      {
        sesionAlumno=true;
      }
@@ -88,7 +89,9 @@ public class LoginFormBean implements Serializable{
     public boolean verificarProfesor(){
      boolean sesionProfesor=false;
      Usuario usuario1 = (Usuario)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioValidado");
-     if(usuario1.getTipoUsuario().equals("profesor"))
+     
+     if(usuario1!=null&&
+        usuario1.getTipoUsuario().equals("profesor"))
      {
        sesionProfesor=true;
      }
@@ -98,7 +101,8 @@ public class LoginFormBean implements Serializable{
      public boolean verificarSupervisor(){
      boolean sesionSupervisor=false;
      Usuario usuario1 = (Usuario)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioValidado");
-     if(usuario1.getTipoUsuario().equals("supervisor"))
+     if(usuario1!= null &&
+             usuario1.getTipoUsuario().equals("supervisor"))
      {
        sesionSupervisor=true;
      }

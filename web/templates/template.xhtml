@@ -62,9 +62,9 @@
                               </p:menubar>
                         <p:menubar rendered="#{loginFormBean.verificarSupervisor()}">
                                 <p:submenu label="Administrar Tablas">
-                                    <p:menuitem value="Carreras" />
-                                    <p:menuitem value="Materias" />
-                                    <p:menuitem value="Aulas" />
+                                    <p:menuitem value="Carreras" action="/vistas/Carrera?faces-redirect=true" />
+                                    <p:menuitem value="Materias" action="/vistas/Materias?faces-redirect=true" />
+                                    <p:menuitem value="Aulas"  action="/vistas/Aulas?faces-redirect=true"/>
                                 </p:submenu>
                                 
                                 <p:submenu label="Administrar Docentes">
