@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../templates/template.xhtml">
+
+            <ui:define name="content">
+                <br />
+                <br />
+                <p:panel header="Listado de Aulas" >
+                    <br/>
+                    <p:commandButton value="Agregar Aula" onclick="PF('dlg_aula').show();" />
+                    <br/>
+                    <br/>
+
+                    <p:dataTable >
+                        <p:column headerText="Codigo">
+
+                        </p:column>
+
+                        <p:column headerText="Nombre">
+
+                        </p:column>
+
+                        <p:column headerText="Descripcion">
+
+                        </p:column>
+
+                        <p:column headerText="Capacidad">
+
+                        </p:column>
+
+                        <p:column headerText="Modificar">
+
+                        </p:column>
+
+                        <p:column headerText="Eliminar">
+
+                        </p:column>
+
+                        <p:column headerText="Asignar Materia" >
+
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+
+                <p:commandButton value="Asignar Materia" onclick="" />
+
+                <p:dialog header="Nueva Aula" widgetVar="dlg_aula" modal="true" >
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Nombre :" />
+                        <p:inputText />
+                        <p:outputLabel value="Descripcion :" />
+                        <p:inputText />
+                        <p:outputLabel value="Capacidad :" />
+                        <p:inputText />
+                        <p:commandButton value="Guardar" onclick="PF('dlg_aula').hide();" />
+                    </p:panelGrid>
+                </p:dialog>
+
+                <p:dialog header="Asignacíon de Materia" widgetVar="dgl_materia" modal="true" >
+                    <p:panelGrid columns="2" >
+                        <p:outputLabel value="Periodo" />
+                        <p:inputText />
+                        <p:outputLabel value="Comentario" />
+                        <p:inputText />
+                        <p:outputLabel value="Dia" />
+                        <p:inputText />
+                        <p:outputLabel value="Horario de Inicio" />
+                        <p:inputText />
+                        <p:outputLabel value="Horario de Finalizacion" />
+                        <p:inputText />
+                        <p:outputLabel value="Franja Horaria" />
+                        <p:inputText />
+                        <p:outputLabel value="Aula" />
+                        <p:selectOneMenu >
+                            <f:selectItem itemLabel="Aula 12" />
+                            <f:selectItem itemLabel="Aula 11" />
+                        </p:selectOneMenu>
+                        <p:commandButton value="Guardar" onclick="PF('dlg_materia').hide();" />
+                    </p:panelGrid>
+                </p:dialog>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

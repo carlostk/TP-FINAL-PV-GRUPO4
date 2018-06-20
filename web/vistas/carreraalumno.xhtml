@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../templates/template.xhtml">
+
+            <ui:define name="content">
+                <br />
+                <br />
+                <br />
+                <p:panel header="Datos de Carrera">
+                                    <p:panelGrid columns="3">
+                    <p:outputLabel value="Carrera" />
+                    <p:selectOneMenu >
+                        <f:selectItem itemLabel="Analista Programador Universitario" />
+                        <f:selectItem itemLabel="Licenciatura en Sistemas" />
+                        <f:selectItem itemLabel="Ingenieria en Informatica" />
+                    </p:selectOneMenu>
+                    <br />
+                    <p:outputLabel value="Año" />
+                    <p:selectOneMenu >
+                        <f:selectItem itemLabel="Primero" />
+                        <f:selectItem itemLabel="Segundo" />
+                        <f:selectItem itemLabel="Tercero" />
+                    </p:selectOneMenu>
+                </p:panelGrid>
+                 <br/>               
+                <br/>
+                <p:dataTable>
+                    <p:column headerText="Materia">
+                        <p:outputLabel value="Programacion Visual" />
+                    </p:column>
+
+                    <p:column headerText="Inscribirese" >
+                        <p:commandButton value="Inscribirse" />
+                    </p:column>
+
+                    <p:column headerText="Ver Horarios" >
+                        <p:commandButton value="Ir a horario" />
+                    </p:column>
+
+                    <p:column headerText="Profesor" >
+                        <p:outputLabel value="Ariel Vega" />
+                    </p:column>
+                </p:dataTable>
+                </p:panel>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

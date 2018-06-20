@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../templates/template.xhtml">
+
+            <ui:define name="content">
+                <br /> 
+                <br /> 
+                <p:panel header="Visualización de Asistencia" >
+                                    
+                <p:panelGrid columns="3">
+                    <p:outputLabel value="Dias" />
+                    <p:selectOneMenu >
+                        <f:selectItem itemLabel="Lunes" />
+                        <f:selectItem itemLabel="Martes" />
+                        <f:selectItem itemLabel="Miercoles" />
+                        <f:selectItem itemLabel="Jueves" />
+                        <f:selectItem itemLabel="Viernes" />
+                    </p:selectOneMenu>
+                </p:panelGrid>
+                <br /> 
+                <p:dataTable>
+                    <p:column headerText="Materia">
+                        <p:outputLabel value="Programacion Visual" />
+                    </p:column>
+
+                    <p:column headerText="Fecha">
+                        <p:outputLabel value="21/06/2018" />
+                    </p:column>
+
+                    <p:column headerText="Aula">
+                        <p:outputLabel value="Aula 12" />
+                    </p:column>
+
+                    <p:column headerText="Inicio">
+                        <p:outputLabel value="18 hs" />
+                    </p:column>
+
+                    <p:column headerText="Finalizacion">
+                        <p:outputLabel value="21 hs" />
+                    </p:column>
+
+                    <p:column headerText="Asistencia">
+                        <p:commandButton value="Anotarce" />
+                    </p:column>
+                </p:dataTable>
+                </p:panel>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
