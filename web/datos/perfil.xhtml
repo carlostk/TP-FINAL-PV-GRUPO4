@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../templates/template.xhtml">
+
+            <ui:define name="content">
+                <br />
+                <br />
+                <h:form id="frmDatosPerfil" >
+                    <p:growl id="mensaje" showDetail="false" sticky="false"/>   
+                    <p:panel header="Editar Datos del Perfil">
+                        <p:panelGrid id="tblPerfil" columns="2">
+                            <p:outputLabel id="lblNombre" value="Nombre:" for="txtNombre" />
+                            <p:inputText id="txtNombre" required="true" value="#{datosFormBean.perfilBean.perfil.nombres}" >
+                                <f:validateLength minimum="3" maximum="50" />
+                            </p:inputText>
+                            <p:outputLabel id="lblApellido" value="Apellido:" for="txtApellido" />
+                            <p:inputText id="txtApellido" required="true" value="#{datosFormBean.perfilBean.perfil.apellidos}" >
+                                <f:validateLength minimum="3" maximum="50" />
+                            </p:inputText>
+                            <p:outputLabel id="lblDocumento" value="Documento:" for="txtDocumento" />
+                            <p:inputNumber id="txtDocumento" required="true" value="#{datosFormBean.perfilBean.perfil.dni}"
+                                           decimalPlaces="0" thousandSeparator="." >
+                            </p:inputNumber>
+                            <p:outputLabel id="lblFDNacimiento" value="Fecha de Nac: " for="txtFDNacimiento" />
+                            <p:calendar id="txtFDNacimiento" required="true" value="#{datosFormBean.perfilBean.perfil.fechaNac}" />
+                            <p:outputLabel id="lblEmail" value="E-Mail" for="txtEmail" />
+                            <p:inputText  id="txtEmail" required="true" value="#{datosFormBean.perfilBean.perfil.email}" />
+                            <p:outputLabel id="lblTelefono" value="Celular: " for="txtTelefono" />
+                            <p:inputText id="txtTelefono" required="true" value="#{datosFormBean.perfilBean.perfil.celular}" >
+                                <f:validateLength minimum="9" maximum="15" />
+                            </p:inputText>
+                            <p:commandButton id="btnActualizar" value="Actualizar" actionListener="#{datosFormBean.perfilBean.actualizarPerfil()}" />
+                        </p:panelGrid>
+                    </p:panel>
+                </h:form>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

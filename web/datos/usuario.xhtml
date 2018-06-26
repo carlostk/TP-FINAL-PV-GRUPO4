@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./../templates/template.xhtml">
+
+            <ui:define name="content">
+                                <br />
+                <br />
+                <h:form id="frmDatosUsuario">
+                    <p:growl id="mensaje" showDetail="false" sticky="false"/>   
+                    <p:panel header="Datos del Usuario" >
+                        <p:panelGrid id="tblUsuario" columns="2" >
+                            <p:outputLabel id="lblNombreUsuario" value="Nombre de Usuario" for="txtNombreUsuario" />
+                            <p:inputText id="txtNombreUsuario" required="true" value="#{datosFormBean.perfilBean.perfil.usuario.nombreUsuario}" >
+                                <f:validateLength minimum="3" maximum="10" />
+                            </p:inputText>
+                            <p:outputLabel id="lblContraseña" value="Contraseña:" for="txtContraseña" />
+                            <p:inputText id="txtContraseña" required="true" value="#{datosFormBean.perfilBean.perfil.usuario.password}" >
+                                <f:validateLength minimum="4" maximum="20" />
+                            </p:inputText> 
+                            <p:outputLabel id="lblCContraseña" value="Confirmar Contraseña:" for="txtCContraseña" />
+                            <p:inputText id="txtCContraseña" required="true" value="#{datosFormBean.perfilBean.perfil.usuario.password}" >
+                                <f:validateLength minimum="4" maximum="20" />
+                            </p:inputText>
+                            <p:commandButton id="btnActualizar" value="Actualizar" actionListener="#{datosFormBean.perfilBean.actualizarPerfil()}" />
+                        </p:panelGrid>
+                    </p:panel>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

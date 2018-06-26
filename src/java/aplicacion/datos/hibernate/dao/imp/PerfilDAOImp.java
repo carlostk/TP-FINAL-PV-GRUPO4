@@ -9,7 +9,9 @@ import aplicacion.datos.hibernate.configuracion.HibernateUtil;
 import aplicacion.datos.hibernate.dao.PerfilDAO;
 import aplicacion.modelo.dominio.Perfil;
 import java.io.Serializable;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -21,7 +23,7 @@ public class PerfilDAOImp implements PerfilDAO, Serializable{
     public void agregar(Perfil perfil) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        session.save(perfil) ;
+        session.save(perfil);
         session.getTransaction().commit();
         session.close();
     }
@@ -36,9 +38,19 @@ public class PerfilDAOImp implements PerfilDAO, Serializable{
     }
 
     @Override
-    public Perfil obtenerPerfil() {
-        Perfil perfil = null ;
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Perfil obtenerPerfil(String nombreUsuario) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(Perfil.class);
+        criteria.createAlias("usuario", "us");
+        criteria.add(Restrictions.like("us.nombreUsuario", nombreUsuario));
+        //criteria.add(Restrictions.like("usuario.nombreUsuario", nombreUsuario));
+        Perfil perfil = null;
+        if (!criteria.list().isEmpty()) {
+            perfil = (Perfil) criteria.list().get(0);
+        }
+        session.getTransaction().commit();
+        session.close();
+        return perfil;
     }
-    
 }

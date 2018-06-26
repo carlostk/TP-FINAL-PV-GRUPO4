@@ -13,95 +13,107 @@
     </h:head>
 
     <h:body>
-      <div id="contenedor">
-        <div id="top">
-            <ui:insert name="top">
-                <div id="tooplate_header">
+        <div id="contenedor">
+            <div id="top">
+                <ui:insert name="top">
+                    <div id="tooplate_header">
                         <div id="titulo">
                             <h1>Sistema de Registro de Asistencias</h1>
                         </div>
-                </div>
-                <div id="tooplate_middle">
-                    <h:form >
-                        <p:menubar rendered="#{loginFormBean.verificarProfesor()}">
+                    </div>
+                    <div id="tooplate_middle">
+                        <h:form >
+                            <p:menubar rendered="#{loginFormBean.verificarProfesor()}">
                                 <p:submenu label="Carreras">
 
                                 </p:submenu>
-                            
+
                                 <p:submenu label="Ver Asistecia">
-                                    
+
                                 </p:submenu>                           
-                                
+
                                 <p:submenu label="Horarios">
-                                    
+
                                 </p:submenu>
-                                
+
                                 <p:menuitem value="Mis Materias" />
-                                
-                                <p:menuitem value="Datos Personales" />
+
+                                <p:submenu label="Datos Personales">
+                                    <p:menuitem value="Usuario" action="/datos/usuario?faces-redirect=true" />
+                                    <p:menuitem value="Perfil" action="/datos/perfil?faces-redirect=true" />
+                                    <p:menuitem value="Profesor"  action="/datos/profesor?faces-redirect=true"/>
+                                </p:submenu> 
                                 <f:facet name="options">
                                     <p:outputLabel value="Bienvenido #{loginFormBean.nombreUsuarioValidado}"/>
                                     <p:commandButton value="Cerrar Sesión" 
                                                      action="#{loginFormBean.cerrarSesion()}" style="margin-left: 10px"/>
                                 </f:facet>
                             </p:menubar>
-                        
+
                             <p:menubar rendered="#{loginFormBean.verificarAlumno()}">
                                 <p:submenu label="Carreras">
-                                    
+
                                 </p:submenu>
                                 <p:menuitem value="Asistencias" />
                                 <p:menuitem value="Reportes" />
                                 <p:menuitem value="Mis Materias" />
-                                <p:menuitem value="Datos Personales" />                                
+                                <p:submenu label="Datos Personales">
+                                    <p:menuitem value="Usuario" action="/datos/usuario?faces-redirect=true"   />
+                                    <p:menuitem value="Perfil"  action="/datos/perfil?faces-redirect=true"  />
+                                    <p:menuitem value="Alumno"  action="/datos/alumno?faces-redirect=true"/>
+                                </p:submenu>                                  
                                 <f:facet name="options">
                                     <p:outputLabel value="Bienvenido #{loginFormBean.nombreUsuarioValidado}"/>
                                     <p:commandButton value="Cerrar Sesión" 
                                                      action="#{loginFormBean.cerrarSesion()}"/>
                                 </f:facet>
-                              </p:menubar>
-                        <p:menubar rendered="#{loginFormBean.verificarSupervisor()}">
+                            </p:menubar>
+                            <p:menubar rendered="#{loginFormBean.verificarSupervisor()}">
                                 <p:submenu label="Administrar Tablas">
                                     <p:menuitem value="Carreras" action="/vistas/Carrera?faces-redirect=true" />
                                     <p:menuitem value="Materias" action="/vistas/Materias?faces-redirect=true" />
                                     <p:menuitem value="Aulas"  action="/vistas/Aulas?faces-redirect=true"/>
                                 </p:submenu>
-                                
-                            <p:menuitem value="materia" outcome="/vistas/materias"/>
-                                
-                                <p:menuitem value="Datos Personales" outcome="/vistas/carreras"/>
-                                
+
+                                <p:menuitem value="materia" outcome="/vistas/materias"/>
+
+                                <p:submenu label="Datos Personales">
+                                    <p:menuitem value="Usuario" action="/datos/usuario?faces-redirect=true" />
+                                    <p:menuitem value="Perfil" action="/datos/perfil?faces-redirect=true" />
+                                    <p:menuitem value="Alumno"  action="/datos/alumno?faces-redirect=true"/>
+                                </p:submenu>  
+
                                 <f:facet name="options">
                                     <p:outputLabel value="Bienvenido #{loginFormBean.nombreUsuarioValidado}"/>
                                     <p:commandButton value="Cerrar Sesión" 
                                                      action="#{loginFormBean.cerrarSesion()}" style="margin-left: 10px"/>
                                 </f:facet>
-                              </p:menubar>
-                        
+                            </p:menubar>
+
                         </h:form>
-                        
-                    <p:panel rendered="#{loginFormBean.verificarSesion() eq false}">
+
+                        <p:panel rendered="#{loginFormBean.verificarSesion() eq false}">
                             <h:form>
                                 <p:outputLabel value="Sesión no Iniciada"/>
                                 <p:commandButton value="Iniciar Sesión" action="/index?faces-redirect=true"/>
                             </h:form>
                         </p:panel>
                     </div>
-            </ui:insert>
-        </div>
-        <div id="content" class="center_content">
-                <ui:insert name="content">
-               
                 </ui:insert>
             </div>
-        <div id="bottom">
+            <div id="content" class="center_content">
+                <ui:insert name="content">
+
+                </ui:insert>
+            </div>
+            <div id="bottom">
                 <ui:insert name="bottom">
                     <hr/>
                     <center>Desarrollado por Cátedra Programación Visual - Universidad Nacional de Jujuy - Carrera Analista Programador Universitario</center>
                 </ui:insert>
             </div>
-        
-      </div>
+
+        </div>
 
     </h:body>
 

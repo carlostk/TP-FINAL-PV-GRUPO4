@@ -14,5 +14,5 @@ import aplicacion.modelo.dominio.Perfil;
 public interface PerfilDAO {
     void agregar(Perfil perfil);
     void modificar(Perfil perfil);
-    Perfil obtenerPerfil();
+    Perfil obtenerPerfil(String nombreUsuario);
 }

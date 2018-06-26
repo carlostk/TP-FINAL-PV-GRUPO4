@@ -35,7 +35,7 @@ body{
 }
 
 .center_content {
-    height: 462px;
+    height: auto;
     padding: 0px;
     background: url(../images/fondocentral.png) repeat top center fixed ;
 }
