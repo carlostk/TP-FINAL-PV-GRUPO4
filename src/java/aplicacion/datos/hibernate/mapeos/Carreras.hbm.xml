@@ -3,30 +3,19 @@
 <!-- Generated 18/06/2018 06:49:49 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
   <class catalog="aulas" name="aplicacion.modelo.dominio.Carrera" optimistic-lock="version" table="carreras">
-    <id name="carCodigo" type="java.lang.Integer">
+    <id name="codigo" type="java.lang.Integer">
       <column name="car_codigo"/>
       <generator class="identity"/>
     </id>
-    <property name="carNombre" type="string">
+    <property name="nombreCarrera" type="string">
       <column length="70" name="car_nombre" not-null="true"/>
     </property>
-    <property name="carPlan" type="string">
+    <property name="plan" type="string">
       <column length="10" name="car_plan" not-null="true"/>
     </property>
-    <property name="carEstado" type="boolean">
+    <property name="estado" type="boolean">
       <column name="car_estado" not-null="true"/>
     </property>
-    <set fetch="select" inverse="true" lazy="true" name="materiases" table="materias">
-      <key>
-        <column name="mat_carrera" not-null="true"/>
-      </key>
-      <one-to-many class="aplicacion.modelo.dominio.Materia"/>
-    </set>
-    <set fetch="select" inverse="true" lazy="true" name="alumnoses" table="alumnos">
-      <key>
-        <column name="alu_carrera" not-null="true"/>
-      </key>
-      <one-to-many class="aplicacion.modelo.dominio.Alumno"/>
-    </set>
+    
   </class>
 </hibernate-mapping>

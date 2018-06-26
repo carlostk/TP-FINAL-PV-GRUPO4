@@ -10,6 +10,7 @@ import aplicacion.datos.hibernate.dao.UsuarioDAO;
 import aplicacion.modelo.dominio.Usuario;
 
 import java.io.Serializable;
+import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -22,13 +23,15 @@ public class UsuarioDAOImp implements UsuarioDAO, Serializable {
 
     @Override
     public boolean validar(String nombreUsuario, String contraseña, String tipo) {
-
+        
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Criteria criteria = session.createCriteria(Usuario.class);
         criteria.add(Restrictions.like("nombreUsuario", nombreUsuario));
         criteria.add(Restrictions.like("password", contraseña));
         criteria.add(Restrictions.like("tipoUsuario", tipo));
+        System.out.println(criteria.list().size());
+        
         boolean esValido = true;
         if (criteria.list().isEmpty()) {
             esValido = false;

@@ -67,11 +67,9 @@
                                     <p:menuitem value="Aulas"  action="/vistas/Aulas?faces-redirect=true"/>
                                 </p:submenu>
                                 
-                                <p:submenu label="Administrar Docentes">
-                                    
-                                </p:submenu>
+                            <p:menuitem value="materia" outcome="/vistas/materias"/>
                                 
-                                <p:menuitem value="Datos Personales" />
+                                <p:menuitem value="Datos Personales" outcome="/vistas/carreras"/>
                                 
                                 <f:facet name="options">
                                     <p:outputLabel value="Bienvenido #{loginFormBean.nombreUsuarioValidado}"/>

@@ -11,63 +11,57 @@ import java.util.Set;
 public class Materia  implements java.io.Serializable {
 
 
-     private Integer matCodigo;
-     private Carrera carreras;
-     private String matNombre;
-     private boolean matEstado;
-     private Set docentesMateriases = new HashSet(0);
+     private Integer codigo;
+     private Carrera carrera;
+     private String nombre;
+     private boolean estado;
+    
 
     public Materia() {
+        carrera=new Carrera();
     }
 
-	
-    public Materia(Carrera carreras, String matNombre, boolean matEstado) {
-        this.carreras = carreras;
-        this.matNombre = matNombre;
-        this.matEstado = matEstado;
+    public Materia(Integer codigo, Carrera carrera, String nombre, boolean estado) {
+        this.codigo = codigo;
+        this.carrera = carrera;
+        this.nombre = nombre;
+        this.estado = estado;
     }
-    public Materia(Carrera carreras, String matNombre, boolean matEstado, Set docentesMateriases) {
-       this.carreras = carreras;
-       this.matNombre = matNombre;
-       this.matEstado = matEstado;
-       this.docentesMateriases = docentesMateriases;
+
+    public Integer getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
+    }
+
+    public Carrera getCarrera() {
+        return carrera;
+    }
+
+    public void setCarrera(Carrera carrera) {
+        this.carrera = carrera;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
    
-    public Integer getMatCodigo() {
-        return this.matCodigo;
-    }
-    
-    public void setMatCodigo(Integer matCodigo) {
-        this.matCodigo = matCodigo;
-    }
-    public Carrera getCarreras() {
-        return this.carreras;
-    }
-    
-    public void setCarreras(Carrera carreras) {
-        this.carreras = carreras;
-    }
-    public String getMatNombre() {
-        return this.matNombre;
-    }
-    
-    public void setMatNombre(String matNombre) {
-        this.matNombre = matNombre;
-    }
-    public boolean isMatEstado() {
-        return this.matEstado;
-    }
-    
-    public void setMatEstado(boolean matEstado) {
-        this.matEstado = matEstado;
-    }
-    public Set getDocentesMateriases() {
-        return this.docentesMateriases;
-    }
-    
-    public void setDocentesMateriases(Set docentesMateriases) {
-        this.docentesMateriases = docentesMateriases;
-    }
+	
+   
 
 
 

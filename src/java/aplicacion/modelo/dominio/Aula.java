@@ -16,7 +16,7 @@ public class Aula  implements java.io.Serializable {
      private String aulDescripcion;
      private int aulCapacidad;
      private boolean aulEstado;
-     private Set aulasMateriases = new HashSet(0);
+     
 
     public Aula() {
     }
@@ -33,7 +33,7 @@ public class Aula  implements java.io.Serializable {
        this.aulDescripcion = aulDescripcion;
        this.aulCapacidad = aulCapacidad;
        this.aulEstado = aulEstado;
-       this.aulasMateriases = aulasMateriases;
+      
     }
    
     public Integer getAulCodigo() {
@@ -71,14 +71,7 @@ public class Aula  implements java.io.Serializable {
     public void setAulEstado(boolean aulEstado) {
         this.aulEstado = aulEstado;
     }
-    public Set getAulasMateriases() {
-        return this.aulasMateriases;
-    }
-    
-    public void setAulasMateriases(Set aulasMateriases) {
-        this.aulasMateriases = aulasMateriases;
-    }
-
+  
 
 
 

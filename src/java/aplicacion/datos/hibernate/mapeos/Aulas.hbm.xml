@@ -19,11 +19,6 @@
     <property name="aulEstado" type="boolean">
       <column name="aul_estado" not-null="true"/>
     </property>
-    <set fetch="select" inverse="true" lazy="true" name="aulasMateriases" table="aulas_materias">
-      <key>
-        <column name="am_aula" not-null="true"/>
-      </key>
-      <one-to-many class="aplicacion.modelo.dominio.AulasMaterias"/>
-    </set>
+    
   </class>
 </hibernate-mapping>
