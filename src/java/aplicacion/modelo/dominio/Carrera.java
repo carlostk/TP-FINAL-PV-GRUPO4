@@ -25,7 +25,12 @@ public class Carrera  implements java.io.Serializable {
         this.plan = plan;
         this.estado = estado;
     }
+  @Override
+    public String toString(){
+        return String.format("Carrera[%d,%s]", codigo, nombreCarrera,plan,estado);
+    }
 
+          
     public Integer getCodigo() {
         return codigo;
     }

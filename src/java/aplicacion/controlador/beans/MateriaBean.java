@@ -19,6 +19,8 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -47,11 +49,13 @@ public class MateriaBean implements Serializable{
     @PostConstruct
     public void init(){
        materia = new Materia();
-        materiaDao= new MateriaDaoImp();
-        carreraDao=new CarreraDaoImp();
-        carreras=carreraDao.obtenerTodoCarreras();
-        carrera=new Carrera();
-        materias=materiaDao.obtenerTodoMateria();
+       materiaDao= new MateriaDaoImp();
+       carreraDao=new CarreraDaoImp();
+       carrera=new Carrera();
+       materias=materiaDao.obtenerTodoMateria();
+       carreras=carreraDao.obtenerTodoCarreras();
+       HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+       session.setAttribute("carreras", carreras);
     }
 
     public Materia getMateria() {
@@ -110,9 +114,9 @@ public class MateriaBean implements Serializable{
         this.materias = materias;
     }
   
-   public void prueba()
+     public void registrarMateria()
    {
-     System.out.println(carrera.getNombreCarrera()+carreras.get(0).isEstado()+carreras.get(0).getPlan());
+     
      if(estado.equals("h"))
       {
        
@@ -121,28 +125,9 @@ public class MateriaBean implements Serializable{
           {
             materia.setEstado(false);
           }
-     
-     
-     materia.setCarrera(carrera);
-     
      materiaDao.agregarMateria(materia);
      materias=materiaDao.obtenerTodoMateria();
    }
-    
-     public void registrarMateria()
-    {
-      System.out.println("valor:"+estado);
-      if(estado.equals("h"))
-      {
-       System.out.println("llego");
-        materia.setEstado(true);
-      }else
-          {
-            materia.setEstado(false);
-          }
-      System.out.println("llego1");
-      materiaDao.agregarMateria(materia);
-    }
     public void eliminarMateria(Materia materia)
     {
       materiaDao.eliminarMateria(materia);

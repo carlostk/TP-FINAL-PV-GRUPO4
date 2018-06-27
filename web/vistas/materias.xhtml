@@ -73,12 +73,13 @@
                                 <f:selectItem itemLabel="Habilitar" itemValue="h" />
                                 <f:selectItem itemLabel="Desabilitar" itemValue="d" /> <!--Esta propiedad guarda al objeto que representa el texto del itemlabel anterior-->
                             </p:selectOneMenu>
-                            <h:selectOneMenu id="cmbPaises" value="#{materiaFormBean.materiaBean.carrera}" converter="omnifaces.SelectItemsConverter">
-                                <f:selectItems value="#{materiaFormBean.materiaBean.carreras}" var="p" itemLabel="#{p.nombreCarrera}" itemValue="#{p}"/>
+                            <p:outputLabel value="Carrera:" />
+                            <h:selectOneMenu id="cmbCarrera" value="#{materiaFormBean.materiaBean.materia.carrera}" converter="omnifaces.SelectItemsConverter">
+                                <f:selectItems value="#{materiaFormBean.materiaBean.carreras}" var="p" itemLabel="#{p.nombreCarrera}" itemValue="#{p}"/><!--Esta propiedad guarda al objeto que representa el texto del itemlabel anterior-->
                                 
                            </h:selectOneMenu>
                                                        
-                             <p:commandButton update="@([id$=basicDT])" value="Guardar" actionListener="#{materiaBean.prueba()}"  onclick="PF('dlg_materia').hide();" />
+                            <p:commandButton update="@([id$=basicDT])" value="Guardar" actionListener="#{materiaBean.registrarMateria()}"  onclick="PF('dlg_materia').hide();" />
                            
                         </p:panelGrid>
                     </p:dialog>

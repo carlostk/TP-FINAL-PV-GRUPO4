@@ -61,6 +61,12 @@
                         <p:inputText  value="#{carreraFormBean.carreraBean.carrera.nombreCarrera}"/>
                         <p:outputLabel value="Plan :" />
                         <p:inputText value="#{carreraFormBean.carreraBean.carrera.plan}"/>
+                         <p:outputLabel value="Estado :" />
+                        <p:selectOneMenu id="estadoCarrera" required="true"
+                                         value="#{carreraBean.estado}">
+                                <f:selectItem itemLabel="Habilitar" itemValue="h" />
+                                <f:selectItem itemLabel="Desabilitar" itemValue="d" /> 
+                        </p:selectOneMenu>
                         <p:commandButton  value="Guardar"  actionListener="#{carreraFormBean.carreraBean.registrarCarrera()}" update="@([id$=basicDT])" onclick="PF('dlg_carrera').hide()"/>
                         </p:panelGrid>
                     </p:dialog>
