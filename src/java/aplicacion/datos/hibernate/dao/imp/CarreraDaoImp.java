@@ -10,7 +10,6 @@ import aplicacion.datos.hibernate.dao.CarreraDAO;
 import aplicacion.modelo.dominio.Carrera;
 import java.io.Serializable;
 import java.util.List;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;

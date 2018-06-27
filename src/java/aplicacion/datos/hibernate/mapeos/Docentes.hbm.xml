@@ -2,28 +2,23 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 18/06/2018 06:49:49 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="aulas" name="aplicacion.modelo.dominio.Docentes" optimistic-lock="version" table="docentes">
-    <id name="docCodigo" type="java.lang.Integer">
+  <class catalog="aulas" name="aplicacion.modelo.dominio.Docente" optimistic-lock="version" table="docentes">
+    <id name="codigo" type="java.lang.Integer">
       <column name="doc_codigo"/>
       <generator class="identity"/>
     </id>
-    <many-to-one class="aplicacion.modelo.dominio.Perfil" fetch="select" name="perfiles">
+    <many-to-one class="aplicacion.modelo.dominio.Perfil" fetch="select" name="perfil">
       <column name="doc_perfil" not-null="true"/>
     </many-to-one>
-    <property name="docLegajo" type="string">
+    <property name="legajo" type="string">
       <column length="45" name="doc_legajo" not-null="true"/>
     </property>
-    <property name="docCargo" type="string">
+    <property name="cargo" type="string">
       <column length="45" name="doc_cargo" not-null="true"/>
     </property>
-    <property name="docEstado" type="boolean">
+    <property name="estado" type="boolean">
       <column name="doc_estado" not-null="true"/>
     </property>
-    <set fetch="select" inverse="true" lazy="true" name="docentesMateriases" table="docentes_materias">
-      <key>
-        <column name="dm_docente" not-null="true"/>
-      </key>
-      <one-to-many class="aplicacion.modelo.dominio.DocentesMaterias"/>
-    </set>
+  
   </class>
 </hibernate-mapping>

@@ -39,14 +39,9 @@ public class MateriaBean implements Serializable{
     private List<Materia> materias;
     private String buscado;
   
-   /* public MateriaBean() {
-        materia = new Materia();
-        materiaDao= new MateriaDaoImp();
-        carreraDao=new CarreraDaoImp();
-        carreras=carreraDao.obtenerTodoCarreras();
-        carrera=new Carrera();
-        materias=materiaDao.obtenerTodoMateria();
-    }*/
+   public MateriaBean() {
+       
+    }
     @PostConstruct
     public void init(){
        materia = new Materia();

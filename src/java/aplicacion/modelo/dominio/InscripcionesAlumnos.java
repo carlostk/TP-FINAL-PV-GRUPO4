@@ -13,7 +13,7 @@ public class InscripcionesAlumnos  implements java.io.Serializable {
 
      private Integer insCodigo;
      private Alumno alumnos;
-     private DocentesMaterias docentesMaterias;
+     private DocenteMateria docentesMaterias;
      private boolean insEstado;
      private Set asistenciases = new HashSet(0);
 
@@ -21,12 +21,12 @@ public class InscripcionesAlumnos  implements java.io.Serializable {
     }
 
 	
-    public InscripcionesAlumnos(Alumno alumnos, DocentesMaterias docentesMaterias, boolean insEstado) {
+    public InscripcionesAlumnos(Alumno alumnos, DocenteMateria docentesMaterias, boolean insEstado) {
         this.alumnos = alumnos;
         this.docentesMaterias = docentesMaterias;
         this.insEstado = insEstado;
     }
-    public InscripcionesAlumnos(Alumno alumnos, DocentesMaterias docentesMaterias, boolean insEstado, Set asistenciases) {
+    public InscripcionesAlumnos(Alumno alumnos, DocenteMateria docentesMaterias, boolean insEstado, Set asistenciases) {
        this.alumnos = alumnos;
        this.docentesMaterias = docentesMaterias;
        this.insEstado = insEstado;
@@ -47,11 +47,11 @@ public class InscripcionesAlumnos  implements java.io.Serializable {
     public void setAlumnos(Alumno alumnos) {
         this.alumnos = alumnos;
     }
-    public DocentesMaterias getDocentesMaterias() {
+    public DocenteMateria getDocentesMaterias() {
         return this.docentesMaterias;
     }
     
-    public void setDocentesMaterias(DocentesMaterias docentesMaterias) {
+    public void setDocentesMaterias(DocenteMateria docentesMaterias) {
         this.docentesMaterias = docentesMaterias;
     }
     public boolean isInsEstado() {

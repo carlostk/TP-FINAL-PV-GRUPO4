@@ -13,7 +13,7 @@ public class AulasMaterias  implements java.io.Serializable {
 
      private Integer amCodigo;
      private Aula aulas;
-     private DocentesMaterias docentesMaterias;
+     private DocenteMateria docentesMaterias;
      private String amPeriodo;
      private String amComentario;
      private String amDia;
@@ -27,7 +27,7 @@ public class AulasMaterias  implements java.io.Serializable {
     }
 
 	
-    public AulasMaterias(Aula aulas, DocentesMaterias docentesMaterias, String amPeriodo, String amComentario, String amDia, String amHorarioDesde, String amHorarioHasta, boolean amEstado, String amFranjaHoraria) {
+    public AulasMaterias(Aula aulas, DocenteMateria docentesMaterias, String amPeriodo, String amComentario, String amDia, String amHorarioDesde, String amHorarioHasta, boolean amEstado, String amFranjaHoraria) {
         this.aulas = aulas;
         this.docentesMaterias = docentesMaterias;
         this.amPeriodo = amPeriodo;
@@ -38,7 +38,7 @@ public class AulasMaterias  implements java.io.Serializable {
         this.amEstado = amEstado;
         this.amFranjaHoraria = amFranjaHoraria;
     }
-    public AulasMaterias(Aula aulas, DocentesMaterias docentesMaterias, String amPeriodo, String amComentario, String amDia, String amHorarioDesde, String amHorarioHasta, boolean amEstado, String amFranjaHoraria, Set asistenciases) {
+    public AulasMaterias(Aula aulas, DocenteMateria docentesMaterias, String amPeriodo, String amComentario, String amDia, String amHorarioDesde, String amHorarioHasta, boolean amEstado, String amFranjaHoraria, Set asistenciases) {
        this.aulas = aulas;
        this.docentesMaterias = docentesMaterias;
        this.amPeriodo = amPeriodo;
@@ -65,11 +65,11 @@ public class AulasMaterias  implements java.io.Serializable {
     public void setAulas(Aula aulas) {
         this.aulas = aulas;
     }
-    public DocentesMaterias getDocentesMaterias() {
+    public DocenteMateria getDocentesMaterias() {
         return this.docentesMaterias;
     }
     
-    public void setDocentesMaterias(DocentesMaterias docentesMaterias) {
+    public void setDocentesMaterias(DocenteMateria docentesMaterias) {
         this.docentesMaterias = docentesMaterias;
     }
     public String getAmPeriodo() {

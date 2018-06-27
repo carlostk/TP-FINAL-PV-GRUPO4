@@ -2,37 +2,27 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 18/06/2018 06:49:49 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="aulas" name="aplicacion.modelo.dominio.DocentesMaterias" optimistic-lock="version" table="docentes_materias">
-    <id name="dmCodigo" type="java.lang.Integer">
+  <class catalog="aulas" name="aplicacion.modelo.dominio.DocenteMateria" optimistic-lock="version" table="docentes_materias">
+    <id name="codigo" type="java.lang.Integer">
       <column name="dm_codigo"/>
       <generator class="identity"/>
     </id>
-    <many-to-one class="aplicacion.modelo.dominio.Docentes" fetch="select" name="docentes">
+    <many-to-one class="aplicacion.modelo.dominio.Docente" fetch="select" name="docente">
       <column name="dm_docente" not-null="true"/>
     </many-to-one>
-    <many-to-one class="aplicacion.modelo.dominio.Materia" fetch="select" name="materias">
+    <many-to-one class="aplicacion.modelo.dominio.Materia" fetch="select" name="materia">
       <column name="dm_materia" not-null="true"/>
     </many-to-one>
-    <property name="dmAnio" type="int">
+    <property name="anio" type="int">
       <column name="dm_anio" not-null="true"/>
     </property>
-    <property name="dmHabilitado" type="boolean">
+    <property name="habilitado" type="boolean">
       <column name="dm_habilitado" not-null="true"/>
     </property>
-    <property name="dmEstado" type="boolean">
+    <property name="estado" type="boolean">
       <column name="dm_estado" not-null="true"/>
     </property>
-    <set fetch="select" inverse="true" lazy="true" name="aulasMateriases" table="aulas_materias">
-      <key>
-        <column name="am_asignacion_materia" not-null="true"/>
-      </key>
-      <one-to-many class="aplicacion.modelo.dominio.AulasMaterias"/>
-    </set>
-    <set fetch="select" inverse="true" lazy="true" name="inscripcionesAlumnoses" table="inscripciones_alumnos">
-      <key>
-        <column name="ins_docente_materia" not-null="true"/>
-      </key>
-      <one-to-many class="aplicacion.modelo.dominio.InscripcionesAlumnos"/>
-    </set>
+    
+    
   </class>
 </hibernate-mapping>
