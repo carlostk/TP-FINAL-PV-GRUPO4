@@ -94,7 +94,11 @@ public class CarreraBean implements Serializable{
     
     public void buscarCarrera()
     {
-      
+        if(carreraDao.buscarCarrera(buscado)!=null)
+        {
+         carreras.clear();
+         carreras.add(0, carreraDao.buscarCarrera(buscado));
+        }
     }
     public void eliminarCarrera(Carrera carrera)
     {

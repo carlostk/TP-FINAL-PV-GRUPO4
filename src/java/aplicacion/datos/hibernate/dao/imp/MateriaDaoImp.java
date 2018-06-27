@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -48,7 +49,19 @@ public class MateriaDaoImp implements MateriaDAO, Serializable{
 
     @Override
     public Materia buscarMateria(String nombre) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      List<Materia>materias;
+        Materia materia;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(Materia.class);
+        criteria.add(Restrictions.like("nombreCarrera", nombre));
+        System.out.println("tamaño"+criteria.list().size());
+        materias=(List<Materia>) criteria.list();
+        
+        materia=materias.get(0);
+        
+        session.close();
+        return materia;
     }
 
     @Override

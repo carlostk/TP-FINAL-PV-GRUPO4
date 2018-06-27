@@ -37,6 +37,7 @@ public class MateriaBean implements Serializable{
     private List<Carrera> carreras;
     private CarreraDAO carreraDao;
     private List<Materia> materias;
+    private String buscado;
   
    /* public MateriaBean() {
         materia = new Materia();
@@ -133,5 +134,12 @@ public class MateriaBean implements Serializable{
       materiaDao.eliminarMateria(materia);
       materias=materiaDao.obtenerTodoMateria();
     }
-    
+    public void buscarCarrera()
+    {
+        if(materiaDao.buscarMateria(buscado)!=null)
+        {
+         materias.clear();
+         materias.add(0, materiaDao.buscarMateria(buscado));
+        }
+    }
 }

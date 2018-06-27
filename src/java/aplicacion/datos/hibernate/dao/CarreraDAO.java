@@ -16,6 +16,6 @@ public interface CarreraDAO {
     void agregarCarrera(Carrera carrera);
     void eliminarCarrera(Carrera carrera);
     void modificarCarrera(Carrera carrera);
-    List<Carrera> buscarCarrera(String nombre) ;
+    Carrera buscarCarrera(String nombre) ;
     List<Carrera> obtenerTodoCarreras();
 }

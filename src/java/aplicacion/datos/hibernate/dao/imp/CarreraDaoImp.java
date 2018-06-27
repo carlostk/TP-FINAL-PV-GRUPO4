@@ -49,14 +49,18 @@ public class CarreraDaoImp implements CarreraDAO, Serializable {
     }
 
     @Override
-    public List<Carrera> buscarCarrera(String nombre) {
-        List<Carrera>carrera;
+    public Carrera buscarCarrera(String nombre) {
+        List<Carrera>carreras;
+        Carrera carrera;
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Criteria criteria = session.createCriteria(Carrera.class);
         criteria.add(Restrictions.like("nombreCarrera", nombre));
         System.out.println("tamaño"+criteria.list().size());
-        carrera=(List<Carrera>) criteria.list();
+        carreras=(List<Carrera>) criteria.list();
+        
+        carrera=carreras.get(0);
+        System.out.println("tamañooo"+carrera.getNombreCarrera());
         session.close();
         return carrera;
     }
