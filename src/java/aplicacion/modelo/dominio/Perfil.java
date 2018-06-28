@@ -36,7 +36,10 @@ public class Perfil  implements java.io.Serializable {
         this.celular = perCelular;
     }
     
-   
+   @Override
+    public String toString(){
+        return String.format("Perfil[%d,%s]", codigo, usuario,nombres,apellidos,dni,fechaNac,email,celular);
+    }
     public Integer getCodigo() {
         return this.codigo;
     }

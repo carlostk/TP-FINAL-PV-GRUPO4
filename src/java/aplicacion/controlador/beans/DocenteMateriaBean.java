@@ -126,6 +126,7 @@ public class DocenteMateriaBean implements Serializable {
     
     public void registrarDocenteMateria()
     {
+        System.out.println("VALORRRR"+docenteMateria.getMateria().getNombre());
        if(estado.equals("h"))
       {
        
@@ -137,8 +138,5 @@ public class DocenteMateriaBean implements Serializable {
       docenteMateria.setEstado(false);
       docenteMateriaDao.agregarDocenteMateria(docenteMateria);
     }
-    public void probar()
-    {
-      System.out.println("VALORR: "+docentes.get(0).getPerfil());
-    }
+    
 }

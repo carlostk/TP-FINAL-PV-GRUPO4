@@ -26,7 +26,10 @@ public class Usuario  implements java.io.Serializable {
         this.tipoUsuario = usuTipoUsuario;
         this.estado = usuEstado;
     }
-    
+     @Override
+    public String toString(){
+        return String.format("Usuario[%d,%s]", codigo, nombreUsuario,password,tipoUsuario,estado);
+    }
    
     public Integer getCodigo() {
         return this.codigo;

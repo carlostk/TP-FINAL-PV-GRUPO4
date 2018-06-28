@@ -46,6 +46,16 @@
                                 </f:facet>
                             </p:cellEditor>
                         </p:column>
+                        <p:column headerText="Carrera">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{mate.carrera.nombreCarrera}" /></f:facet>
+                                <f:facet name="input">
+                                    <h:selectOneMenu id="cmbCarrera" value="#{mate.carrera}" converter="omnifaces.SelectItemsConverter">
+                                      <f:selectItems value="#{materiaFormBean.materiaBean.carreras}" var="p" itemLabel="#{p.nombreCarrera}" itemValue="#{p}"/><!--Esta propiedad guarda al objeto que representa el texto del itemlabel anterior-->
+                                   </h:selectOneMenu>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
 
                         <p:column headerText="Eliminar">
                             <p:commandButton value="Eliminar" update="basicDT" actionListener="#{materiaFormBean.materiaBean.eliminarMateria(mate)}"/>
@@ -100,9 +110,9 @@
                             </h:selectOneMenu>
                             <p:outputLabel value="Profesor:" />
                             <h:selectOneMenu id="cmbpro" value="#{docenteMateriaBean.docenteMateria.docente}" converter="omnifaces.SelectItemsConverter">
-                                <f:selectItems value="#{docenteMateriaBean.docentes}" var="p" itemLabel="#{p.cargo}" itemValue="#{p}"/><!--Esta propiedad guarda al objeto que representa el texto del itemlabel anterior-->
+                                <f:selectItems value="#{docenteMateriaBean.docentes}" var="o" itemLabel="#{o.perfil.nombres}" itemValue="#{o}"/><!--Esta propiedad guarda al objeto que representa el texto del itemlabel anterior-->
                             </h:selectOneMenu>
-                            <p:commandButton value="Guardar" actionListener="#{docenteMateriaBean.probar()}"  />
+                            <p:commandButton value="Guardar" actionListener="#{docenteMateriaBean.registrarDocenteMateria()}"  onclick="PF('dlg_profesor').hide();"/>
                         </p:panelGrid>
                     </p:dialog>
                   </h:form>

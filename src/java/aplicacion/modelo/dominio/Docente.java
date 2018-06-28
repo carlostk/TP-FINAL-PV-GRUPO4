@@ -27,7 +27,10 @@ public class Docente  implements java.io.Serializable {
         this.legajo = legajo;
         this.cargo = cargo;
     }
-
+@Override
+    public String toString(){
+        return String.format("Docente[%d,%s]", codigo, perfil,legajo,cargo,estado);
+    }
     public Integer getCodigo() {
         return codigo;
     }

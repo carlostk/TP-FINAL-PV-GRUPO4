@@ -11,6 +11,7 @@ import aplicacion.modelo.dominio.Docente;
 import java.io.Serializable;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
@@ -71,6 +72,10 @@ public class DocenteDaoImp implements DocenteDAO, Serializable {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(Docente.class);
         docentes=(List<Docente>) criteria.list();
+         for(Docente m : docentes)
+        {
+            Hibernate.initialize(m.getPerfil());
+        }
         session.close();
         return  docentes;
     }

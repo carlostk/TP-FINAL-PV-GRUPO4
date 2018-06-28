@@ -11,6 +11,7 @@ import aplicacion.modelo.dominio.Materia;
 import java.io.Serializable;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
@@ -71,6 +72,10 @@ public class MateriaDaoImp implements MateriaDAO, Serializable{
         session.beginTransaction();
         Criteria criteria = session.createCriteria(Materia.class);
         materias=(List<Materia>) criteria.list();
+        for(Materia m : materias)
+        {
+            Hibernate.initialize(m.getCarrera());
+        }
         session.close();
         return  materias;
     }

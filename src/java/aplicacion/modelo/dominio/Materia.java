@@ -27,7 +27,10 @@ public class Materia  implements java.io.Serializable {
         this.nombre = nombre;
         this.estado = estado;
     }
-
+@Override
+    public String toString(){
+        return String.format("Materia[%d,%s]", codigo, carrera,nombre,estado);
+    }
     public Integer getCodigo() {
         return codigo;
     }

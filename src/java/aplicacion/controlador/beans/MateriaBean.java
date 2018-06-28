@@ -52,7 +52,7 @@ public class MateriaBean implements Serializable{
        materias=materiaDao.obtenerTodoMateria();
        carreras=carreraDao.obtenerTodoCarreras();
        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-       session.setAttribute("carreras", carreras);
+       session.setAttribute("materias", materias);
     }
 
     public Materia getMateria() {
@@ -113,7 +113,7 @@ public class MateriaBean implements Serializable{
   
      public void registrarMateria()
    {
-     System.out.println("vALORRRRRRR"+materias.get(0).getCarrera());
+     System.out.println("vALORRRRRRR"+materias.get(0).getCarrera().getNombreCarrera());
      if(estado.equals("h"))
       {
        
