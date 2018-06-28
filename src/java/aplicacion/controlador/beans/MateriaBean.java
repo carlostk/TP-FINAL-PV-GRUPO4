@@ -45,6 +45,7 @@ public class MateriaBean implements Serializable{
     @PostConstruct
     public void init(){
        materia = new Materia();
+       
        materiaDao= new MateriaDaoImp();
        carreraDao=new CarreraDaoImp();
        carrera=new Carrera();
@@ -112,7 +113,7 @@ public class MateriaBean implements Serializable{
   
      public void registrarMateria()
    {
-     
+     System.out.println("vALORRRRRRR"+materias.get(0).getCarrera());
      if(estado.equals("h"))
       {
        

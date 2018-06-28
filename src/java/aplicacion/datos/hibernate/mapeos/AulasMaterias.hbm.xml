@@ -10,7 +10,7 @@
     <many-to-one class="aplicacion.modelo.dominio.Aula" fetch="select" name="aulas">
       <column name="am_aula" not-null="true"/>
     </many-to-one>
-    <many-to-one class="aplicacion.modelo.dominio.DocentesMaterias" fetch="select" name="docentesMaterias">
+    <many-to-one class="aplicacion.modelo.dominio.DocenteMateria" fetch="select" name="docentesMaterias">
       <column name="am_asignacion_materia" not-null="true"/>
     </many-to-one>
     <property name="amPeriodo" type="string">

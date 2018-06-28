@@ -10,7 +10,7 @@
     <many-to-one class="aplicacion.modelo.dominio.Alumno" fetch="select" name="alumnos">
       <column name="ins_alumno" not-null="true"/>
     </many-to-one>
-    <many-to-one class="aplicacion.modelo.dominio.DocentesMaterias" fetch="select" name="docentesMaterias">
+    <many-to-one class="aplicacion.modelo.dominio.DocenteMateria" fetch="select" name="docentesMaterias">
       <column name="ins_docente_materia" not-null="true"/>
     </many-to-one>
     <property name="insEstado" type="boolean">

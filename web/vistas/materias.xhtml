@@ -87,18 +87,22 @@
                     <p:dialog header="Asignación de Profesor" widgetVar="dlg_profesor" modal="true" >
                         <p:panelGrid columns="2">
                             <p:outputLabel value="Año" />
-                            <p:inputText />
+                            <p:inputText value="#{docenteMateriaBean.docenteMateria.anio}"/>
                             <p:outputLabel value="Habilitar" />
-                            <p:selectBooleanButton onLabel="Si" offLabel="No" style="width: 60px" />
-                            <p:outputLabel value="Materia" />
-                            <p:inputText value="Programacion Visual" readonly="true" />
-                            <p:outputLabel value="Profesor:" />
-                            <p:selectOneMenu>
-                                <f:selectItem itemLabel="Ariel Vega" />
-                                <f:selectItem itemLabel="Carolina Apaza" />
-                                <f:selectItem itemLabel="Alfredo Espinoza" />
+                            <p:selectOneMenu id="estadodocente" required="true"
+                                             value="#{docenteMateriaBean.estado}">
+                                <f:selectItem itemLabel="Habilitar" itemValue="h" />
+                                <f:selectItem itemLabel="Desabilitar" itemValue="d" />
                             </p:selectOneMenu>
-                            <p:commandButton value="Guardar" onclick="PF('dlg_profesor').hide();" />
+                            <p:outputLabel value="Materia" />
+                            <h:selectOneMenu id="cmbmat" value="#{docenteMateriaBean.docenteMateria.materia}" converter="omnifaces.SelectItemsConverter">
+                                <f:selectItems value="#{docenteMateriaBean.materias}" var="pr" itemLabel="#{pr.nombre}" itemValue="#{pr}"/><!--Esta propiedad guarda al objeto que representa el texto del itemlabel anterior-->
+                            </h:selectOneMenu>
+                            <p:outputLabel value="Profesor:" />
+                            <h:selectOneMenu id="cmbpro" value="#{docenteMateriaBean.docenteMateria.docente}" converter="omnifaces.SelectItemsConverter">
+                                <f:selectItems value="#{docenteMateriaBean.docentes}" var="p" itemLabel="#{p.cargo}" itemValue="#{p}"/><!--Esta propiedad guarda al objeto que representa el texto del itemlabel anterior-->
+                            </h:selectOneMenu>
+                            <p:commandButton value="Guardar" actionListener="#{docenteMateriaBean.probar()}"  />
                         </p:panelGrid>
                     </p:dialog>
                   </h:form>

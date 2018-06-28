@@ -5,10 +5,13 @@
  */
 package aplicacion.controlador.beans;
 
+import aplicacion.datos.hibernate.dao.DocenteDAO;
 import aplicacion.datos.hibernate.dao.DocenteMateriaDAO;
 import aplicacion.datos.hibernate.dao.MateriaDAO;
+import aplicacion.datos.hibernate.dao.imp.DocenteDaoImp;
 import aplicacion.datos.hibernate.dao.imp.DocenteMateriaDAOImp;
 import aplicacion.datos.hibernate.dao.imp.MateriaDaoImp;
+import aplicacion.modelo.dominio.Docente;
 import aplicacion.modelo.dominio.DocenteMateria;
 import aplicacion.modelo.dominio.Materia;
 import java.io.Serializable;
@@ -31,6 +34,9 @@ public class DocenteMateriaBean implements Serializable {
     private Materia materia;
     private List<Materia> materias;
     private MateriaDAO materiaDao;
+    private List<Docente> docentes;
+    private DocenteDAO docenteDao;
+    private String estado;
     public DocenteMateriaBean() {
     }
      @PostConstruct
@@ -41,6 +47,9 @@ public class DocenteMateriaBean implements Serializable {
         docenteMateriaDao= new DocenteMateriaDAOImp();
         materias=materiaDao.obtenerTodoMateria();
         docentesMaterias=docenteMateriaDao.obtenerTodoDocenteMateria();
+        docenteDao=new DocenteDaoImp();
+        docentes=docenteDao.obtenerTodoDocente();
+        
     }
 
     public DocenteMateria getDocenteMateria() {
@@ -90,5 +99,46 @@ public class DocenteMateriaBean implements Serializable {
     public void setMateriaDao(MateriaDAO materiaDao) {
         this.materiaDao = materiaDao;
     }
+
+    public List<Docente> getDocentes() {
+        return docentes;
+    }
+
+    public void setDocentes(List<Docente> docentes) {
+        this.docentes = docentes;
+    }
+
+    public DocenteDAO getDocenteDao() {
+        return docenteDao;
+    }
+
+    public void setDocenteDao(DocenteDAO docenteDao) {
+        this.docenteDao = docenteDao;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
     
+    public void registrarDocenteMateria()
+    {
+       if(estado.equals("h"))
+      {
+       
+        docenteMateria.setHabilitado(true);
+      }else
+          {
+            docenteMateria.setHabilitado(false);
+          }
+      docenteMateria.setEstado(false);
+      docenteMateriaDao.agregarDocenteMateria(docenteMateria);
+    }
+    public void probar()
+    {
+      System.out.println("VALORR: "+docentes.get(0).getPerfil());
+    }
 }
