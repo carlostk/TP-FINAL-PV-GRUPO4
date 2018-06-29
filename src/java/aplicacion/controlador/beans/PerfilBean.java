@@ -56,10 +56,7 @@ public class PerfilBean implements Serializable {
     }
 
     public void registrarPerfil() {
-        perfil.setDni("1");
-        perfil.setCelular("1");
-        perfil.setFechaNac(new Date());
-
+        perfil.getUsuario().setEstado(true);
         PerfilDAO perfilDAO = new PerfilDAOImp();
         perfilDAO.agregar(perfil);
 
@@ -68,7 +65,7 @@ public class PerfilBean implements Serializable {
     public void obtenerDatosPerfil() {
         System.out.println("Entro");
         Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioValidado");
-
+        
         PerfilDAO perfilDAO = new PerfilDAOImp();
         String nombreUsuario = usuario.getNombreUsuario();
         System.out.println("Nombre de Usuario: " + nombreUsuario);
@@ -79,8 +76,10 @@ public class PerfilBean implements Serializable {
 
     public void actualizarPerfil() {
         PerfilDAO perfilDAO = new PerfilDAOImp();
-        perfilDAO.agregar(perfil);
-
+        perfilDAO.modificar(perfil);
+        
+        //Falta cambiar el nombre de usuario en la session
+        
         FacesContext facesContext = FacesContext.getCurrentInstance();
         facesContext.addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario/Perfil actualizado exitosamente", "Usuario/Perfil actualizado exitosamente"));

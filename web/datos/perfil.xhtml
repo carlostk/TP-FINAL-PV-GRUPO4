@@ -13,7 +13,7 @@
             <ui:define name="content">
                 <br />
                 <br />
-                <h:form id="frmDatosPerfil" >
+                <h:form id="frmDatosPerfil" rendered="#{loginFormBean.verificarAlumno() || loginFormBean.verificarProfesor() || loginFormBean.verificarSupervisor()}"> 
                     <p:growl id="mensaje" showDetail="false" sticky="false"/>   
                     <p:panel header="Editar Datos del Perfil">
                         <p:panelGrid id="tblPerfil" columns="2">
@@ -26,9 +26,8 @@
                                 <f:validateLength minimum="3" maximum="50" />
                             </p:inputText>
                             <p:outputLabel id="lblDocumento" value="Documento:" for="txtDocumento" />
-                            <p:inputNumber id="txtDocumento" required="true" value="#{datosFormBean.perfilBean.perfil.dni}"
-                                           decimalPlaces="0" thousandSeparator="." >
-                            </p:inputNumber>
+                            <p:inputText id="txtDocumento" required="true" value="#{datosFormBean.perfilBean.perfil.dni}"
+                                         />
                             <p:outputLabel id="lblFDNacimiento" value="Fecha de Nac: " for="txtFDNacimiento" />
                             <p:calendar id="txtFDNacimiento" required="true" value="#{datosFormBean.perfilBean.perfil.fechaNac}" />
                             <p:outputLabel id="lblEmail" value="E-Mail" for="txtEmail" />
@@ -37,7 +36,7 @@
                             <p:inputText id="txtTelefono" required="true" value="#{datosFormBean.perfilBean.perfil.celular}" >
                                 <f:validateLength minimum="9" maximum="15" />
                             </p:inputText>
-                            <p:commandButton id="btnActualizar" value="Actualizar" actionListener="#{datosFormBean.perfilBean.actualizarPerfil()}" />
+                            <p:commandButton id="btnActualizar" value="Actualizar" update="mensaje" actionListener="#{datosFormBean.perfilBean.actualizarPerfil()}" />
                         </p:panelGrid>
                     </p:panel>
                 </h:form>

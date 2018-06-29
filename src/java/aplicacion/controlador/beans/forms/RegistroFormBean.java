@@ -10,6 +10,7 @@ import aplicacion.controlador.beans.UsuarioBean;
 import aplicacion.datos.hibernate.dao.UsuarioDAO;
 import aplicacion.datos.hibernate.dao.imp.UsuarioDAOImp;
 import aplicacion.modelo.dominio.Usuario;
+import java.io.IOException;
 import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -24,8 +25,6 @@ import javax.faces.context.FacesContext;
 @ManagedBean
 @RequestScoped
 public class RegistroFormBean implements Serializable {
-@ManagedProperty(value = "#{usuarioBean}")
-private UsuarioBean usuarioBean;
 @ManagedProperty(value = "#{perfilBean}")
 private PerfilBean perfilBean;
 
@@ -35,23 +34,8 @@ private PerfilBean perfilBean;
     public RegistroFormBean() {
     }
 
-    public RegistroFormBean(UsuarioBean usuarioBean, PerfilBean perfilBean) {
-        this.usuarioBean = usuarioBean;
+    public RegistroFormBean( PerfilBean perfilBean) {
         this.perfilBean = perfilBean;
-    }
-
-    /**
-     * @return the usuarioBean
-     */
-    public UsuarioBean getUsuarioBean() {
-        return usuarioBean;
-    }
-
-    /**
-     * @param usuarioBean the usuarioBean to set
-     */
-    public void setUsuarioBean(UsuarioBean usuarioBean) {
-        this.usuarioBean = usuarioBean;
     }
 
     /**
@@ -69,12 +53,13 @@ private PerfilBean perfilBean;
     }
     
     
-    public void registrar(){
+    public void registrar() throws IOException{
         //usuarioBean.registrarUsuario();
         perfilBean.registrarPerfil();
         FacesContext facesContext = FacesContext.getCurrentInstance();
         facesContext.addMessage(null,
                 new FacesMessage( FacesMessage.SEVERITY_INFO, "Usuario creado exitosamente","Usuario creado exitosamente"));
+        facesContext.getExternalContext().redirect("/tp-final/faces/index.xhtml"); //Para redigir la pagina al login si usar un action
     } 
-            
+                    
 }

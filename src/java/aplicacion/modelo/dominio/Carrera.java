@@ -1,6 +1,9 @@
 package aplicacion.modelo.dominio;
 // Generated 18/06/2018 06:49:42 PM by Hibernate Tools 4.3.1
 
+import java.util.Objects;
+
+
 
 
 
@@ -63,7 +66,38 @@ public class Carrera  implements java.io.Serializable {
         this.estado = estado;
     }
 
-   
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Carrera other = (Carrera) obj;
+        if (this.estado != other.estado) {
+            return false;
+        }
+        if (!Objects.equals(this.nombreCarrera, other.nombreCarrera)) {
+            return false;
+        }
+        if (!Objects.equals(this.plan, other.plan)) {
+            return false;
+        }
+        if (!Objects.equals(this.codigo, other.codigo)) {
+            return false;
+        }
+        return true;
+    }   
 
 	
    

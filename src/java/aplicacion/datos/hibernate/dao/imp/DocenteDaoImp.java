@@ -25,14 +25,14 @@ public class DocenteDaoImp implements DocenteDAO, Serializable {
     public void agregarDocente(Docente docente) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        session.save(docente) ;
+        session.save(docente);
         session.getTransaction().commit();
         session.close();
     }
 
     @Override
     public void eliminarDocente(Docente docente) {
-       Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.delete(docente);
         session.getTransaction().commit();
@@ -41,7 +41,7 @@ public class DocenteDaoImp implements DocenteDAO, Serializable {
 
     @Override
     public void modificarDocente(Docente docente) {
-       Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.update(docente);
         session.getTransaction().commit();
@@ -50,34 +50,49 @@ public class DocenteDaoImp implements DocenteDAO, Serializable {
 
     @Override
     public Docente buscarDocente(String nombre) {
-       List<Docente>docentes;
+        List<Docente> docentes;
         Docente docente;
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Criteria criteria = session.createCriteria(Docente.class);
         criteria.add(Restrictions.like("perfil.nombres", nombre));
-        System.out.println("tamaño"+criteria.list().size());
-        docentes=(List<Docente>) criteria.list();
-        
-        docente=docentes.get(0);
-        System.out.println("tamañooo"+docente.getCargo());
+        System.out.println("tamaño" + criteria.list().size());
+        docentes = (List<Docente>) criteria.list();
+
+        docente = docentes.get(0);
+        System.out.println("tamañooo" + docente.getCargo());
         session.close();
         return docente;
     }
 
     @Override
     public List<Docente> obtenerTodoDocente() {
-       List<Docente>docentes;
+        List<Docente> docentes;
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Criteria criteria = session.createCriteria(Docente.class);
-        docentes=(List<Docente>) criteria.list();
-         for(Docente m : docentes)
-        {
+        docentes = (List<Docente>) criteria.list();
+        for (Docente m : docentes) {
             Hibernate.initialize(m.getPerfil());
         }
         session.close();
-        return  docentes;
+        return docentes;
     }
-    
+
+    @Override
+    public Docente buscarDocentePorNombreDeUsuario(String nombreUsuario) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(Docente.class);
+        criteria.createAlias("perfil.usuario", "per_us");
+        criteria.add(Restrictions.like("per_us.nombreUsuario", nombreUsuario));
+        Docente docente = null;
+        if (!criteria.list().isEmpty()) {
+            docente = (Docente) criteria.list().get(0);
+        }
+        session.getTransaction().commit();
+        session.close();
+        return docente;
+    }
+
 }

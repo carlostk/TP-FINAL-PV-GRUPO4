@@ -3,24 +3,18 @@
 <!-- Generated 18/06/2018 06:49:49 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
   <class catalog="aulas" name="aplicacion.modelo.dominio.Alumno" optimistic-lock="version" table="alumnos">
-    <id name="aluCodigo" type="java.lang.Integer">
+    <id name="codigo" type="java.lang.Integer">
       <column name="alu_codigo"/>
       <generator class="identity"/>
     </id>
-    <many-to-one class="aplicacion.modelo.dominio.Carrera" fetch="select" name="carreras">
+    <many-to-one class="aplicacion.modelo.dominio.Carrera" fetch="join" name="carrera" cascade="all">
       <column name="alu_carrera" not-null="true"/>
     </many-to-one>
-    <many-to-one class="aplicacion.modelo.dominio.Perfil" fetch="select" name="perfiles">
+    <many-to-one class="aplicacion.modelo.dominio.Perfil" fetch="join" name="perfil" cascade="all" >
       <column name="alu_perfil" not-null="true"/>
     </many-to-one>
-    <property name="aluLibretaUniversitaria" type="string">
+    <property name="libretaUniversitaria" type="string">
       <column length="10" name="alu_libreta_universitaria" not-null="true" unique="true"/>
     </property>
-    <set fetch="select" inverse="true" lazy="true" name="inscripcionesAlumnoses" table="inscripciones_alumnos">
-      <key>
-        <column name="ins_alumno" not-null="true"/>
-      </key>
-      <one-to-many class="aplicacion.modelo.dominio.InscripcionesAlumnos"/>
-    </set>
   </class>
 </hibernate-mapping>

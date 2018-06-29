@@ -11,66 +11,49 @@ import java.util.Set;
 public class Alumno  implements java.io.Serializable {
 
 
-     private Integer aluCodigo;
-     private Carrera carreras;
-     private Perfil perfiles;
-     private String aluLibretaUniversitaria;
-     private Set inscripcionesAlumnoses = new HashSet(0);
+     private Integer codigo;
+     private Carrera carrera;
+     private Perfil perfil;
+     private String libretaUniversitaria;
 
     public Alumno() {
     }
 
 	
     public Alumno(Carrera carreras, Perfil perfiles, String aluLibretaUniversitaria) {
-        this.carreras = carreras;
-        this.perfiles = perfiles;
-        this.aluLibretaUniversitaria = aluLibretaUniversitaria;
-    }
-    public Alumno(Carrera carreras, Perfil perfiles, String aluLibretaUniversitaria, Set inscripcionesAlumnoses) {
-       this.carreras = carreras;
-       this.perfiles = perfiles;
-       this.aluLibretaUniversitaria = aluLibretaUniversitaria;
-       this.inscripcionesAlumnoses = inscripcionesAlumnoses;
+        this.carrera = carreras;
+        this.perfil = perfiles;
+        this.libretaUniversitaria = aluLibretaUniversitaria;
     }
    
-    public Integer getAluCodigo() {
-        return this.aluCodigo;
+    public Integer getCodigo() {
+        return this.codigo;
     }
     
-    public void setAluCodigo(Integer aluCodigo) {
-        this.aluCodigo = aluCodigo;
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
     }
-    public Carrera getCarreras() {
-        return this.carreras;
-    }
-    
-    public void setCarreras(Carrera carreras) {
-        this.carreras = carreras;
-    }
-    public Perfil getPerfiles() {
-        return this.perfiles;
+    public Carrera getCarrera() {
+        return this.carrera;
     }
     
-    public void setPerfiles(Perfil perfiles) {
-        this.perfiles = perfiles;
+    public void setCarrera(Carrera carrera) {
+        this.carrera = carrera;
     }
-    public String getAluLibretaUniversitaria() {
-        return this.aluLibretaUniversitaria;
-    }
-    
-    public void setAluLibretaUniversitaria(String aluLibretaUniversitaria) {
-        this.aluLibretaUniversitaria = aluLibretaUniversitaria;
-    }
-    public Set getInscripcionesAlumnoses() {
-        return this.inscripcionesAlumnoses;
+    public Perfil getPerfil() {
+        return this.perfil;
     }
     
-    public void setInscripcionesAlumnoses(Set inscripcionesAlumnoses) {
-        this.inscripcionesAlumnoses = inscripcionesAlumnoses;
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
     }
-
-
-
+    public String getLibretaUniversitaria() {
+        return this.libretaUniversitaria;
+    }
+    
+    public void setLibretaUniversitaria(String libretaUniversitaria) {
+        this.libretaUniversitaria = libretaUniversitaria;
+    }
 
 }
 

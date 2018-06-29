@@ -44,6 +44,14 @@
                     <p:inputText id="txtCorreo" required="true" value="#{registroFormBean.perfilBean.perfil.email}" >
                         <f:validateLength minimum="10" />
                     </p:inputText>
+                    <p:outputLabel id="lblDocumento" value="Documento: " for="txtDocumento" />
+                    <p:inputText id="txtDocumento" value="#{registroFormBean.perfilBean.perfil.dni}" required="true" />
+                    <p:outputLabel id="lblFDNacimiento" value="Fecha de Nacimiento" for="txtFDNacimiento" />
+                    <p:calendar id="txtFDNacimiento" value="#{registroFormBean.perfilBean.perfil.fechaNac}" showOn="button" required="true" />
+                    <p:outputLabel id="lblCelular" value="Num. Celular:" for="txtCelular" />
+                    <p:inputNumber id="txtCelular" value="#{registroFormBean.perfilBean.perfil.celular}" required="true"
+                                   decimalPlaces="0" thousandSeparator="" >
+                    </p:inputNumber>
                     <p:commandButton id="btnIncribir" value="Inscribirse" update="mensaje" 
                                      actionListener="#{registroFormBean.registrar()}"/>
                 </p:panelGrid>

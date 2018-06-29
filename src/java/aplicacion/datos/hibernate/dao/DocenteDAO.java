@@ -18,4 +18,5 @@ public interface DocenteDAO {
     void modificarDocente(Docente docente) ;
     Docente buscarDocente(String nombre) ;
     List<Docente> obtenerTodoDocente();
+    Docente buscarDocentePorNombreDeUsuario(String nombreUsuario);
 }

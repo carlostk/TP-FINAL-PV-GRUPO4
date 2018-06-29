@@ -11,9 +11,9 @@
         <ui:composition template="./../templates/template.xhtml">
 
             <ui:define name="content">
-                                <br />
                 <br />
-                <h:form id="frmDatosUsuario">
+                <br />
+                <h:form id="frmDatosUsuario" rendered="#{loginFormBean.verificarAlumno() || loginFormBean.verificarProfesor() || loginFormBean.verificarSupervisor()}"> 
                     <p:growl id="mensaje" showDetail="false" sticky="false"/>   
                     <p:panel header="Datos del Usuario" >
                         <p:panelGrid id="tblUsuario" columns="2" >
@@ -29,7 +29,7 @@
                             <p:inputText id="txtCContraseña" required="true" value="#{datosFormBean.perfilBean.perfil.usuario.password}" >
                                 <f:validateLength minimum="4" maximum="20" />
                             </p:inputText>
-                            <p:commandButton id="btnActualizar" value="Actualizar" actionListener="#{datosFormBean.perfilBean.actualizarPerfil()}" />
+                            <p:commandButton id="btnActualizar" value="Actualizar" update="mensaje" actionListener="#{datosFormBean.perfilBean.actualizarPerfil()}" />
                         </p:panelGrid>
                     </p:panel>
                 </h:form>
