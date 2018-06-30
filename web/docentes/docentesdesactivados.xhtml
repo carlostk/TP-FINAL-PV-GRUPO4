@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../templates/template.xhtml">
+
+            <ui:define name="content">
+                <br />
+                <br />
+                <h:form>
+                    <p:panel id="pnlProfesores" header="Profesores Activos/Autorizados" >
+                        <p:dataTable var="doc" value="#{listaDocentesDesactivadosFormBean.docentesaDesactivados}" >
+                            <p:column headerText="Legajo">
+                                <p:outputLabel value="#{doc.legajo}" />
+                            </p:column>
+                            
+                            <p:column headerText="Usuario">
+                                <p:outputLabel value="#{doc.perfil.usuario.nombreUsuario}" /> 
+                            </p:column>
+                            
+                            <p:column headerText="Nombre Apellido">
+                                <p:outputLabel value="#{doc.perfil.nombres} #{doc.perfil.apellidos}" />
+                            </p:column>
+                            
+                            <p:column headerText="Modificar">
+                                <p:commandLink value="Modificar" />
+                            </p:column>
+                            
+                            <p:column headerText="Activar">
+                                <p:commandLink value="Desactivar" />
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

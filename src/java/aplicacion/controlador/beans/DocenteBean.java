@@ -33,24 +33,31 @@ public class DocenteBean implements Serializable {
      * Creates a new instance of DocenteBean
      */
     public DocenteBean() {
-        profesor = new Docente();
-        encontrado = false;
+        //Se coloca un try para que no se corte el programa cuando entra como un alumno o supervisor (Devolvia null point) .
+        try {
+            profesor = new Docente();
+            encontrado = false;
 
-        Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioValidado");
-        String nombreUsuario = usuario.getNombreUsuario();
-        DocenteDAO docenteDAO = new DocenteDaoImp();
-        Docente unProfesor = docenteDAO.buscarDocentePorNombreDeUsuario(nombreUsuario);
+            Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioValidado");
+            String nombreUsuario = usuario.getNombreUsuario();
+            System.out.println(nombreUsuario);
 
-        if (unProfesor != null) {
-            this.setProfesor(unProfesor);
-            encontrado = true;
-        } else {
-            PerfilDAO perfilDAO = new PerfilDAOImp();
-            Perfil unPerfil = perfilDAO.obtenerPerfil(nombreUsuario);
-            this.profesor.setPerfil(unPerfil);
-            this.profesor.setEstado(false); //Se lo deja así para que pueda ser activado despues
+            DocenteDAO docenteDAO = new DocenteDaoImp();
+            Docente unProfesor = docenteDAO.buscarDocentePorNombreDeUsuario(nombreUsuario);
+
+            if (unProfesor != null) {
+                this.setProfesor(unProfesor);
+                encontrado = true;
+            } else {
+                PerfilDAO perfilDAO = new PerfilDAOImp();
+                Perfil unPerfil = perfilDAO.obtenerPerfil(nombreUsuario);
+                this.profesor.setPerfil(unPerfil);
+                this.profesor.setEstado(false); //Se lo deja así para que pueda ser activado despues.
+            }
+        } catch (Exception e) {
+            //Si se produce un error se descarta lo anterior y se crea un nuevo docente.
+            profesor = new Docente(); 
         }
-
     }
 
     public DocenteBean(Docente profesor, boolean encontrado) {
@@ -109,7 +116,7 @@ public class DocenteBean implements Serializable {
 
     public void consultarEstadoDeActivasion() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        if ( this.profesor.isEstado() ) {
+        if (this.profesor.isEstado()) {
             facesContext.addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Docente/Profesor habilitado", "Docente/Profesor habilitado"));
             System.out.println("Estado activado");
@@ -119,6 +126,6 @@ public class DocenteBean implements Serializable {
             System.out.println("Estado Desactivado");
         }
         System.out.println("Final.");
-    }    
+    }
 
 }

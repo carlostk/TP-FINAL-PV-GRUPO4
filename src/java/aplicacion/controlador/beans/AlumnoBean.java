@@ -24,44 +24,37 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @RequestScoped
-public class AlumnoBean implements Serializable{
+public class AlumnoBean implements Serializable {
 
     private Alumno alumno;
     private boolean encontrado;
 
-    /**
-     * Creates a new instance of AlumnoBean
-     */
     public AlumnoBean() {
-        alumno = new Alumno();
-        encontrado = false ;
-        
-        System.out.println("Comienzo del Constructor");
-        //Obtener el nombre del usuario
-        Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioValidado");
-        String nombreUsuario = usuario.getNombreUsuario();
-        System.out.println("Recupera el nombre de usuario");
-        System.out.println("Nombre de usuario es " + nombreUsuario );
-        //Consultamos si hay un alumno con ese nombre de usuario
-        AlumnoDAO alumnoDAO = new AlumnoDAOImp();
-        Alumno unAlumno = alumnoDAO.buscarAlumno(nombreUsuario); // Aqui esta el problema
-        
-        System.out.println("Busca el alumno");
-        if (unAlumno != null) {
-            //Si lo encontro lo setea
-            this.setAlumno(unAlumno);
-            encontrado = true;
-            System.out.println("Lo encuentra");
-        } else {
-            //Si no lo encontro guarda el perfil del usuario logueado en alumno
-            System.out.println("No lo encontro un perfil asignado");
-            PerfilDAO perfilDAO = new PerfilDAOImp();
-            Perfil unPerfil = perfilDAO.obtenerPerfil(nombreUsuario);
-            this.alumno.setPerfil(unPerfil);
-            System.out.println("Ahora asigna el perfil del usuario logueado");
-        
+        //Se colaca un try por las dudas salte algun error
+        try {
+            alumno = new Alumno();
+            encontrado = false;
+            //Obtener el nombre del usuario
+            Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioValidado");
+            String nombreUsuario = usuario.getNombreUsuario();
+            //Consultamos si hay un alumno con ese nombre de usuario
+            AlumnoDAO alumnoDAO = new AlumnoDAOImp();
+            Alumno unAlumno = alumnoDAO.buscarAlumno(nombreUsuario); // Aqui realiza la busqueda.
+
+            if (unAlumno != null) {
+                //Si lo encontro lo setea
+                this.setAlumno(unAlumno);
+                encontrado = true;
+            } else {
+                //Si no lo encontro guarda el perfil del usuario logueado en alumno
+                PerfilDAO perfilDAO = new PerfilDAOImp();
+                Perfil unPerfil = perfilDAO.obtenerPerfil(nombreUsuario);
+                this.alumno.setPerfil(unPerfil);
+            }
+        } catch (Exception e) {
+            alumno = new Alumno();
         }
-      
+
     }
 
     public AlumnoBean(Alumno alumno) {
@@ -96,16 +89,25 @@ public class AlumnoBean implements Serializable{
         this.encontrado = encontrado;
     }
 
+    /**
+     * Se encarga de guardar el alumno.
+     */
     public void guardarAlumno() {
         AlumnoDAO alumnoDAO = new AlumnoDAOImp();
         alumnoDAO.agregar(alumno);
     }
 
+    /**
+     * Se encarga de actualizar los datos del alumno.
+     */
     public void actualizarAlumno() {
         AlumnoDAO alumnoDAO = new AlumnoDAOImp();
         alumnoDAO.modificarEstado(alumno);
     }
 
+    /**
+     * Dependiendo el valor de encontrado crea o actualiza el alumno.
+     */
     public void realizarCambios() {
         if (encontrado == true) {
             actualizarAlumno();
@@ -116,4 +118,5 @@ public class AlumnoBean implements Serializable{
         facesContext.addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO, "Cambios Aplicados", "Cambios Aplicados"));
     }
+
 }
