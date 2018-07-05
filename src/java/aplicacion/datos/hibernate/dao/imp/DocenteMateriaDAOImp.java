@@ -12,6 +12,7 @@ import aplicacion.modelo.dominio.DocenteMateria;
 import java.io.Serializable;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 
 /**
@@ -59,6 +60,12 @@ public class DocenteMateriaDAOImp implements DocenteMateriaDAO, Serializable{
         session.beginTransaction();
         Criteria criteria = session.createCriteria(DocenteMateria.class);
         docenteMaterias=(List<DocenteMateria>) criteria.list();
+         for(DocenteMateria m : docenteMaterias)
+        {
+            Hibernate.initialize(m.getDocente().getPerfil());
+            Hibernate.initialize(m.getDocente());
+            Hibernate.initialize(m.getMateria());
+        }
         session.close();
         return  docenteMaterias;
     }

@@ -56,10 +56,15 @@ public class CarreraDaoImp implements CarreraDAO, Serializable {
         Criteria criteria = session.createCriteria(Carrera.class);
         criteria.add(Restrictions.like("nombreCarrera", nombre));
         System.out.println("tamaño"+criteria.list().size());
-        carreras=(List<Carrera>) criteria.list();
+        if(!criteria.list().isEmpty())
+        {
+          carreras=(List<Carrera>) criteria.list();
+          carrera=carreras.get(0);
+        }else{
+              carrera=null;
+             }
         
-        carrera=carreras.get(0);
-        System.out.println("tamañooo"+carrera.getNombreCarrera());
+       
         session.close();
         return carrera;
     }

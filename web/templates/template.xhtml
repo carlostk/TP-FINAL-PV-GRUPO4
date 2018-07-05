@@ -9,6 +9,7 @@
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <h:outputStylesheet name="./css/cssLayout.css"/>
+        <h:outputStylesheet name="./css/docentemateria.css" />
         <title>Facelets Template</title>
     </h:head>
 
@@ -16,7 +17,7 @@
         <div id="contenedor">
             <div id="top">
                 <ui:insert name="top">
-                    <div id="tooplate_header">
+                    <div id="tooplate_header1">
                         <div id="titulo">
                             <h1>Sistema de Registro de Asistencias</h1>
                         </div>
@@ -71,11 +72,11 @@
                             <p:menubar rendered="#{loginFormBean.verificarSupervisor()}">
                                 <p:submenu label="Administrar Tablas">
                                     <p:menuitem value="Carreras" outcome="/vistas/carreras"/>
-                                    <p:menuitem value="Materias" action="/vistas/Materias?faces-redirect=true" />
-                                    <p:menuitem value="Aulas"  action="/vistas/Aulas?faces-redirect=true"/>
+                                    <p:menuitem value="Materias" outcome="/vistas/materias" />
+                                    <p:menuitem value="DocenteMaterias"  outcome="/vistas/docente-materia"/>
                                 </p:submenu>
 
-                                <p:menuitem value="materia" outcome="/vistas/materias"/>
+                                
 
                                 <p:submenu label="Datos Personales">
                                     <p:menuitem value="Usuario" action="/datos/usuario?faces-redirect=true" />
@@ -102,13 +103,13 @@
                 </ui:insert>
             </div>
             <div id="content" class="center_content">
-                <ui:insert name="content">
+                <ui:insert name="content" >
 
                 </ui:insert>
             </div>
             <div id="bottom">
                 <ui:insert name="bottom">
-                    <hr/>
+                    
                     <center>Desarrollado por Cátedra Programación Visual - Universidad Nacional de Jujuy - Carrera Analista Programador Universitario</center>
                 </ui:insert>
             </div>

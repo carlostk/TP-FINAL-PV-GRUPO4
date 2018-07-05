@@ -12,25 +12,24 @@
 
             <ui:define name="content">
                 <br/>
-                <br/>
-                <br/>
-                <br/>
+                
                 <p:panel header="Administración de Materias" >
                   <h:form id="form">
+                      <p:growl id="mensajes"/>
                     <br/>
                     <p:commandButton value="Agregar Materia" onclick="PF('dlg_materia').show();" />
                     <br/>
                     <br/>
                     <p:dataTable widgetVar="cellMaterias" editMode="cell" editable="true" id="basicDT" var="mate" value="#{materiaBean.materias}">
-                        <p:ajax event="cellEdit" listener="#{materiaFormBean.materiaBean.materiaDao.modificarMateria(mate)}"  />
-                        <p:column headerText="Codigo">
+                        <p:ajax event="cellEdit" listener="#{materiaFormBean.modificar(mate)}"  />
+                        <p:column headerText="Codigo" class="c">
                             <p:cellEditor>
                                 <f:facet name="output"><h:outputText value="#{mate.codigo}" /></f:facet>
                                 <f:facet name="input"><p:inputText id="modelInput" value="#{mate.codigo}"/></f:facet>
                             </p:cellEditor>
                         </p:column>
 
-                        <p:column headerText="Nombre">
+                        <p:column headerText="Nombre" class="c">
                             <p:cellEditor>
                                 <f:facet name="output"><h:outputText value="#{mate.nombre}" /></f:facet>
                                 <f:facet name="input"><p:inputText id="modelInput1" value="#{mate.nombre}"/></f:facet>
@@ -38,15 +37,19 @@
                         </p:column>
                         
                         
-                        <p:column headerText="Estado">
+                        <p:column headerText="Estado" class="c">
                             <p:cellEditor>
                                 <f:facet name="output"><h:outputText value="#{mate.estado}" /></f:facet>
                                 <f:facet name="input">
-                                    <p:inputText id="modelInput2" value="#{mate.estado}"/>
+                                    <p:selectOneMenu id="estadoCarrera" required="true"
+                                                     value="#{materiaFormBean.estado}">
+                                <f:selectItem itemLabel="Habilitar" itemValue="h" />
+                                <f:selectItem itemLabel="Desabilitar" itemValue="d" /> <!--Esta propiedad guarda al objeto que representa el texto del itemlabel anterior-->
+                            </p:selectOneMenu>
                                 </f:facet>
                             </p:cellEditor>
                         </p:column>
-                        <p:column headerText="Carrera">
+                        <p:column headerText="Carrera" class="c">
                             <p:cellEditor>
                                 <f:facet name="output"><h:outputText value="#{mate.carrera.nombreCarrera}" /></f:facet>
                                 <f:facet name="input">
@@ -57,8 +60,8 @@
                             </p:cellEditor>
                         </p:column>
 
-                        <p:column headerText="Eliminar">
-                            <p:commandButton value="Eliminar" update="basicDT" actionListener="#{materiaFormBean.materiaBean.eliminarMateria(mate)}"/>
+                        <p:column headerText="Eliminar" class="c">
+                            <p:commandButton value="Eliminar" update="basicDT @([id$=mensajes]" actionListener="#{materiaFormBean.eliminar(mate)}"/>
                         </p:column>
 
                         <p:column headerText="Asignar Profesor">
@@ -72,27 +75,7 @@
                     <br />
                     <br />
                     <p:commandButton value="Asignar Profesor" onclick="PF('dlg_profesor').show();" />
-                    <p:dialog header="Nueva Materia" widgetVar="dlg_materia" modal="true" >
-                        <p:panelGrid columns="2">
-                           
-                            <p:outputLabel value="Nombre de la Materia" />
-                            <p:inputText  value="#{materiaFormBean.materiaBean.materia.nombre}"/>
-                            <p:outputLabel value="Estado" />
-                            <p:selectOneMenu id="estadoCarrera" required="true"
-                                             value="#{materiaFormBean.materiaBean.estado}">
-                                <f:selectItem itemLabel="Habilitar" itemValue="h" />
-                                <f:selectItem itemLabel="Desabilitar" itemValue="d" /> <!--Esta propiedad guarda al objeto que representa el texto del itemlabel anterior-->
-                            </p:selectOneMenu>
-                            <p:outputLabel value="Carrera:" />
-                            <h:selectOneMenu id="cmbCarrera" value="#{materiaFormBean.materiaBean.materia.carrera}" converter="omnifaces.SelectItemsConverter">
-                                <f:selectItems value="#{materiaFormBean.materiaBean.carreras}" var="p" itemLabel="#{p.nombreCarrera}" itemValue="#{p}"/><!--Esta propiedad guarda al objeto que representa el texto del itemlabel anterior-->
-                                
-                           </h:selectOneMenu>
-                                                       
-                            <p:commandButton update="@([id$=basicDT])" value="Guardar" actionListener="#{materiaBean.registrarMateria()}"  onclick="PF('dlg_materia').hide();" />
-                           
-                        </p:panelGrid>
-                    </p:dialog>
+                    
 
                     <p:dialog header="Asignación de Profesor" widgetVar="dlg_profesor" modal="true" >
                         <p:panelGrid columns="2">
@@ -116,6 +99,30 @@
                         </p:panelGrid>
                     </p:dialog>
                   </h:form>
+                    <h:form>
+                        <p:growl id="mensajes1"/>
+                        <p:dialog header="Nueva Materia" widgetVar="dlg_materia" modal="true" >
+                        <p:panelGrid columns="2">
+                           
+                            <p:outputLabel for="txtnomMateria" value="Nombre de la Materia" />
+                            <p:inputText id="txtnomMateria"  value="#{materiaFormBean.materiaBean.materia.nombre}" required="true"/>
+                            <p:outputLabel  value="Estado" />
+                            <p:selectOneMenu id="estadoCarrera" required="true"
+                                             value="#{materiaFormBean.materiaBean.estado}">
+                                <f:selectItem itemLabel="Habilitar" itemValue="h" />
+                                <f:selectItem itemLabel="Desabilitar" itemValue="d" /> <!--Esta propiedad guarda al objeto que representa el texto del itemlabel anterior-->
+                            </p:selectOneMenu>
+                            <p:outputLabel value="Carrera:" />
+                            <h:selectOneMenu id="cmbCarrera" value="#{materiaFormBean.materiaBean.materia.carrera}" converter="omnifaces.SelectItemsConverter">
+                                <f:selectItems value="#{materiaFormBean.materiaBean.carreras}" var="p" itemLabel="#{p.nombreCarrera}" itemValue="#{p}"/><!--Esta propiedad guarda al objeto que representa el texto del itemlabel anterior-->
+                                
+                           </h:selectOneMenu>
+                                                       
+                            <p:commandButton update="@([id$=basicDT]) mensajes1" value="Guardar" actionListener="#{materiaFormBean.agregar()}"  onclick="PF('dlg_materia').hide();" />
+                           
+                        </p:panelGrid>
+                    </p:dialog>
+                    </h:form>
                 </p:panel>
             </ui:define>
 

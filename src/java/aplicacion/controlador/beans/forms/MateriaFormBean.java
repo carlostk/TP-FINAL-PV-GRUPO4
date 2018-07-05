@@ -6,10 +6,14 @@
 package aplicacion.controlador.beans.forms;
 
 import aplicacion.controlador.beans.MateriaBean;
+import aplicacion.modelo.dominio.Materia;
 import java.io.Serializable;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -21,15 +25,67 @@ public class MateriaFormBean implements Serializable{
 @ManagedProperty(value = "#{materiaBean}")
     
 private MateriaBean materiaBean;
+private String estado="";
     public MateriaFormBean() {
     }
+public void agregar()
+{
+  materiaBean.registrarMateria();
+  FacesMessage mensaje = new FacesMessage(FacesMessage.SEVERITY_INFO,"Agregado correctamente","Agregado correctamente");
+  FacesContext facesContext = FacesContext.getCurrentInstance();
+  facesContext.addMessage(null, mensaje);
+}
+public void modificar(Materia materia)
+{
+  if(materia.getNombre().equals(""))
+  {
+    FacesMessage mensaje = new FacesMessage(FacesMessage.SEVERITY_ERROR,"ingrese un valor","ingrese un valor");
+    FacesContext facesContext = FacesContext.getCurrentInstance();
+    facesContext.addMessage(null, mensaje);
+    RequestContext.getCurrentInstance().update("form:mensajes");
+  }
+  else
+  {
+    if(estado.equals("h"))
+         {
+       
+           materia.setEstado(true);
+         }
+         if(estado.equals("d"))
+         {
+           materia.setEstado(false);
+         }
+          materiaBean.getMateriaDao().modificarMateria(materia);
+          FacesMessage mensaje = new FacesMessage(FacesMessage.SEVERITY_INFO,"Modificado","Modificado");
+          FacesContext facesContext = FacesContext.getCurrentInstance();
+          facesContext.addMessage(null, mensaje);
+          RequestContext.getCurrentInstance().update("form:mensajes");
+  
+  }
 
+}
+public void eliminar(Materia materia)
+{
+  materiaBean.eliminarMateria(materia);
+  FacesMessage mensaje = new FacesMessage(FacesMessage.SEVERITY_INFO,"Eliminado","Eliminado");
+  FacesContext facesContext = FacesContext.getCurrentInstance();
+  facesContext.addMessage(null, mensaje);
+  
+}
     public MateriaBean getMateriaBean() {
         return materiaBean;
     }
 
     public void setMateriaBean(MateriaBean materiaBean) {
         this.materiaBean = materiaBean;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
     
     

@@ -23,7 +23,6 @@ public class CarreraBean implements Serializable{
 
     private Carrera carrera;
     private CarreraDAO carreraDao;
-    private String buscado;
     private List<Carrera> carreras;
     private String estado;
     public CarreraBean() {
@@ -53,13 +52,7 @@ public class CarreraBean implements Serializable{
     }
 
 
-    public String getBuscado() {
-        return buscado;
-    }
-
-    public void setBuscado(String buscado) {
-        this.buscado = buscado;
-    }
+   
 
     public List<Carrera> getCarreras() {
         return carreras;
@@ -92,13 +85,16 @@ public class CarreraBean implements Serializable{
       carreras=carreraDao.obtenerTodoCarreras();
     }
     
-    public void buscarCarrera()
+    public boolean buscarCarrera(String buscado)
     {
+        boolean encontrado=false;
         if(carreraDao.buscarCarrera(buscado)!=null)
         {
          carreras.clear();
          carreras.add(0, carreraDao.buscarCarrera(buscado));
+         encontrado=true;
         }
+        return encontrado;
     }
     public void eliminarCarrera(Carrera carrera)
     {

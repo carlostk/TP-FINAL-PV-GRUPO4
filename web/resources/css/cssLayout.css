@@ -3,20 +3,11 @@ body{
 }
 
 #bottom {
-
-    background: rgba(147,206,222,1);
-    background: -moz-linear-gradient(45deg, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);
-    background: -webkit-gradient(left bottom, right top, color-stop(0%, rgba(147,206,222,1)), color-stop(41%, rgba(117,189,209,1)), color-stop(100%, rgba(73,165,191,1)));
-    background: -webkit-linear-gradient(45deg, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);
-    background: -o-linear-gradient(45deg, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);
-    background: -ms-linear-gradient(45deg, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);
-    background: linear-gradient(45deg, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#93cede', endColorstr='#49a5bf', GradientType=1 );
-    color: #00007a ;
-    margin: 10px 0px 0px 0px;
+    background: url(../images/1.jpg) no-repeat;
+    color: white;
     padding: 5px;
     position: relative;
-    text-shadow: 5px 5px 5px #aaa;
+    
 }
 
 #contenedor {
@@ -36,9 +27,11 @@ body{
 
 .center_content {
     height: auto;
-    padding: 0px;
-    background: url(../images/fondocentral.png) repeat top center fixed ;
+    padding-top:0px;
+    background: url(../images/fondoCont.jpg) repeat top center fixed ;
+    padding-bottom: 30px;
 }
+ 
 
 #tooplate_header {
     /* background: url(../images/tooplate_header1.jpg) no-repeat; */
@@ -55,9 +48,14 @@ body{
     margin: 0 auto;
     padding: 0 40px;
 }
-
+#tooplate_header1 {
+    background: url(../images/2.jpg) no-repeat;
+    height: 111px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
 #tooplate_middle {
-    background: url(../images/tooplate_middle.jpg) no-repeat;
+    background: url(../images/1.jpg) no-repeat;
     clear: both;
     height: 30px;
     margin: 0 auto;
@@ -67,7 +65,7 @@ body{
 #tooplate_main {
     background: url(../images/tooplate_main.jpg) no-repeat top;
     clear: both;
-    height: 330px;
+    height: 100px;
     margin: 0 auto;
     padding: 10px 40px 0;
 }
@@ -76,9 +74,9 @@ body{
     float: left;
     width: 960px;
     margin-top: 3%;
-    color: #3f3fa8 ;
+  
     text-align: center ;
-    text-shadow: 5px 5px 5px #aaa;
+    
 }
 
 
