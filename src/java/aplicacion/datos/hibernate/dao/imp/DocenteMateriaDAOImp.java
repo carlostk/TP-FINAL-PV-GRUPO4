@@ -54,17 +54,14 @@ public class DocenteMateriaDAOImp implements DocenteMateriaDAO, Serializable{
     }
 
     @Override
-    public List<DocenteMateria> obtenerTodoDocenteMateria() {
+   public List<DocenteMateria> obtenerTodoDocenteMateria() {
          List<DocenteMateria>docenteMaterias;
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Criteria criteria = session.createCriteria(DocenteMateria.class);
         docenteMaterias=(List<DocenteMateria>) criteria.list();
-         for(DocenteMateria m : docenteMaterias)
-        {
-            Hibernate.initialize(m.getDocente().getPerfil());
-            Hibernate.initialize(m.getDocente());
-            Hibernate.initialize(m.getMateria());
+        for (DocenteMateria dm : docenteMaterias) {
+            Hibernate.initialize(dm.getDocente());
         }
         session.close();
         return  docenteMaterias;

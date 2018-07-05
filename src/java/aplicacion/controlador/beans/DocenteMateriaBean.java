@@ -31,7 +31,7 @@ public class DocenteMateriaBean implements Serializable {
     private DocenteMateria docenteMateria;
     private List<DocenteMateria> docentesMaterias;
     private DocenteMateriaDAO docenteMateriaDao;
-    
+     private Materia materia;
     private List<Materia> materias;
     private MateriaDAO materiaDao;
     private List<Docente> docentes;
@@ -41,7 +41,7 @@ public class DocenteMateriaBean implements Serializable {
     }
      @PostConstruct
     public void init(){
-      
+      materia = new Materia();
         docenteMateria = new DocenteMateria();
         materiaDao= new MateriaDaoImp();
         docenteMateriaDao= new DocenteMateriaDAOImp();
@@ -118,7 +118,7 @@ public class DocenteMateriaBean implements Serializable {
         this.estado = estado;
     }
     
-    public void registrarDocenteMateria()
+        public void registrarDocenteMateria()
     {
         System.out.println("VALORRRR"+docenteMateria.getMateria().getNombre());
        if(estado.equals("h"))
@@ -129,9 +129,9 @@ public class DocenteMateriaBean implements Serializable {
           {
             docenteMateria.setHabilitado(false);
           }
+       
       docenteMateria.setEstado(false);
       docenteMateriaDao.agregarDocenteMateria(docenteMateria);
-      docentesMaterias=docenteMateriaDao.obtenerTodoDocenteMateria();
     }
     public void eliminarDocenteMateria(DocenteMateria docenteMateria)
     {

@@ -81,9 +81,25 @@ public class DocenteMateria  implements java.io.Serializable {
 
     
    
+   @Override
+    public boolean equals(Object other) {
+        return (other instanceof DocenteMateria) && (codigo != null)
+            ? codigo.equals(((DocenteMateria) other).codigo)
+            : (other == this);
+    }
 
+    @Override
+    public int hashCode() {
+        return (codigo != null)
+            ? (this.getClass().hashCode() + codigo.hashCode())
+            : super.hashCode();
+    }
 
-
+    @Override
+    public String toString() {
+        return String.format("docenteMaterias[%d, %s]", codigo, docente.getLegajo());
+    }
+ 
 
 }
 

@@ -12,7 +12,6 @@ import java.io.Serializable;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -21,6 +20,7 @@ import org.hibernate.criterion.Restrictions;
  */
 public class AulaDAOImp implements Serializable, AulaDAO{
 
+   
     @Override
     public void agregarAula(Aula aula) {
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -32,7 +32,7 @@ public class AulaDAOImp implements Serializable, AulaDAO{
 
     @Override
     public void modificarAula(Aula aula) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.update(aula);
         session.getTransaction().commit();
@@ -41,27 +41,30 @@ public class AulaDAOImp implements Serializable, AulaDAO{
 
     @Override
     public void eliminarAula(Aula aula) {
-        aula.setAulEstado(false);
-        Session session = HibernateUtil.getSessionFactory().openSession();
+         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        session.update(aula);
+        session.delete(aula);
         session.getTransaction().commit();
         session.close();
     }
 
     @Override
     public List<Aula> obtenerTodoAula() {
+           List<Aula> aulas;
+        List<Aula> aux= null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Criteria criteria = session.createCriteria(Aula.class);
-        //criteria.addOrder(Order.asc(nombre)) ;
-        //List aulas =
-        return null;
+        aulas=(List<Aula>) criteria.list();
+        
+        session.close();
+        
+        return  aulas;
     }
 
     @Override
     public Aula buscarAula(String nombre) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+          Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Criteria criteria = session.createCriteria(Aula.class) ;
         criteria.add(Restrictions.like("nombre", nombre)) ;

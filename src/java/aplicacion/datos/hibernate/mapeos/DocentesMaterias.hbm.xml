@@ -7,10 +7,10 @@
       <column name="dm_codigo"/>
       <generator class="identity"/>
     </id>
-    <many-to-one class="aplicacion.modelo.dominio.Docente" fetch="select" name="docente">
+    <many-to-one class="aplicacion.modelo.dominio.Docente" fetch="join" name="docente">
       <column name="dm_docente" not-null="true"/>
     </many-to-one>
-    <many-to-one class="aplicacion.modelo.dominio.Materia" fetch="select" name="materia">
+    <many-to-one class="aplicacion.modelo.dominio.Materia" fetch="join" name="materia">
       <column name="dm_materia" not-null="true"/>
     </many-to-one>
     <property name="anio" type="int">

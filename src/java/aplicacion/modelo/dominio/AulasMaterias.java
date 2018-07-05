@@ -129,7 +129,25 @@ public class AulasMaterias  implements java.io.Serializable {
         this.asistenciases = asistenciases;
     }
 
+ @Override
+    public boolean equals(Object other) {
+        return (other instanceof AulasMaterias) && (amCodigo != null)
+            ? amCodigo.equals(((AulasMaterias) other).amCodigo)
+            : (other == this);
+    }
 
+    @Override
+    public int hashCode() {
+        return (amCodigo != null)
+            ? (this.getClass().hashCode() + amCodigo.hashCode())
+            : super.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return String.format("AulasMaterias[%d, %s]", amCodigo, amComentario);
+    }
+    
 
 
 }

@@ -3,6 +3,7 @@ package aplicacion.modelo.dominio;
 
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -71,7 +72,26 @@ public class Aula  implements java.io.Serializable {
     public void setAulEstado(boolean aulEstado) {
         this.aulEstado = aulEstado;
     }
-  
+
+     @Override
+    public boolean equals(Object other) {
+        return (other instanceof Aula) && (aulCodigo != null)
+            ? aulCodigo.equals(((Aula) other).aulCodigo)
+            : (other == this);
+    }
+
+    @Override
+    public int hashCode() {
+        return (aulCodigo != null)
+            ? (this.getClass().hashCode() + aulCodigo.hashCode())
+            : super.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Aula[%d, %s]", aulCodigo, aulNombre);
+    }
+    
 
 
 

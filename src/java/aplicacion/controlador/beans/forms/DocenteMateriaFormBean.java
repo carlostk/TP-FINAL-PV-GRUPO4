@@ -97,7 +97,9 @@ public class DocenteMateriaFormBean implements Serializable{
         this.estado = estado;
     }
 
-   
+     public DocenteMateriaFormBean(DocenteMateriaBean docenteMateriaBean) {
+        this.docenteMateriaBean = docenteMateriaBean;
+    }
     
     
     

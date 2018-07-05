@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <body>
 
@@ -12,79 +13,150 @@
             <ui:define name="content">
                 <br />
                 <br />
-                <p:panel header="Listado de Aulas" >
-                    <br/>
-                    <p:commandButton value="Agregar Aula" onclick="PF('dlg_aula').show();" />
-                    <br/>
-                    <br/>
+                <h:form>
 
-                    <p:dataTable >
-                        <p:column headerText="Codigo">
 
-                        </p:column>
+                    <p:panel header="Listado de Aulas" >
+                        <h:form id="form">
+                            <br/>
+                            <p:commandButton value="Agregar Aula" onclick="PF('dlg_aula').show();" />
+                            <br/>
+                            <br/>
 
-                        <p:column headerText="Nombre">
+                            <p:dataTable widgetVar="cellAulas" editMode="cell" editable="true" id="basicDT" var="aula" value="#{aulaFormBean.aulaBean.aulas}">
+                                <p:ajax event="cellEdit" listener="#{aulaFormBean.aulaBean.aulaDAO.modificarAula(aula)}"  /> 
+                                <p:column headerText="Codigo">
+                                    <p:cellEditor>
+                                        <f:facet name="output"> <h:outputText value="#{aula.aulCodigo}" /></f:facet>
+                                        <f:facet name="input"> <p:inputText id="modelInput" value="#{aula.aulCodigo}"/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
 
-                        </p:column>
+                                <p:column headerText="Nombre">
+                                    <p:cellEditor>
+                                        <f:facet name="output"> <h:outputText value="#{aula.aulNombre}" /></f:facet>
+                                        <f:facet name="input"> <p:inputText id="modelInput1" value="#{aula.aulNombre}"/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
 
-                        <p:column headerText="Descripcion">
+                                <p:column headerText="Descripcion">
+                                    <p:cellEditor>
+                                        <f:facet name="output"> <h:outputText value="#{aula.aulDescripcion}" /></f:facet>
+                                        <f:facet name="input"> <p:inputText id="modelInput2" value="#{aula.aulDescripcion}"/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
 
-                        </p:column>
+                                <p:column headerText="Capacidad">
+                                    <p:cellEditor>
+                                        <f:facet name="output"> <h:outputText value="#{aula.aulCapacidad}" /></f:facet>
+                                        <f:facet name="input"> <p:inputText id="modelInput3" value="#{aula.aulCapacidad}"/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
 
-                        <p:column headerText="Capacidad">
+                                <p:column headerText="Eliminar">
+                                    <p:commandButton value="Eliminar" update="basicDT" actionListener="#{aulaFormBean.aulaBean.eliminarAula(aula)}"/>
+                                </p:column>
 
-                        </p:column>
+                            </p:dataTable>
 
-                        <p:column headerText="Modificar">
+                            <p:contextMenu for="basicDT" widgetVar="cMenu">   
+                                <p:menuitem value="Edit Cell" icon="ui-icon-search" onclick="PF('cellAulas').showCellEditor();return false;"/>  
+                                <p:menuitem value="Hide Menu" icon="ui-icon-close" onclick="PF('cMenu').hide()"/>  
+                            </p:contextMenu>
+                        </h:form>
+                    </p:panel>
 
-                        </p:column>
+                    <p:commandButton value="Asignar Materia" onclick="PF('dgl_materia').show();"
+                                      oncomplete="PF('dgl_materia').show()"/>
 
-                        <p:column headerText="Eliminar">
+                    
+                </h:form>
 
-                        </p:column>
 
-                        <p:column headerText="Asignar Materia" >
+                <h:form>
+                    <p:dialog header="Nueva Aula" widgetVar="dlg_aula" modal="true" >
+                        <p:panelGrid columns="2">
+                            <p:outputLabel value="Nombre :" />
+                            <p:inputText value="#{aulaFormBean.aulaBean.aula.aulNombre}"/>
+                            <p:outputLabel value="Descripcion :" />
+                            <p:inputText value="#{aulaFormBean.aulaBean.aula.aulDescripcion}"/>
+                            <p:outputLabel value="Capacidad :" />
+                            <p:inputText value="#{aulaFormBean.aulaBean.aula.aulCapacidad}"/>
+                            <p:commandButton value="Guardar" onclick="PF('dlg_aula').hide();" actionListener="#{aulaFormBean.aulaBean.registrarAula()}"
+                                             update="@([id$=basicDT])" />
+                        </p:panelGrid>
+                    </p:dialog>
+                </h:form>   
 
-                        </p:column>
-                    </p:dataTable>
-                </p:panel>
+                <h:form>
+                                                            
+                    <p:dialog header="Asignacíon de Materia" widgetVar="dgl_materia" modal="true" >
+                        <h:form id="altaAsignarMateria">
+                            <p:growl id="mensajes"/>
 
-                <p:commandButton value="Asignar Materia" onclick="" />
 
-                <p:dialog header="Nueva Aula" widgetVar="dlg_aula" modal="true" >
-                    <p:panelGrid columns="2">
-                        <p:outputLabel value="Nombre :" />
-                        <p:inputText />
-                        <p:outputLabel value="Descripcion :" />
-                        <p:inputText />
-                        <p:outputLabel value="Capacidad :" />
-                        <p:inputText />
-                        <p:commandButton value="Guardar" onclick="PF('dlg_aula').hide();" />
-                    </p:panelGrid>
-                </p:dialog>
+                            <p:panelGrid columns="2" >
 
-                <p:dialog header="Asignacíon de Materia" widgetVar="dgl_materia" modal="true" >
-                    <p:panelGrid columns="2" >
-                        <p:outputLabel value="Periodo" />
-                        <p:inputText />
-                        <p:outputLabel value="Comentario" />
-                        <p:inputText />
-                        <p:outputLabel value="Dia" />
-                        <p:inputText />
-                        <p:outputLabel value="Horario de Inicio" />
-                        <p:inputText />
-                        <p:outputLabel value="Horario de Finalizacion" />
-                        <p:inputText />
-                        <p:outputLabel value="Franja Horaria" />
-                        <p:inputText />
-                        <p:outputLabel value="Aula" />
-                        <p:selectOneMenu >
-                            <f:selectItem itemLabel="Aula 12" />
-                            <f:selectItem itemLabel="Aula 11" />
-                        </p:selectOneMenu>
-                        <p:commandButton value="Guardar" onclick="PF('dlg_materia').hide();" />
-                    </p:panelGrid>
-                </p:dialog>
+                                <p:outputLabel value="Aula" />
+                                <p:selectOneMenu id="cmbAula" value="#{aulasMateriasFormBean.aulasMateriasBean.aulasMaterias.aulas}" 
+                                                 converter="omnifaces.SelectItemsConverter">
+                                    <f:selectItems value="#{aulaFormBean.aulaBean.aulas}" var="a" 
+                                                   itemLabel="#{a.aulNombre}" 
+                                                   itemValue="#{a}"/><!--Esta propiedad guarda al objeto que representa el texto del itemlabel anterior-->
+                                </p:selectOneMenu>
+
+                                <p:outputLabel value="Docente Materia"  />
+                                <p:selectOneMenu id="cmbDocenteMateria" value="#{aulasMateriasFormBean.aulasMateriasBean.aulasMaterias.docentesMaterias}" 
+                                                 converter="omnifaces.SelectItemsConverter">
+                                    <f:selectItems value="#{docenteMateriaFormBean.docenteMateriaBean.docentesMaterias}" var="d" 
+                                                   itemLabel="#{d.materia.nombre} - #{d.docente.perfil.apellidos}" itemValue="#{d}"/>
+                                </p:selectOneMenu>
+
+                                <p:outputLabel value="Periodo" for="periodo" />      
+                                <p:selectOneMenu id="periodo" value="#{aulasMateriasFormBean.aulasMateriasBean.aulasMaterias.amPeriodo}" style="width:125px" >
+                                    <f:selectItem itemLabel="Anual" itemValue="Anual" />
+                                    <f:selectItem itemLabel="Cuatrimestral" itemValue="Cuatrimestral" />
+                                    <f:selectItem itemLabel="Parcial" itemValue="Parcial" />
+                                </p:selectOneMenu>
+
+                                <p:outputLabel value="Dia" for="dia"/>
+                                <p:selectOneButton id="dia" value="#{aulasMateriasFormBean.aulasMateriasBean.aulasMaterias.amDia}" required="true">
+                                    <f:selectItem itemLabel="lu" itemValue="Lunes" />
+                                    <f:selectItem itemLabel="Ma" itemValue="Martes" />
+                                    <f:selectItem itemLabel="Mi" itemValue="Mirecoles" />
+                                    <f:selectItem itemLabel="Ju" itemValue="Jueves" />
+                                    <f:selectItem itemLabel="Vi" itemValue="Viernes" />
+                                </p:selectOneButton>
+
+                                <p:outputLabel value="Horario"  id="horario" for="displayRange"/>
+                                <h:panelGrid columns="1" style="margin-bottom: 10px">
+                                    <h:outputText id="displayRange" value="Desde las #{aulasMateriasFormBean.aulasMateriasBean.aulasMaterias.amHorarioDesde} Hasta las  #{aulasMateriasFormBean.aulasMateriasBean.aulasMaterias.amHorarioHasta}" />
+                                    <p:slider for="inicio,fin" display="displayRange" style="width: 400px" range="true" displayTemplate="Desde las {min}.00 Hs. Hasta las  {max}.00 Hs."  minValue="8" maxValue="21"/>
+                                </h:panelGrid>
+                                <h:inputHidden id="inicio" value="#{aulasMateriasFormBean.aulasMateriasBean.aulasMaterias.amHorarioDesde}" required="true"/>
+                                <h:inputHidden id="fin" value="#{aulasMateriasFormBean.aulasMateriasBean.aulasMaterias.amHorarioHasta}"  required="true"/>
+
+                                <p:outputLabel value="Franja Horaria" />
+                                <p:selectOneMenu value="#{aulasMateriasFormBean.aulasMateriasBean.aulasMaterias.amFranjaHoraria}" style="width:125px" >
+                                    <f:selectItem itemLabel="Mañana" itemValue="Mañana" />
+                                    <f:selectItem itemLabel="Tarde" itemValue="Tarde" />
+                                    <f:selectItem itemLabel="Noche" itemValue="Noche" />
+                                </p:selectOneMenu>
+
+                                <p:outputLabel value="Comentario"  id="comentario" for="txtComentario"/>
+                                <p:inputTextarea id="txtComentario" rows="2" cols="30" value="#{aulasMateriasFormBean.aulasMateriasBean.aulasMaterias.amComentario}" 
+                                                 minQueryLength="4" maxlength="75" required="true">
+                                </p:inputTextarea>
+
+                                <p:commandButton  value="Aseptar" actionListener="#{aulasMateriasFormBean.aulasMateriasBean.registrarAulasMaterias()}" 
+                                                  style="margin-top: 5px" update="@([id$=dlg_materia]) mensajes " > </p:commandButton>
+                                
+                            </p:panelGrid>
+                        </h:form>
+                    </p:dialog>
+                </h:form>
+
+
             </ui:define>
 
         </ui:composition>
