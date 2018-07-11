@@ -20,5 +20,5 @@ public interface DocenteDAO {
     List<Docente> obtenerTodoDocente();
     Docente buscarDocentePorNombreDeUsuario(String nombreUsuario);
     List<Docente> obtenerDocentesPorEstado(boolean estado);
-    Docente buscarDocentePorPorCodigo(String codigo) ;
+    Docente buscarDocentePorPorCodigo(int codigo) ;
 }

@@ -14,7 +14,7 @@
                 <br />
                 <h:form>
                     <p:panel id="pnlProfesores" header="Profesores Desactivados/Pendientes" >
-                        <p:dataTable var="doc" value="#{listaDocentesActivosFormBean.docentesActivos}" >
+                        <p:dataTable id="tblact" var="doc" value="#{listaDocentesActivosFormBean.docentesActivos}" >
                             <p:column headerText="Legajo">
                                 <p:outputLabel value="#{doc.legajo}" />
                             </p:column>
@@ -31,8 +31,8 @@
                                 <p:commandLink value="Modificar" />
                             </p:column>
                             
-                            <p:column headerText="Activar">
-                                <p:commandLink value="Activar" />
+                            <p:column headerText="Desactivar">
+                                <p:commandLink value="Desactivar" actionListener="#{listaDocentesActivosFormBean.desactivarDocente(doc.codigo)}"  update="tblact" />
                             </p:column>
                         </p:dataTable>
                     </p:panel>

@@ -15,7 +15,7 @@ body{
     margin: 0 auto;	/* esto hace que el contenedor se centre verticalmente */
     padding: 2px;
     text-align: left; /* debemos colocarlo sino todo el texto se centra por heredar text-align de body*/
-    width: 960px; /* este será el ancho por defecto, lo heredarán encabezado, y pie */
+    width: 1060px; /* este será el ancho por defecto, lo heredarán encabezado, y pie */
 }
 
 #top {

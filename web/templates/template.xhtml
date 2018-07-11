@@ -30,15 +30,13 @@
                                 </p:submenu>
 
                                 <p:submenu label="Ver Asistecia">
-                                     <p:menuitem value="crear" outcome="/docentes/altaAsistencia"/>
-                                      <p:menuitem value="crear" outcome="/docentes/Asistencias"/>
+                                     <p:menuitem value="Crear Asistencia" outcome="/docentes/altaAsistencia"/>
+                                      <p:menuitem value="Ver Asistencia " outcome="/docentes/Asistencias"/>
                                 </p:submenu>                           
 
                                 <p:submenu label="Horarios">
 
                                 </p:submenu>
-
-                                <p:menuitem value="Mis Materias" outcome="/docentes/inscripcionesP"/>
 
                                 <p:submenu label="Datos Personales">
                                     <p:menuitem value="Usuario" action="/datos/usuario?faces-redirect=true" />
@@ -54,9 +52,10 @@
 
                             <p:menubar rendered="#{loginFormBean.verificarAlumno()}">
                                 <p:submenu label="Mis Materias">
-                                    <p:menuitem value="Materias Inscriptas" outcome="/docentes/inscripcionesA"/>
-                                    <p:menuitem value="Inscripcion a Materias" outcome="/docentes/inscripcionesAlumnoAlta"/>
+                                    <p:menuitem value="Materias Inscriptas" outcome="/alumnos/inscripcionesrealizadas"/>
+                                    <p:menuitem value="Inscripcion a Materias" outcome="/alumnos/inscripcion"/>
                                 </p:submenu>
+                                <p:menuitem value="Horario" outcome="/alumnos/verHorarioMateria"/>
                                 
                                 
                                 <p:submenu label="Datos Personales">
@@ -78,9 +77,9 @@
                                     <p:menuitem value="Aulas" outcome="/vistas/aulas" />
                                     <p:menuitem value="inscripcion" outcome="/vistas/inscripcionAlumno" />
                                     
-                                    <p:submenu label="Ususarios">
-                                        <p:menuitem value="Alumno"  />
-                                        <p:menuitem value="docente"  />
+                                    <p:submenu label="Docentes">
+                                        <p:menuitem value="Docentes Activados" outcome="/docentes/docentesactivados"  />
+                                        <p:menuitem value="Docentes Desactivados" outcome="/docentes/docentesdesactivados"  />
                                     </p:submenu>
                                 </p:submenu>
 
@@ -89,7 +88,6 @@
                                 <p:submenu label="Datos Personales">
                                     <p:menuitem value="Usuario" action="/datos/usuario?faces-redirect=true" />
                                     <p:menuitem value="Perfil" action="/datos/perfil?faces-redirect=true" />
-                                    <p:menuitem value="Alumno"  action="/datos/alumno?faces-redirect=true"/>
                                 </p:submenu>  
 
                                 <f:facet name="options">

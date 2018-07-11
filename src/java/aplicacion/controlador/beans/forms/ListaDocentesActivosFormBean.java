@@ -104,7 +104,7 @@ public class ListaDocentesActivosFormBean implements Serializable {
      * Entonces la tabla y la lista se actaulizan.
      * @param codigo 
      */
-    public void desactivarDocente(String codigo){
+    public void desactivarDocente(int codigo){
         DocenteDAO docenteDAO = new DocenteDaoImp();
         Docente unDocente = docenteDAO.buscarDocentePorPorCodigo(codigo);
         unDocente.setEstado(false);

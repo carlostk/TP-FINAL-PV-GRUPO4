@@ -34,6 +34,7 @@ public class ListaDocentesDesactivadosFormBean implements Serializable {
      * Creates a new instance of ListaDocentesDesactivadosFormBean
      */
     public ListaDocentesDesactivadosFormBean() {
+        cargarListaDocentes();
     }
 
     public ListaDocentesDesactivadosFormBean(DocenteBean docenteBean, List<Docente> docentesaDesactivados, Docente copiaDeDocente) {
@@ -99,7 +100,7 @@ public class ListaDocentesDesactivadosFormBean implements Serializable {
      *
      * @param codigo
      */
-    public void desactivarDocente(String codigo) {
+    public void desactivarDocente(int codigo) {
         DocenteDAO docenteDAO = new DocenteDaoImp();
         Docente unDocente = docenteDAO.buscarDocentePorPorCodigo(codigo);
         unDocente.setEstado(true);

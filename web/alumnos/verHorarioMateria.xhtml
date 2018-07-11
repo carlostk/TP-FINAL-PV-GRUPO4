@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+       <ui:composition template="./../templates/template.xhtml">
+
+            <ui:define name="content">
+                <br/>
+                
+                <p:panel header="Crear Horario" >
+                        <h:form id="horarios" >
+                            <p:growl id="mensaje" />
+
+                            <p:dataTable id="basiDT" value="#{horarioFormBean.obtenerHorarios()}" var="h" >
+                                
+                                <p:column headerText="Materia" >
+                                    <p:outputLabel  value="#{h.docentesMaterias.materia.nombre}"/>
+                                </p:column>
+                                <p:column headerText="Aula" width="120">
+                                    <p:outputLabel value="#{h.aulas.aulNombre}" />
+                                </p:column>
+                                <p:column headerText="Dia" width="80">
+                                    <p:outputLabel value="#{h.amDia}"/>
+                                </p:column>
+                                <p:column headerText="Horario" width="120">
+                                    <p:outputLabel value="#{h.amHorarioDesde} - #{h.amHorarioHasta} "/>
+                                </p:column>
+                                <p:column  width="120">
+                                    <p:commandButton value="agregar"  actionListener="#{horarioFormBean.agregarHorario(h)}"
+                                                     update="horarios">
+                                    </p:commandButton>
+                                </p:column>
+                                <p:column  width="120">
+                                    <p:commandButton  value="eliminar" actionListener="#{horarioFormBean.eliminarHorario(h)}"
+                                                     update="horarios">
+                                   </p:commandButton>
+                                </p:column>
+                            </p:dataTable>
+                            <br/>
+                            <h2> Horarios</h2>
+                             <br />
+                            <p:dataTable id="basiDT2" value="#{horarioFormBean.tablahorarios}" var="h" >
+                               
+                                <p:column headerText="Materia" >
+                                    <p:outputLabel  value="#{h.docentesMaterias.materia.nombre}"/>
+                                </p:column>
+                                <p:column headerText="Aula" width="120">
+                                    <p:outputLabel value="#{h.aulas.aulNombre}" />
+                                </p:column>
+                                <p:column headerText="Dia" width="80">
+                                    <p:outputLabel value="#{h.amDia}"/>
+                                </p:column>
+                                <p:column headerText="Horario" width="120">
+                                    <p:outputLabel value="#{h.amHorarioDesde} - #{h.amHorarioHasta} "/>
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+                    </p:panel>
+            
+            </ui:define>
+          </ui:composition>
+
+    </body>
+</html>

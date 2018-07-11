@@ -15,7 +15,7 @@
                 <br />
                 <h:form id="frmDatosUsuario" rendered="#{loginFormBean.verificarAlumno() || loginFormBean.verificarProfesor() || loginFormBean.verificarSupervisor()}"> 
                     <p:growl id="mensaje" showDetail="false" sticky="false"/>   
-                    <p:panel header="Datos del Usuario" >
+                    <p:panel header="Datos del Usuario" footer="Si realiza algun cambio se cerrara la session." >
                         <p:panelGrid id="tblUsuario" columns="2" >
                             <p:outputLabel id="lblNombreUsuario" value="Nombre de Usuario" for="txtNombreUsuario" />
                             <p:inputText id="txtNombreUsuario" required="true" value="#{datosFormBean.perfilBean.perfil.usuario.nombreUsuario}" >
@@ -26,10 +26,10 @@
                                 <f:validateLength minimum="4" maximum="20" />
                             </p:inputText> 
                             <p:outputLabel id="lblCContraseña" value="Confirmar Contraseña:" for="txtCContraseña" />
-                            <p:inputText id="txtCContraseña" required="true" value="#{datosFormBean.perfilBean.perfil.usuario.password}" >
+                            <p:inputText id="txtCContraseña" required="true" value="#{datosFormBean.contraseña}" >
                                 <f:validateLength minimum="4" maximum="20" />
                             </p:inputText>
-                            <p:commandButton id="btnActualizar" value="Actualizar" update="mensaje" actionListener="#{datosFormBean.perfilBean.actualizarPerfil()}" />
+                            <p:commandButton id="btnActualizar" value="Actualizar" update="mensaje" actionListener="#{datosFormBean.actualizarPerfil()}" />
                         </p:panelGrid>
                     </p:panel>
                 </h:form>

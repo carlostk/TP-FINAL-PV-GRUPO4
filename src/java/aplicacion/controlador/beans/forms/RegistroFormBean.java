@@ -26,16 +26,22 @@ import javax.faces.context.FacesContext;
 @ManagedBean
 @ViewScoped
 public class RegistroFormBean implements Serializable {
-@ManagedProperty(value = "#{perfilBean}")
-private PerfilBean perfilBean;
+
+    @ManagedProperty(value = "#{perfilBean}")
+    private PerfilBean perfilBean;
+    private String contraseña;
 
     /**
      * Creates a new instance of RegistroFormBean
      */
     public RegistroFormBean() {
+        Usuario usuario1 = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioValidado");
+        if (usuario1 != null) {
+            FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        }
     }
 
-    public RegistroFormBean( PerfilBean perfilBean) {
+    public RegistroFormBean(PerfilBean perfilBean) {
         this.perfilBean = perfilBean;
     }
 
@@ -52,15 +58,41 @@ private PerfilBean perfilBean;
     public void setPerfilBean(PerfilBean perfilBean) {
         this.perfilBean = perfilBean;
     }
-    
-    
-    public void registrar() throws IOException{
-        //usuarioBean.registrarUsuario();
-        perfilBean.registrarPerfil();
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        facesContext.addMessage(null,
-                new FacesMessage( FacesMessage.SEVERITY_INFO, "Usuario creado exitosamente","Usuario creado exitosamente"));
-        facesContext.getExternalContext().redirect("/tp-final/faces/index.xhtml"); //Para redigir la pagina al login si usar un action
-    } 
-                    
+
+    /**
+     * Se encarga de registrar un perfil.
+     *
+     * @throws IOException
+     */
+    public void registrar() throws IOException {
+        if (contraseña.compareTo(this.perfilBean.getPerfil().getUsuario().getPassword()) == 0) {
+            perfilBean.registrarPerfil();
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario creado exitosamente", "Usuario creado exitosamente"));
+            facesContext.getExternalContext().redirect("/tp-final/faces/index.xhtml"); //Para redigir la pagina al login si usar un action
+        } else {
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Las contraseñas deben coincidir"));
+        }
+
+    }
+
+    /**
+     * @return the contraseña
+     */
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    /**
+     * @param contraseña the contraseña to set
+     */
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+
+    public void cerrarSession() {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+    }
 }

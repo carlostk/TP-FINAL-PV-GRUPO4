@@ -133,7 +133,7 @@ public class DocenteDaoImp implements DocenteDAO, Serializable {
      * @return retorna un docente
      */
     @Override
-    public Docente buscarDocentePorPorCodigo(String codigo) {
+    public Docente buscarDocentePorPorCodigo(int codigo) {
         //int codigoConvertido = Integer.parseInt(codigo);
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();

@@ -31,29 +31,16 @@ public class AlumnoBean implements Serializable {
     private boolean encontrado;
 
     public AlumnoBean() {
-        //Se colaca un try por las dudas salte algun error
-        try {
-            alumno = new Alumno();
-            encontrado = false;
-            //Obtener el nombre del usuario
-            Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioValidado");
-            String nombreUsuario = usuario.getNombreUsuario();
-            //Consultamos si hay un alumno con ese nombre de usuario
-            AlumnoDAO alumnoDAO = new AlumnoDAOImp();
-            Alumno unAlumno = alumnoDAO.buscarAlumno(nombreUsuario); // Aqui realiza la busqueda.
+        alumno = new Alumno();
+        encontrado = false;
 
-            if (unAlumno != null) {
-                //Si lo encontro lo setea
-                this.setAlumno(unAlumno);
-                encontrado = true;
-            } else {
-                //Si no lo encontro guarda el perfil del usuario logueado en alumno
-                PerfilDAO perfilDAO = new PerfilDAOImp();
-                Perfil unPerfil = perfilDAO.obtenerPerfil(nombreUsuario);
-                this.alumno.setPerfil(unPerfil);
+        //Aqui comienza la recuperacion de datos
+        try {
+            Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioValidado");
+            if (usuario.getTipoUsuario().compareTo("alumno") == 0) { //Se pregunta si es igual a alumno.
+                this.recuperarDatosAlumno(); //Si es verdad recupera sus datos
             }
         } catch (Exception e) {
-            alumno = new Alumno();
         }
 
     }
@@ -118,6 +105,32 @@ public class AlumnoBean implements Serializable {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         facesContext.addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO, "Cambios Aplicados", "Cambios Aplicados"));
+    }
+
+    /**
+     * Se encarga de recuperar los datos del alumno.
+     */
+    public void recuperarDatosAlumno() {
+        try {
+            //Obtener el nombre del usuario
+            Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioValidado");
+            String nombreUsuario = usuario.getNombreUsuario();
+            //Consultamos si hay un alumno con ese nombre de usuario
+            AlumnoDAO alumnoDAO = new AlumnoDAOImp();
+            Alumno unAlumno = alumnoDAO.buscarAlumno(nombreUsuario); // Aqui realiza la busqueda.
+
+            if (unAlumno != null) {
+                //Si lo encontro lo setea
+                this.setAlumno(unAlumno);
+                encontrado = true;
+            } else {
+                //Si no lo encontro guarda el perfil del usuario logueado en alumno
+                PerfilDAO perfilDAO = new PerfilDAOImp();
+                Perfil unPerfil = perfilDAO.obtenerPerfil(nombreUsuario);
+                this.alumno.setPerfil(unPerfil);
+            }
+        } catch (Exception e) {
+        }
     }
 
 }

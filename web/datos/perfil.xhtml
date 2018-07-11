@@ -25,13 +25,17 @@
                             <p:inputText id="txtApellido" required="true" value="#{datosFormBean.perfilBean.perfil.apellidos}" >
                                 <f:validateLength minimum="3" maximum="50" />
                             </p:inputText>
-                            <p:outputLabel id="lblDocumento" value="Documento:" for="txtDocumento" />
-                            <p:inputText id="txtDocumento" required="true" value="#{datosFormBean.perfilBean.perfil.dni}"
-                                         />
+                            <p:outputLabel id="lblDocumento" value="Documento:" for="txtDocumento" />                            
+                            <p:inputText id="txtDocumento" required="true" value="#{datosFormBean.perfilBean.perfil.dni}" >
+                                <f:validateLength minimum="8" />
+                            </p:inputText>
                             <p:outputLabel id="lblFDNacimiento" value="Fecha de Nac: " for="txtFDNacimiento" />
                             <p:calendar id="txtFDNacimiento" required="true" value="#{datosFormBean.perfilBean.perfil.fechaNac}" />
                             <p:outputLabel id="lblEmail" value="E-Mail" for="txtEmail" />
-                            <p:inputText  id="txtEmail" required="true" value="#{datosFormBean.perfilBean.perfil.email}" />
+                            <p:inputText  id="txtEmail" required="true" value="#{datosFormBean.perfilBean.perfil.email}" >
+                                <f:validateLength minimum="8" />
+                                <f:validator validatorId="emailValidator"/>
+                            </p:inputText>
                             <p:outputLabel id="lblTelefono" value="Celular: " for="txtTelefono" />
                             <p:inputText id="txtTelefono" required="true" value="#{datosFormBean.perfilBean.perfil.celular}" >
                                 <f:validateLength minimum="9" maximum="15" />
@@ -40,6 +44,7 @@
                         </p:panelGrid>
                     </p:panel>
                 </h:form>
+
 
             </ui:define>
 

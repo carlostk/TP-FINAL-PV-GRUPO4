@@ -35,6 +35,10 @@
                             </p:cellEditor>
                         </p:column>
                         
+                        <p:column headerText="Apellido" >
+                            <p:outputLabel value="#{mate.docente.perfil.apellidos}" />
+                        </p:column>
+                        
                         
                         <p:column  headerText="Anio" style="width: 50px" class="c">
                             <p:cellEditor>
@@ -54,7 +58,7 @@
                                 </f:facet>
                             </p:cellEditor>
                         </p:column>
-                        <p:column headerText="Profecion" class="c">
+                        <p:column headerText="Habilitado" class="c">
                             <p:cellEditor>
                                 <f:facet name="output"><h:outputText value="#{mate.habilitado}" /></f:facet>
                                 <f:facet name="input">
@@ -64,14 +68,6 @@
                                 <f:selectItem itemLabel="Habilitar" itemValue="h" />
                                 <f:selectItem itemLabel="Desabilitar" itemValue="d" />
                             </p:selectOneMenu>
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-                        <p:column headerText="Estado" class="c">
-                            <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{mate.estado}" /></f:facet>
-                                <f:facet name="input">
-                                    <p:inputText id="modelInput4" value="#{mate.estado}"/>
                                 </f:facet>
                             </p:cellEditor>
                         </p:column>

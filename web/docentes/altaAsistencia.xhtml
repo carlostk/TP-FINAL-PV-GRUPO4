@@ -65,7 +65,7 @@
                                         <p:outputLabel value="#{alu.alumno.perfil.nombres}" />
                                     </p:column>                               
                                     <p:column >
-                                        <p:commandButton id="btnTomar" icon="ui-icon-calendar" oncomplete="PF('dialogTomarAsistencia').show();"
+                                        <p:commandButton id="btnTomar" value="tomar asistencia" oncomplete="PF('dialogTomarAsistencia').show();"
                                                          update="frmTomar">
                                             <f:setPropertyActionListener target="#{asistenciaFormBean.asistenciaBean.asistencia.inscripcionesAlumnos}" value="#{alu}" />
                                         </p:commandButton>
@@ -79,7 +79,7 @@
                     <h:form id="frmTomar">
                         <p:growl id="mensajes" />
                         <p:dialog id="dlgTomar" header="Registrar Asistencia" widgetVar="dialogTomarAsistencia" resizable="false" 
-                                  showEffect="explode" hideEffect="explode" modal="true" >
+                                  modal="true" >
                             <h:panelGrid id="pnlEditar" columns="2" cellpadding="5">
 
                                 <p:outputLabel value="Liberta Universitaria" />
@@ -99,7 +99,7 @@
                                 </p:selectOneMenu>
 
                             </h:panelGrid>
-                            <p:commandButton value="asis" actionListener="#{asistenciaFormBean.registrarAsistencia2()}" update="mensajes formAsiste:tblAlumnos"
+                            <p:commandButton value="aseptar" actionListener="#{asistenciaFormBean.registrarAsistencia2()}" update="mensajes formAsiste:tblAlumnos"
                                               style="margin: 20px" oncomplete="PF('dialogTomarAsistencia').hide();"/>
                         </p:dialog>
                     </h:form>

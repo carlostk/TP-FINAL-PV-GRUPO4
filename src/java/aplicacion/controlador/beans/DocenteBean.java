@@ -28,42 +28,24 @@ import javax.faces.context.FacesContext;
 public class DocenteBean implements Serializable {
 
     private Docente profesor;
-   
     private boolean encontrado;
 
     /**
      * Creates a new instance of DocenteBean
      */
     public DocenteBean() {
-       
-        //Se coloca un try para que no se corte el programa cuando entra como un alumno o supervisor (Devolvia null point) .
+        profesor = new Docente();
+        encontrado = false;
+        
+        //Aqui comienza la recuperacion de datos
         try {
-            profesor = new Docente();
-            encontrado = false;
-
             Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioValidado");
-            String nombreUsuario = usuario.getNombreUsuario();
-            System.out.println(nombreUsuario);
-
-            DocenteDAO docenteDAO = new DocenteDaoImp();
-            Docente unProfesor = docenteDAO.buscarDocentePorNombreDeUsuario(nombreUsuario);
-
-            if (unProfesor != null) {
-                this.setProfesor(unProfesor);
-                encontrado = true;
-            } else {
-                PerfilDAO perfilDAO = new PerfilDAOImp();
-                Perfil unPerfil = perfilDAO.obtenerPerfil(nombreUsuario);
-                this.profesor.setPerfil(unPerfil);
-                this.profesor.setEstado(false); //Se lo deja así para que pueda ser activado despues.
+            if(usuario.getTipoUsuario().compareTo("profesor") == 0 ){ //Se pregunta si es igual a profesor.
+                this.recuperarDatosDocente(); //Si es verdad recupera sus datos
             }
         } catch (Exception e) {
-            //Si se produce un error se descarta lo anterior y se crea un nuevo docente.
-            profesor = new Docente(); 
         }
     }
-
-   
 
     public DocenteBean(Docente profesor, boolean encontrado) {
         this.profesor = profesor;
@@ -111,27 +93,44 @@ public class DocenteBean implements Serializable {
     public void realizarCambios() {
         if (encontrado == true) {
             actualizarProfesor();
-        }
-        else{
-          guardarProfesor();
+        } else {
+            guardarProfesor();
         }
         FacesContext facesContext = FacesContext.getCurrentInstance();
         facesContext.addMessage(null,
-        new FacesMessage(FacesMessage.SEVERITY_INFO, "Cambios Aplicados", "Cambios Aplicados"));
+                new FacesMessage(FacesMessage.SEVERITY_INFO, "Cambios Aplicados", "Cambios Aplicados"));
     }
 
-    public void consultarEstadoDeActivasion() {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
+    public String consultarEstadoDeActivasion() {
         if (this.profesor.isEstado()) {
-            facesContext.addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Docente/Profesor habilitado", "Docente/Profesor habilitado"));
-            System.out.println("Estado activado");
+            return "Estado activado";
         } else {
-            facesContext.addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Docente/Profesor NO habilitado", "Docente/Profesor NO habilitado"));
-            System.out.println("Estado Desactivado");
+            return "Estado Desactivado";
         }
-        System.out.println("Final.");
     }
 
+    /**
+     * Se encarga de recuperar los datos.
+     */
+    public void recuperarDatosDocente() {
+        try {
+            Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioValidado");
+            String nombreUsuario = usuario.getNombreUsuario();
+            System.out.println(nombreUsuario);
+
+            DocenteDAO docenteDAO = new DocenteDaoImp();
+            Docente unProfesor = docenteDAO.buscarDocentePorNombreDeUsuario(nombreUsuario);
+
+            if (unProfesor != null) {
+                this.setProfesor(unProfesor);
+                encontrado = true;
+            } else {
+                PerfilDAO perfilDAO = new PerfilDAOImp();
+                Perfil unPerfil = perfilDAO.obtenerPerfil(nombreUsuario);
+                this.profesor.setPerfil(unPerfil);
+                this.profesor.setEstado(false); //Se lo deja así para que pueda ser activado despues.
+            }
+        } catch (Exception e) {
+        }
+    }
 }

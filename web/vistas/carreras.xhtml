@@ -12,78 +12,84 @@
 
             <ui:define name="content">
                 <br/>
-                
-               
-                <p:panel header="Listado de Carreras" >
-                   <h:form id="form">
-                     <p:growl id="mensajes"/>
-                    <br/>
-                    <p:commandButton value="Agregar Carrera" onclick="PF('dlg_carrera').show();" />
-                    <p:inputText  value="#{carreraFormBean.buscado}" style="margin-left:400px"/>
-                    <p:commandButton update="@([id$=basicDT]) mensajes" value="Buscar" actionListener="#{carreraFormBean.buscar()}"/>
-                    <br/>
-                    <br/>
-                
-                    <p:dataTable widgetVar="cellCarreras" editMode="cell" editable="true" id="basicDT" var="carre" value="#{carreraFormBean.carreraBean.carreras}">
-                        <p:ajax event="cellEdit" listener="#{carreraFormBean.modificar(carre)}"  /> 
-                        <p:column headerText="Codigo" class="c">
-                           
-                            <h:outputText value="#{carre.codigo}" />
-                           
-                        </p:column>
-                      
-                        <p:column headerText="Nombre" class="c" >
-                          <p:cellEditor>
-                              <f:facet name="output"><h:outputText value="#{carre.nombreCarrera}" /></f:facet>
-                              <f:facet name="input"><p:inputText id="modelInput1" value="#{carre.nombreCarrera}"/></f:facet>
-                          </p:cellEditor>
-                        </p:column>
 
-                        <p:column headerText="Plan" class="c">
-                           <p:cellEditor>
-                               <f:facet name="output"><h:outputText value="#{carre.plan}" /></f:facet>
-                               <f:facet name="input"><p:inputText id="modelInput2" value="#{carre.plan}"/></f:facet>
-                           </p:cellEditor>
-                        </p:column>
-                        <p:column headerText="Estado" class="c">
-                           <p:cellEditor>
-                               <f:facet name="output"><h:outputText value="#{carre.estado}" /></f:facet>
-                               <f:facet name="input"><p:selectOneMenu id="estadoCarrera1" required="true"
-                                         value="#{carreraBean.estado}">
-                                <f:selectItem itemLabel="Habilitar" itemValue="h" />
-                                <f:selectItem itemLabel="Desabilitar" itemValue="d" /> 
-                            </p:selectOneMenu></f:facet>
-                           </p:cellEditor>
-                        </p:column>
-                        <p:column headerText="Eliminar" class="c">
-                            <p:commandButton value="Eliminar" update="basicDT " actionListener="#{carreraFormBean.eliminar(carre)}"/>
-                        </p:column>
-                    </p:dataTable>    
-                    <p:contextMenu for="basicDT" widgetVar="cMenu">   
-                      <p:menuitem value="Edit Cell" icon="ui-icon-search" onclick="PF('cellCarreras').showCellEditor();return false;"/>  
-                      <p:menuitem value="Hide Menu" icon="ui-icon-close" onclick="PF('cMenu').hide()"/>  
-                    </p:contextMenu> 
-                  
-                   
-                  </h:form> 
+
+                <p:panel header="Listado de Carreras" >
+                    <h:form id="form">
+                        <p:growl id="mensajes"/>
+                        <br/>
+                        <p:panelGrid columns="2">
+                            <p:outputLabel value="Buscar Carrera:" />
+                            <p:inputText  value="#{carreraFormBean.buscado}" />
+                            <p:commandButton update="@([id$=basicDT]) mensajes" value="Buscar" actionListener="#{carreraFormBean.buscar()}"/>   
+                            <p:outputLabel />
+                            <p:outputLabel />
+                            <p:outputLabel />
+                            <p:commandButton value="Agregar Carrera" onclick="PF('dlg_carrera').show();" />
+                        </p:panelGrid>
+                        <br/>
+                        <br/>
+
+                        <p:dataTable widgetVar="cellCarreras" editMode="cell" editable="true" id="basicDT" var="carre" value="#{carreraFormBean.carreraBean.carreras}">
+                            <p:ajax event="cellEdit" listener="#{carreraFormBean.modificar(carre)}"  /> 
+                            <p:column headerText="Codigo" class="c">
+
+                                <h:outputText value="#{carre.codigo}" />
+
+                            </p:column>
+
+                            <p:column headerText="Nombre" class="c" >
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{carre.nombreCarrera}" /></f:facet>
+                                    <f:facet name="input"><p:inputText id="modelInput1" value="#{carre.nombreCarrera}"/></f:facet>
+                                </p:cellEditor>
+                            </p:column>
+
+                            <p:column headerText="Plan" class="c">
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{carre.plan}" /></f:facet>
+                                    <f:facet name="input"><p:inputText id="modelInput2" value="#{carre.plan}"/></f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column headerText="Estado" class="c">
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{carre.estado}" /></f:facet>
+                                    <f:facet name="input"><p:selectOneMenu id="estadoCarrera1" required="true"
+                                                                           value="#{carreraBean.estado}">
+                                            <f:selectItem itemLabel="Habilitar" itemValue="h" />
+                                            <f:selectItem itemLabel="Desabilitar" itemValue="d" /> 
+                                        </p:selectOneMenu></f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column headerText="Eliminar" class="c">
+                                <p:commandButton value="Eliminar" update="basicDT " actionListener="#{carreraFormBean.eliminar(carre)}"/>
+                            </p:column>
+                        </p:dataTable>    
+                        <p:contextMenu for="basicDT" widgetVar="cMenu">   
+                            <p:menuitem value="Edit Cell" icon="ui-icon-search" onclick="PF('cellCarreras').showCellEditor();return false;"/>  
+                            <p:menuitem value="Hide Menu" icon="ui-icon-close" onclick="PF('cMenu').hide()"/>  
+                        </p:contextMenu> 
+
+
+                    </h:form> 
                     <h:form>
                         <p:growl id="mensajes1"/>
-                         <p:dialog header="Nueva Carrera" widgetVar="dlg_carrera" modal="true" >
-                        
-                        <p:panelGrid columns="2">
-                            <p:outputLabel for="txtnombre" value="Nombre :"/>
-                            <p:inputText id="txtnombre"  value="#{carreraBean.carrera.nombreCarrera}" required="true"/>
-                            <p:outputLabel for="txtplan" value="Plan :" />
-                            <p:inputText id="txtplan" value="#{carreraBean.carrera.plan}" required="true"/>
-                            <p:outputLabel value="Estado :" />
-                            <p:selectOneMenu id="estadoCarrera"  
-                                         value="#{carreraBean.estado}">
-                                <f:selectItem itemLabel="Habilitar" itemValue="h" />
-                                <f:selectItem itemLabel="Desabilitar" itemValue="d" /> 
-                            </p:selectOneMenu>
-                            <p:commandButton  value="Guardar"  actionListener="#{carreraFormBean.agregar()}" update="@([id$=basicDT]) mensajes1" onclick="PF('dlg_carrera').hide()"/>
-                        </p:panelGrid>
-                    </p:dialog>
+                        <p:dialog header="Nueva Carrera" widgetVar="dlg_carrera" modal="true" >
+
+                            <p:panelGrid columns="2">
+                                <p:outputLabel for="txtnombre" value="Nombre :"/>
+                                <p:inputText id="txtnombre"  value="#{carreraBean.carrera.nombreCarrera}" required="true"/>
+                                <p:outputLabel for="txtplan" value="Plan :" />
+                                <p:inputText id="txtplan" value="#{carreraBean.carrera.plan}" required="true"/>
+                                <p:outputLabel value="Estado :" />
+                                <p:selectOneMenu id="estadoCarrera"  
+                                                 value="#{carreraBean.estado}">
+                                    <f:selectItem itemLabel="Habilitar" itemValue="h" />
+                                    <f:selectItem itemLabel="Desabilitar" itemValue="d" /> 
+                                </p:selectOneMenu>
+                                <p:commandButton  value="Guardar"  actionListener="#{carreraFormBean.agregar()}" update="@([id$=basicDT]) mensajes1" onclick="PF('dlg_carrera').hide()"/>
+                            </p:panelGrid>
+                        </p:dialog>
                     </h:form>
                 </p:panel>
             </ui:define>

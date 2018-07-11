@@ -22,7 +22,7 @@
                             <p:inputText id="txtCargo" required="true" value="#{docentesFormBean.docenteBean.profesor.cargo}" />
                             <p:commandButton value="Guardar" update="mensaje" actionListener="#{docentesFormBean.docenteBean.realizarCambios()}" />
                             <p:outputLabel />
-                            <p:commandButton value="Consultar Estado" actionListener="#{docentesFormBean.docenteBean.consultarEstadoDeActivasion()}" />
+                            <p:commandButton value="Consultar Estado" actionListener="#{docentesFormBean.estadoDocente()}" update="mensaje" />
                         </p:panelGrid>
                     </p:panel>
                 </h:form>

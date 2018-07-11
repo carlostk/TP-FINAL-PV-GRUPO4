@@ -19,8 +19,13 @@
                     <p:panel header="Listado de Aulas" >
                         <h:form id="form">
                             <br/>
+                            <p:panelGrid columns="4">
                             <p:commandButton value="Agregar Aula" onclick="PF('dlg_aula').show();" />
-                            <br/>
+                            <p:outputLabel />
+                            <p:outputLabel />
+                            <p:commandButton value="Asignar Materia" onclick="PF('dgl_materia').show();"
+                                             oncomplete="PF('dgl_materia').show()"/>
+                            </p:panelGrid>
                             <br/>
 
                             <p:dataTable widgetVar="cellAulas" editMode="cell" editable="true" id="basicDT" var="aula" value="#{aulaFormBean.aulaBean.aulas}">
@@ -66,10 +71,6 @@
                         </h:form>
                     </p:panel>
 
-                    <p:commandButton value="Asignar Materia" onclick="PF('dgl_materia').show();"
-                                      oncomplete="PF('dgl_materia').show()"/>
-
-                    
                 </h:form>
 
 
@@ -89,7 +90,7 @@
                 </h:form>   
 
                 <h:form>
-                                                            
+
                     <p:dialog header="Asignacíon de Materia" widgetVar="dgl_materia" modal="true" >
                         <h:form id="altaAsignarMateria">
                             <p:growl id="mensajes"/>
@@ -150,7 +151,7 @@
 
                                 <p:commandButton  value="Aseptar" actionListener="#{aulasMateriasFormBean.aulasMateriasBean.registrarAulasMaterias()}" 
                                                   style="margin-top: 5px" update="@([id$=dlg_materia]) mensajes " > </p:commandButton>
-                                
+
                             </p:panelGrid>
                         </h:form>
                     </p:dialog>
