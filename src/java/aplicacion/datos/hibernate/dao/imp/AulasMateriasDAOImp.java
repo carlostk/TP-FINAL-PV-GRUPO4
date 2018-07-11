@@ -43,7 +43,7 @@ public class AulasMateriasDAOImp implements Serializable, AulasMateriasDAO{
 
     @Override
     public void eliminarAulasMaterias(AulasMaterias aulasMaterias) {
-                Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.delete(aulasMaterias);
         session.getTransaction().commit();
@@ -52,7 +52,7 @@ public class AulasMateriasDAOImp implements Serializable, AulasMateriasDAO{
 
     @Override
     public List<AulasMaterias> obtenerTodoAulasMaterias() {
-         List<AulasMaterias> aulasMaterias;
+        List<AulasMaterias> aulasMaterias;
         List<AulasMaterias> aux= null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();

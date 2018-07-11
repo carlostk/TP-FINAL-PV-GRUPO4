@@ -19,6 +19,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -27,7 +28,7 @@ import javax.servlet.http.HttpSession;
  * @author pc1
  */
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class MateriaBean implements Serializable{
 
     private Materia materia;

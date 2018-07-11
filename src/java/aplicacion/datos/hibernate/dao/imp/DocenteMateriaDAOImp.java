@@ -62,6 +62,8 @@ public class DocenteMateriaDAOImp implements DocenteMateriaDAO, Serializable{
         docenteMaterias=(List<DocenteMateria>) criteria.list();
         for (DocenteMateria dm : docenteMaterias) {
             Hibernate.initialize(dm.getDocente());
+            Hibernate.initialize(dm.getMateria());
+            Hibernate.initialize(dm.getMateria().getCarrera());
         }
         session.close();
         return  docenteMaterias;

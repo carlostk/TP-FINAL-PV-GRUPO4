@@ -8,17 +8,21 @@ package aplicacion.controlador.beans;
 import aplicacion.datos.hibernate.dao.CarreraDAO;
 import aplicacion.datos.hibernate.dao.imp.CarreraDaoImp;
 import aplicacion.modelo.dominio.Carrera;
+import aplicacion.modelo.dominio.Usuario;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
  * @author pc1
  */
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class CarreraBean implements Serializable{
 
     private Carrera carrera;
@@ -50,9 +54,6 @@ public class CarreraBean implements Serializable{
     public void setCarreraDao(CarreraDAO carreraDao) {
         this.carreraDao = carreraDao;
     }
-
-
-   
 
     public List<Carrera> getCarreras() {
         return carreras;
@@ -101,6 +102,6 @@ public class CarreraBean implements Serializable{
       carreraDao.eliminarCarrera(carrera);
       carreras=carreraDao.obtenerTodoCarreras();
     }
-    
+   
     
 }

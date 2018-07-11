@@ -14,18 +14,22 @@ import aplicacion.datos.hibernate.dao.imp.MateriaDaoImp;
 import aplicacion.modelo.dominio.Docente;
 import aplicacion.modelo.dominio.DocenteMateria;
 import aplicacion.modelo.dominio.Materia;
+import aplicacion.modelo.dominio.Usuario;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
  * @author pc1
  */
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class DocenteMateriaBean implements Serializable {
 
     private DocenteMateria docenteMateria;
@@ -137,5 +141,24 @@ public class DocenteMateriaBean implements Serializable {
     {
       docenteMateriaDao.eliminarDocenteMateria(docenteMateria);
       docentesMaterias=docenteMateriaDao.obtenerTodoDocenteMateria();
+    }
+    public List<DocenteMateria> obtenerdocenteMaterias()
+    {
+      List<DocenteMateria>docentem= new ArrayList<>();
+      Usuario usuario1 = (Usuario)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioValidado");
+      for(Docente d : docenteDao.obtenerTodoDocente())
+        {
+          if(d.getPerfil().getUsuario().getNombreUsuario().equals(usuario1.getNombreUsuario()))
+           {
+             for(DocenteMateria m :docenteMateriaDao.obtenerTodoDocenteMateria())
+             {
+               if(m.getDocente().getLegajo().equals(d.getLegajo()))
+               {
+                 docentem.add(m);
+               }
+             }
+           }
+        }
+      return docentem;
     }
 }

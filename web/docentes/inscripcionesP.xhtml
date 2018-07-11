@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <body>
+         <ui:composition template="./../templates/template.xhtml">
+
+            <ui:define name="content">
+                <br/>
+                
+                <p:panel header="Administración de Docentes Materias" >
+                  <h:form id="form">
+                   <p:growl id="mensajes"/>
+                     
+                   <p:dataTable   id="basicDT" var="mate" value="#{inscripcionAlumnoBean.obtenerInscripcionesProfesor()}">
+                        
+                        <p:column  headerText="Codigo" style="width: 70px" class="c">
+                            <h:outputText  value="#{mate.codigo}" />
+                        </p:column>
+
+                        <p:column headerText="Nombre" class="c">
+                            <h:outputText value="#{mate.alumno.perfil.nombres}" />
+                               
+                        </p:column>
+                                      
+                        <p:column headerText="Docente-Materia" class="c">
+                            
+                               <h:outputText value="#{mate.docenteMateria.docente.perfil.nombres}-#{mate.docenteMateria.materia.nombre}" />
+                                
+                       </p:column>
+                       
+                        
+
+                        
+                    </p:dataTable>
+                   
+                    <br />
+                    <br />
+                    
+                    
+                  </h:form>
+                   
+                
+                </p:panel>
+            </ui:define>
+
+        </ui:composition>
+    </body>
+</html>

@@ -16,6 +16,7 @@ import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 /**
@@ -23,16 +24,18 @@ import javax.faces.context.FacesContext;
  * @author Oscar
  */
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class DocenteBean implements Serializable {
 
     private Docente profesor;
+   
     private boolean encontrado;
 
     /**
      * Creates a new instance of DocenteBean
      */
     public DocenteBean() {
+       
         //Se coloca un try para que no se corte el programa cuando entra como un alumno o supervisor (Devolvia null point) .
         try {
             profesor = new Docente();
@@ -59,6 +62,8 @@ public class DocenteBean implements Serializable {
             profesor = new Docente(); 
         }
     }
+
+   
 
     public DocenteBean(Docente profesor, boolean encontrado) {
         this.profesor = profesor;
@@ -106,12 +111,13 @@ public class DocenteBean implements Serializable {
     public void realizarCambios() {
         if (encontrado == true) {
             actualizarProfesor();
-        } else {
-            guardarProfesor();
+        }
+        else{
+          guardarProfesor();
         }
         FacesContext facesContext = FacesContext.getCurrentInstance();
         facesContext.addMessage(null,
-                new FacesMessage(FacesMessage.SEVERITY_INFO, "Cambios Aplicados", "Cambios Aplicados"));
+        new FacesMessage(FacesMessage.SEVERITY_INFO, "Cambios Aplicados", "Cambios Aplicados"));
     }
 
     public void consultarEstadoDeActivasion() {

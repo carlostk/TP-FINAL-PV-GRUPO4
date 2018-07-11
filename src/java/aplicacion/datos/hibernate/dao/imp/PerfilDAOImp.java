@@ -9,6 +9,7 @@ import aplicacion.datos.hibernate.configuracion.HibernateUtil;
 import aplicacion.datos.hibernate.dao.PerfilDAO;
 import aplicacion.modelo.dominio.Perfil;
 import java.io.Serializable;
+import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -52,5 +53,22 @@ public class PerfilDAOImp implements PerfilDAO, Serializable{
         session.getTransaction().commit();
         session.close();
         return perfil;
+    }
+
+    @Override
+    public List<Perfil> obtenerPerfiles(boolean estado) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(Perfil.class);
+        criteria.createAlias("usuario", "us");
+        criteria.add(Restrictions.like("us.estado", estado));
+        List<Perfil> perfiles = null;
+
+        if (!criteria.list().isEmpty()) {
+            perfiles = criteria.list();
+        }
+        session.getTransaction().commit();
+        session.close();
+        return perfiles;
     }
 }

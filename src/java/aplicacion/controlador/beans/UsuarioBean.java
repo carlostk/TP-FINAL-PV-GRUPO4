@@ -12,6 +12,7 @@ import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 
 
 /**
@@ -19,7 +20,7 @@ import javax.faces.bean.RequestScoped;
  * @author pc1
  */
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class UsuarioBean implements Serializable{
 
     /**

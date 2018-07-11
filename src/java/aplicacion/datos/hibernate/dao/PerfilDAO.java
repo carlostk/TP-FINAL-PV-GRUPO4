@@ -6,6 +6,7 @@
 package aplicacion.datos.hibernate.dao;
 
 import aplicacion.modelo.dominio.Perfil;
+import java.util.List;
 
 /**
  *
@@ -15,4 +16,5 @@ public interface PerfilDAO {
     void agregar(Perfil perfil);
     void modificar(Perfil perfil);
     Perfil obtenerPerfil(String nombreUsuario);
+    List<Perfil> obtenerPerfiles(boolean estado);
 }

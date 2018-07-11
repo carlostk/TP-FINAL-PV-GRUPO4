@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <body>
+         <ui:composition template="./../templates/template.xhtml">
+
+            <ui:define name="content">
+                <br/>
+                <p:panel header="Asistencias" >
+                    <h:form >
+                          <p:growl id="mensaje" />
+                                <br/>                                     
+                                <p:panelGrid columns="2" >
+                                    <p:outputLabel value="Materias:"/>
+                                    <p:selectOneMenu id="mnuMateria" value="#{asistenciaFormBean.docenteMateria}"
+                                                     converter="omnifaces.SelectItemsConverter" required="true"  >
+                                        <f:selectItems value="#{docenteMateriaBean.obtenerdocenteMaterias()}" var="mat"
+                                                       itemLabel="#{mat.materia.nombre}" itemValue="#{mat}" />
+                                    </p:selectOneMenu>
+                                    
+                                    <p:commandButton value="Ver Asistencias" update="tblAsistencia" 
+                                                     actionListener="#{asistenciaFormBean.obtenerAsistenciaAlumnosPorDocenteMateria()}" />
+                                 </p:panelGrid> 
+                                    <br/>
+                                     <br/>
+                                    <p:dataTable id="tblAsistencia" var="alu" value="#{asistenciaFormBean.asistenciaMaterias}"
+                                             >
+                                                           
+                                        <p:column headerText="LU Alumno">
+                                            <p:outputLabel value="#{alu.inscripcionesAlumnos.alumno.libretaUniversitaria}" />
+                                        </p:column>
+                                        <p:column headerText="Nombre">
+                                            <p:outputLabel value="#{alu.inscripcionesAlumnos.alumno.perfil.nombres}" />
+                                        </p:column>
+                                        <p:column headerText="Fecha" >
+                                            <p:outputLabel value="#{alu.asiFecha}" />
+                                        </p:column>
+                                        <p:column headerText="Asistencia" >
+                                            <p:outputLabel value="#{alu.asiValor}"/>
+                                        </p:column>                                    
+                                        
+                                    </p:dataTable>
+
+                              
+                            </h:form>
+                </p:panel>
+            </ui:define>
+         </ui:composition>
+    </body>
+</html>

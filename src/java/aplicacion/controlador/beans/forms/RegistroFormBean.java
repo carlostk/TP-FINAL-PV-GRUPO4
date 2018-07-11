@@ -16,6 +16,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 /**
@@ -23,7 +24,7 @@ import javax.faces.context.FacesContext;
  * @author Oscar
  */
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class RegistroFormBean implements Serializable {
 @ManagedProperty(value = "#{perfilBean}")
 private PerfilBean perfilBean;

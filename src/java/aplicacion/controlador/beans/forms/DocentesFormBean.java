@@ -10,13 +10,14 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 
 /**
  *
  * @author Oscar
  */
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class DocentesFormBean implements Serializable {
 @ManagedProperty(value = "#{docenteBean}")
     private DocenteBean docenteBean;

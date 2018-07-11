@@ -11,6 +11,7 @@ import aplicacion.modelo.dominio.Alumno;
 import java.io.Serializable;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
@@ -70,11 +71,17 @@ public class AlumnoDAOImp implements AlumnoDAO ,Serializable{
 
     @Override
     public List<Alumno> obtenerAlumnos() {
+        List<Alumno> alumnos;
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Criteria criteria = session.createCriteria(Alumno.class);
         criteria.addOrder(Order.asc("codigo"));
-        List alumnos = criteria.list();
+        alumnos = (List<Alumno>) criteria.list();
+        for (Alumno dm : alumnos) {
+            Hibernate.initialize(dm.getPerfil());
+            Hibernate.initialize(dm.getCarrera());
+        }
+        session.close();
         return alumnos;
     }
     

@@ -9,13 +9,14 @@ import aplicacion.controlador.beans.AulasMateriasBean;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 
 /**
  *
  * @author Pc-Yo
  */
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class AulasMateriasFormBean {
 
     @ManagedProperty(value = "#{aulasMateriasBean}")

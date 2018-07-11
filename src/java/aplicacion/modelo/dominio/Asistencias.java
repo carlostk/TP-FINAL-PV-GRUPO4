@@ -12,7 +12,7 @@ public class Asistencias  implements java.io.Serializable {
 
      private Integer asiCodigo;
      private AulasMaterias aulasMaterias;
-     private InscripcionesAlumnos inscripcionesAlumnos;
+     private InscripcionAlumno inscripcionesAlumnos;
      private Date asiFecha;
      private String asiValor;
      private boolean asiEstado;
@@ -20,7 +20,7 @@ public class Asistencias  implements java.io.Serializable {
     public Asistencias() {
     }
 
-    public Asistencias(AulasMaterias aulasMaterias, InscripcionesAlumnos inscripcionesAlumnos, Date asiFecha, String asiValor, boolean asiEstado) {
+    public Asistencias(AulasMaterias aulasMaterias, InscripcionAlumno inscripcionesAlumnos, Date asiFecha, String asiValor, boolean asiEstado) {
        this.aulasMaterias = aulasMaterias;
        this.inscripcionesAlumnos = inscripcionesAlumnos;
        this.asiFecha = asiFecha;
@@ -42,11 +42,11 @@ public class Asistencias  implements java.io.Serializable {
     public void setAulasMaterias(AulasMaterias aulasMaterias) {
         this.aulasMaterias = aulasMaterias;
     }
-    public InscripcionesAlumnos getInscripcionesAlumnos() {
+    public InscripcionAlumno getInscripcionesAlumnos() {
         return this.inscripcionesAlumnos;
     }
     
-    public void setInscripcionesAlumnos(InscripcionesAlumnos inscripcionesAlumnos) {
+    public void setInscripcionesAlumnos(InscripcionAlumno inscripcionesAlumnos) {
         this.inscripcionesAlumnos = inscripcionesAlumnos;
     }
     public Date getAsiFecha() {

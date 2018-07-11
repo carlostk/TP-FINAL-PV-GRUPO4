@@ -14,6 +14,7 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 /**
@@ -21,7 +22,7 @@ import javax.faces.context.FacesContext;
  * @author Pc-Yo
  */
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class AulasMateriasBean {
 
     private AulasMaterias aulasMaterias;

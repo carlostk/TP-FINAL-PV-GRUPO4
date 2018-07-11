@@ -15,13 +15,14 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 
 /**
  *
  * @author Oscar
  */
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class ListaDocentesDesactivadosFormBean implements Serializable {
 
     @ManagedProperty(value = "#{docenteBean}")

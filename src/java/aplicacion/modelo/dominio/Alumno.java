@@ -25,7 +25,10 @@ public class Alumno  implements java.io.Serializable {
         this.perfil = perfiles;
         this.libretaUniversitaria = aluLibretaUniversitaria;
     }
-   
+   @Override
+    public String toString(){
+        return String.format("Alumno[%d,%s]", codigo, carrera,perfil,libretaUniversitaria);
+    }
     public Integer getCodigo() {
         return this.codigo;
     }

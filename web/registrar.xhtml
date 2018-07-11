@@ -56,7 +56,7 @@
                                      actionListener="#{registroFormBean.registrar()}"/>
                 </p:panelGrid>
                 <br />
-                <p:link value="Volver al Login" outcome="index?faces-redirect=true" />
+                <p:link value="Volver al Login" outcome="index?faces-redirect=true"  rendered="#{loginFormBean.verificarSesion() eq false}"/>
             </p:panel>
         </h:form>
     </h:body>

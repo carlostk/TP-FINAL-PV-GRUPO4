@@ -20,7 +20,7 @@ import javax.faces.context.FacesContext;
  * @author pc1
  */
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class LoginFormBean implements Serializable{
 @ManagedProperty(value = "#{usuarioBean}")
     private UsuarioBean usuarioBean;
