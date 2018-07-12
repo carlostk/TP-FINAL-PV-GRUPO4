@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <body>
+         <ui:composition template="./../templates/template.xhtml">
+
+            <ui:define name="content">
+                <br/>
+                <div >
+                    <h:form id="formAsiste">
+                        <p:panel header=" Asistencia" >
+
+                            <p:growl id="msg" />
+                            <h:panelGrid cellpadding="7" columns="1">
+                                   <h:panelGrid columns="2" >
+                                    <p:outputLabel value="Materias:"/>
+                                    <p:selectOneMenu id="mnuMateria" value="#{asistenciaFormBean.docenteMateria}"
+                                                     converter="omnifaces.SelectItemsConverter" required="true" >
+                                        <f:selectItems value="#{asistenciaFormBean.obtenerdocenteMaterias()}" var="mat"
+                                                       itemLabel="#{mat.materia.nombre}" itemValue="#{mat}" />
+                                    </p:selectOneMenu>
+                                    <p:outputLabel value="Fecha:"/>
+                                    <p:calendar id="txtFecha" pattern="dd-MM-yyyy" mask="true"
+                                            required="true" value="#{asistenciaFormBean.asistenciaBean.asistencia.asiFecha}" />
+                                    <p:outputLabel  value="Estado:"/>
+                                   <p:selectOneMenu id="mnuPeriodo" value="#{asistenciaFormBean.asistenciaBean.asistencia.asiValor}"  >
+                                    <f:selectItem itemLabel="Ausente" itemValue="Ausente" />
+                                    <f:selectItem itemLabel="Presente" itemValue="Presente" />
+                                    <f:selectItem itemLabel="Tardanza" itemValue="Tardanza" />
+                                   </p:selectOneMenu>
+                                    <p:commandButton value="aseptar" update="msg" id="btnRegistrar"  actionListener="#{asistenciaFormBean.registrarAsistenciaporAlumno()}"
+                                                       />
+                                    <p:outputLabel />
+                                    
+                                </h:panelGrid>
+                           </h:panelGrid>
+
+                        </p:panel>
+                    </h:form>
+
+                    
+                </div>
+            </ui:define>
+         </ui:composition>
+    </body>
+</html>

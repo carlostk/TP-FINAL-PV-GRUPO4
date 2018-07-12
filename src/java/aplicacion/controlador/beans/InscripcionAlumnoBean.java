@@ -6,14 +6,17 @@
 package aplicacion.controlador.beans;
 
 import aplicacion.datos.hibernate.dao.AlumnoDAO;
+import aplicacion.datos.hibernate.dao.AulasMateriasDAO;
 import aplicacion.datos.hibernate.dao.DocenteDAO;
 import aplicacion.datos.hibernate.dao.DocenteMateriaDAO;
 import aplicacion.datos.hibernate.dao.InscripcionAlumnoDAO;
 import aplicacion.datos.hibernate.dao.imp.AlumnoDAOImp;
+import aplicacion.datos.hibernate.dao.imp.AulasMateriasDAOImp;
 import aplicacion.datos.hibernate.dao.imp.DocenteDaoImp;
 import aplicacion.datos.hibernate.dao.imp.DocenteMateriaDAOImp;
 import aplicacion.datos.hibernate.dao.imp.InscripcionAlumnoDaoImp;
 import aplicacion.modelo.dominio.Alumno;
+import aplicacion.modelo.dominio.AulasMaterias;
 import aplicacion.modelo.dominio.Docente;
 import aplicacion.modelo.dominio.DocenteMateria;
 import aplicacion.modelo.dominio.InscripcionAlumno;
@@ -41,6 +44,7 @@ public class InscripcionAlumnoBean implements Serializable{
     private DocenteDAO docenteDao;
     private DocenteMateriaDAO docenteMateriaDao;
     private AlumnoDAO alumnoDaoImp;
+    private AulasMaterias materia;
     
     public InscripcionAlumnoBean() {
         inscripcionAlumno= new InscripcionAlumno();
@@ -50,6 +54,17 @@ public class InscripcionAlumnoBean implements Serializable{
         alumnos=alumnoDaoImp.obtenerAlumnos();
         docenteMateriaDao=new DocenteMateriaDAOImp();
         docenteDao=new DocenteDaoImp();
+        materia=new AulasMaterias();
+    }
+
+    
+
+    public AulasMaterias getMateria() {
+        return materia;
+    }
+
+    public void setMateria(AulasMaterias materia) {
+        this.materia = materia;
     }
 
     public InscripcionAlumno getInscripcionAlumno() {
@@ -107,7 +122,7 @@ public class InscripcionAlumnoBean implements Serializable{
     public void setDocenteDao(DocenteDAO docenteDao) {
         this.docenteDao = docenteDao;
     }
-    
+   //agrega la inscripcion realizada por el alumno. 
     public void agregar()
     {
      Usuario usuario = (Usuario)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioValidado");
@@ -123,11 +138,14 @@ public class InscripcionAlumnoBean implements Serializable{
       }
       
     }
+    
+    
     public void eliminar(InscripcionAlumno inscripcion){
       inscripcion.setEstado(false);
       inscripcionAlumnoDao.modificarInscripcion(inscripcion);
       inscripciones=inscripcionAlumnoDao.obtenerTodoInscripcion();
     }
+    //obtiene todas las inscripciones de los alumnos que tiene un profesor.
     public List<InscripcionAlumno> obtenerInscripcionesProfesor() {
         List<InscripcionAlumno>inscrip= new ArrayList<>();
          System.out.println("HOLAAAAAAAAAA");
@@ -141,7 +159,8 @@ public class InscripcionAlumnoBean implements Serializable{
               
               for(InscripcionAlumno i : inscripciones)
               {
-                 if(i.getDocenteMateria().getDocente().getLegajo().equals(d.getLegajo()))
+                  System.out.println("HOLA:"+i.getDocenteMateria().getMateria().getCodigo());
+                 if(i.getDocenteMateria().getDocente().getLegajo().equals(d.getLegajo()) )
                  {
                    
                    inscrip.add(i);
@@ -152,6 +171,7 @@ public class InscripcionAlumnoBean implements Serializable{
         }
         return inscrip;
     }
+    //obtiene todas las incripciones a materias que realizo el alumno.
     public List<InscripcionAlumno> obtenerInscripcionesAlumno()
     {
       List<InscripcionAlumno>inscrip= new ArrayList<>();
@@ -176,6 +196,7 @@ public class InscripcionAlumnoBean implements Serializable{
         }
        return inscrip;
     }
+    //obtiene todas las materias que puede inscribirse el alumno en base a su carrera.
     public List<DocenteMateria> obtenerMateriasAlumno()
     {
       List<DocenteMateria>materias= new ArrayList<>();
@@ -200,6 +221,7 @@ public class InscripcionAlumnoBean implements Serializable{
         }
       return materias;
     }
+    
     public boolean Buscar(DocenteMateria docenteMateria)
     {
       boolean buscado=false;
@@ -211,5 +233,47 @@ public class InscripcionAlumnoBean implements Serializable{
         }
       }
       return buscado;
+    }
+   //obtiene las aulas y materias que tiene el profesor. 
+     public List<AulasMaterias> obtenerMateriasProfesor() {
+         AulasMateriasDAO aulaMateriaDAO = new AulasMateriasDAOImp();
+        List<AulasMaterias>materiasP = new ArrayList<>();
+         
+        Usuario usuario1 = (Usuario)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioValidado");
+        System.out.println("codigo"+usuario1.getNombreUsuario());
+        for(Docente d : docenteDao.obtenerTodoDocente())
+        {
+           
+           if(d.getPerfil().getUsuario().getNombreUsuario().equals(usuario1.getNombreUsuario()))
+           {
+              
+              for(AulasMaterias i : aulaMateriaDAO.obtenerTodoAulasMaterias())
+              {
+                  System.out.println("HOLAAAAAAAAAAsapooooo");
+                 if(i.getDocentesMaterias().getDocente().getLegajo().equals(d.getLegajo()))
+                 {
+                   
+                   materiasP.add(i);
+                   
+                 }
+              }
+           }
+        }
+        return materiasP;
+    }
+     //busca una inscripcion atravez de su lu del alumno.
+      public boolean buscarInscripcionAlumno(String buscado)
+    {
+        boolean encontrado=false;
+        for(InscripcionAlumno i: inscripcionAlumnoDao.obtenerTodoInscripcion())
+        {
+          if(i.getAlumno().getLibretaUniversitaria().equals(buscado))
+          {
+            inscripciones.clear();
+            inscripciones.add(0, i);
+            encontrado=true;
+          }
+        }
+        return encontrado;
     }
 }

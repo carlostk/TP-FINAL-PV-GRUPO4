@@ -11,16 +11,26 @@
             <ui:define name="content">
                 <br/>
                 
-                <p:panel header="Administración de Docentes Materias" >
+                <p:panel header="Inscripciones de todos los Alumnos" >
                   <h:form id="form">
                    <p:growl id="mensajes"/>
-                    
+                     <h:panelGrid columns="2">
+                            <p:outputLabel value="Buscar por LU:" />
+                            <p:inputText  value="#{inscripcionFormBeans.buscado}" />
+                            <p:commandButton update="@([id$=basicDT]) mensajes" value="Buscar" actionListener="#{inscripcionFormBeans.buscar()}"/>   
+                            <p:outputLabel />
+                            <p:outputLabel />
+                            <p:outputLabel />
+                           </h:panelGrid>
                     <p:dataTable   id="basicDT" var="mate" value="#{inscripcionAlumnoBean.inscripciones}">
                         
                         <p:column  headerText="Codigo" style="width: 70px" class="c">
                             <h:outputText  value="#{mate.codigo}" />
                         </p:column>
-
+                        <p:column headerText="LU" class="c">
+                            <h:outputText value="#{mate.alumno.libretaUniversitaria}" />
+                               
+                        </p:column>
                         <p:column headerText="Nombre" class="c">
                             <h:outputText value="#{mate.alumno.perfil.nombres}" />
                                

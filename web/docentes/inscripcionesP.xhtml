@@ -11,24 +11,25 @@
             <ui:define name="content">
                 <br/>
                 
-                <p:panel header="Administración de Docentes Materias" >
+                <p:panel header="Inscripciones de Alumnos" >
                   <h:form id="form">
                    <p:growl id="mensajes"/>
                      
-                   <p:dataTable   id="basicDT" var="mate" value="#{inscripcionAlumnoBean.obtenerInscripcionesProfesor()}">
+                     <p:dataTable   id="basicDT" var="mate" value="#{inscripcionAlumnoBean.obtenerInscripcionesProfesor()}">
                         
                         <p:column  headerText="Codigo" style="width: 70px" class="c">
                             <h:outputText  value="#{mate.codigo}" />
                         </p:column>
 
-                        <p:column headerText="Nombre" class="c">
+                        <p:column headerText="Alumno" class="c">
                             <h:outputText value="#{mate.alumno.perfil.nombres}" />
-                               
                         </p:column>
-                                      
-                        <p:column headerText="Docente-Materia" class="c">
-                            
-                               <h:outputText value="#{mate.docenteMateria.docente.perfil.nombres}-#{mate.docenteMateria.materia.nombre}" />
+                        <p:column headerText="LU" class="c">
+                            <h:outputText value="#{mate.alumno.libretaUniversitaria}" />
+                               
+                        </p:column>            
+                        <p:column headerText="Materia" class="c">
+                            <h:outputText value="#{mate.docenteMateria.materia.nombre}" />
                                 
                        </p:column>
                        

@@ -77,13 +77,14 @@ public class AulaBean {
     }
 
      public void registrarAula(){
-       
+      aula.setAulEstado(true);
       aulaDAO.agregarAula(aula);
       aulas=aulaDAO.obtenerTodoAula();
     }
 
     public void eliminarAula(Aula aula){
-      aulaDAO.eliminarAula(aula);
+      aula.setAulEstado(false);
+      aulaDAO.modificarAula(aula);
       aulas=aulaDAO.obtenerTodoAula();
     }
 

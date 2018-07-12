@@ -38,13 +38,6 @@
                                     <p:outputLabel />
                                     
                                 </h:panelGrid>
-                                
-                          
-
-
-                                
-                                
-
                                 <p:commandButton value="Filtrar Alumnos" update="formAsiste"
                                                  actionListener="#{asistenciaFormBean.obtenerAlumnosPorMateria()}" />
 
@@ -99,7 +92,7 @@
                                 </p:selectOneMenu>
 
                             </h:panelGrid>
-                            <p:commandButton value="aseptar" actionListener="#{asistenciaFormBean.registrarAsistencia2()}" update="mensajes formAsiste:tblAlumnos"
+                            <p:commandButton value="aseptar" actionListener="#{asistenciaFormBean.registrarAsistenciaPorElProfesor()}" update="mensajes formAsiste:tblAlumnos"
                                               style="margin: 20px" oncomplete="PF('dialogTomarAsistencia').hide();"/>
                         </p:dialog>
                     </h:form>

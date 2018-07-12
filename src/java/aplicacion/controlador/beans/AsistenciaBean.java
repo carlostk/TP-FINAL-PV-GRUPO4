@@ -51,16 +51,17 @@ public class AsistenciaBean implements Serializable {
         this.asistenciaDao = asistenciaDao;
     }
       
-    
+    //modifica la asistencia.
     public void modificarAsistencia() {
         
         asistenciaDao.modificar(asistencia);
     }
-     
+     //verifica si la asistencia ya se encuentra en la base de datos segun la fecha y el alumno.
     public Asistencias validarAsistencia() {
         
         return asistenciaDao.validarAsistencia(asistencia);
     }
+    
     public List<Asistencias> obtenerAsistencia() {
         
         return asistenciaDao.obtenerAsistencia();

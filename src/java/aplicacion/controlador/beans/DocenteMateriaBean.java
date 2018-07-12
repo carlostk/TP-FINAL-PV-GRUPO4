@@ -35,7 +35,7 @@ public class DocenteMateriaBean implements Serializable {
     private DocenteMateria docenteMateria;
     private List<DocenteMateria> docentesMaterias;
     private DocenteMateriaDAO docenteMateriaDao;
-     private Materia materia;
+    private Materia materia;
     private List<Materia> materias;
     private MateriaDAO materiaDao;
     private List<Docente> docentes;
@@ -122,7 +122,7 @@ public class DocenteMateriaBean implements Serializable {
         this.estado = estado;
     }
     
-        public void registrarDocenteMateria()
+   public void registrarDocenteMateria()
     {
         System.out.println("VALORRRR"+docenteMateria.getMateria().getNombre());
        if(estado.equals("h"))
@@ -134,14 +134,18 @@ public class DocenteMateriaBean implements Serializable {
             docenteMateria.setHabilitado(false);
           }
        
-      docenteMateria.setEstado(false);
+      docenteMateria.setEstado(true);
       docenteMateriaDao.agregarDocenteMateria(docenteMateria);
+      docentesMaterias=docenteMateriaDao.obtenerTodoDocenteMateria();
     }
     public void eliminarDocenteMateria(DocenteMateria docenteMateria)
     {
-      docenteMateriaDao.eliminarDocenteMateria(docenteMateria);
+      docenteMateria.setEstado(false);
+     docenteMateriaDao.modificarDocenteMateria(docenteMateria);
       docentesMaterias=docenteMateriaDao.obtenerTodoDocenteMateria();
     }
+    
+    //obtiene las materias del profesor comparando su legajo.
     public List<DocenteMateria> obtenerdocenteMaterias()
     {
       List<DocenteMateria>docentem= new ArrayList<>();

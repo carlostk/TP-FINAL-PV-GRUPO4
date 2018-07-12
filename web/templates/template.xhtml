@@ -25,18 +25,15 @@
                     <div id="tooplate_middle">
                         <h:form >
                             <p:menubar rendered="#{loginFormBean.verificarProfesor()}">
-                                <p:submenu label="Carreras">
-
-                                </p:submenu>
-
-                                <p:submenu label="Ver Asistecia">
+                                
+                                
+                                <p:submenu label="Alumno">
+                                     <p:menuitem value="Inscripciones de Alumnos" outcome="/docentes/inscripcionesP"/>
                                      <p:menuitem value="Crear Asistencia" outcome="/docentes/altaAsistencia"/>
                                       <p:menuitem value="Ver Asistencia " outcome="/docentes/Asistencias"/>
                                 </p:submenu>                           
 
-                                <p:submenu label="Horarios">
-
-                                </p:submenu>
+                                <p:menuitem value="Mis Materias" outcome="/docentes/materiasProfesor"/>
 
                                 <p:submenu label="Datos Personales">
                                     <p:menuitem value="Usuario" action="/datos/usuario?faces-redirect=true" />
@@ -56,7 +53,7 @@
                                     <p:menuitem value="Inscripcion a Materias" outcome="/alumnos/inscripcion"/>
                                 </p:submenu>
                                 <p:menuitem value="Horario" outcome="/alumnos/verHorarioMateria"/>
-                                
+                                <p:menuitem value="Asistencia" outcome="/alumnos/asistenciaA"/>
                                 
                                 <p:submenu label="Datos Personales">
                                     <p:menuitem value="Usuario" action="/datos/usuario?faces-redirect=true"   />

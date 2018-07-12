@@ -13,6 +13,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
@@ -53,12 +54,18 @@ public class AulasMateriasDAOImp implements Serializable, AulasMateriasDAO{
     @Override
     public List<AulasMaterias> obtenerTodoAulasMaterias() {
         List<AulasMaterias> aulasMaterias;
-        List<AulasMaterias> aux= null;
+        System.out.println("fassssssssssssssss");
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Criteria criteria = session.createCriteria(AulasMaterias.class);
         aulasMaterias =(List<AulasMaterias>) criteria.list();
         
+        for (AulasMaterias d : aulasMaterias) {
+            Hibernate.initialize(d.getDocentesMaterias());
+            Hibernate.initialize(d.getDocentesMaterias().getMateria());
+            Hibernate.initialize(d.getDocentesMaterias().getMateria().getCarrera());
+            Hibernate.initialize(d.getAulas());
+        }
         session.close();
                                                                                                                                                             
         return  aulasMaterias;

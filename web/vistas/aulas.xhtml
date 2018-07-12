@@ -18,14 +18,15 @@
 
                     <p:panel header="Listado de Aulas" >
                         <h:form id="form">
+                            <p:growl id="mensajes1"/>
                             <br/>
-                            <p:panelGrid columns="4">
+                            <h:panelGrid columns="4">
                             <p:commandButton value="Agregar Aula" onclick="PF('dlg_aula').show();" />
                             <p:outputLabel />
                             <p:outputLabel />
                             <p:commandButton value="Asignar Materia" onclick="PF('dgl_materia').show();"
                                              oncomplete="PF('dgl_materia').show()"/>
-                            </p:panelGrid>
+                            </h:panelGrid>
                             <br/>
 
                             <p:dataTable widgetVar="cellAulas" editMode="cell" editable="true" id="basicDT" var="aula" value="#{aulaFormBean.aulaBean.aulas}">
@@ -59,7 +60,7 @@
                                 </p:column>
 
                                 <p:column headerText="Eliminar">
-                                    <p:commandButton value="Eliminar" update="basicDT" actionListener="#{aulaFormBean.aulaBean.eliminarAula(aula)}"/>
+                                    <p:commandButton value="Eliminar" update="@([id$=basicDT])" actionListener="#{aulaFormBean.eliminar(aula)}"/>
                                 </p:column>
 
                             </p:dataTable>
@@ -75,16 +76,17 @@
 
 
                 <h:form>
+                    <p:growl id="mensajes2"/>
                     <p:dialog header="Nueva Aula" widgetVar="dlg_aula" modal="true" >
                         <p:panelGrid columns="2">
-                            <p:outputLabel value="Nombre :" />
-                            <p:inputText value="#{aulaFormBean.aulaBean.aula.aulNombre}"/>
-                            <p:outputLabel value="Descripcion :" />
-                            <p:inputText value="#{aulaFormBean.aulaBean.aula.aulDescripcion}"/>
-                            <p:outputLabel value="Capacidad :" />
-                            <p:inputText value="#{aulaFormBean.aulaBean.aula.aulCapacidad}"/>
-                            <p:commandButton value="Guardar" onclick="PF('dlg_aula').hide();" actionListener="#{aulaFormBean.aulaBean.registrarAula()}"
-                                             update="@([id$=basicDT])" />
+                            <p:outputLabel for="txtnom" value="Nombre :" />
+                            <p:inputText id="txtnom" value="#{aulaFormBean.aulaBean.aula.aulNombre}" required="true"/>
+                            <p:outputLabel for="txtdescri" value="Descripcion :" />
+                            <p:inputText id="txtdescri" value="#{aulaFormBean.aulaBean.aula.aulDescripcion}" required="true"/>
+                            <p:outputLabel for="txtcap" value="Capacidad :" />
+                            <p:inputText id="txtcap" value="#{aulaFormBean.aulaBean.aula.aulCapacidad}" required="true"/>
+                            <p:commandButton value="Guardar" onclick="PF('dlg_aula').hide();" actionListener="#{aulaFormBean.agregar()}"
+                                             update="@([id$=basicDT]) mensajes2" />
                         </p:panelGrid>
                     </p:dialog>
                 </h:form>   

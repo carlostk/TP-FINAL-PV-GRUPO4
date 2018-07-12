@@ -17,12 +17,10 @@
                     <h:form id="form">
                         <p:growl id="mensajes"/>
                         <br/>
-                        <p:panelGrid columns="4">
+                        
                             <p:commandButton value="Agregar Materia" onclick="PF('dlg_materia').show();" />
-                            <p:outputLabel />
-                            <p:outputLabel />
-                            <p:commandButton value="Asignar Profesor" onclick="PF('dlg_profesor').show();" />
-                        </p:panelGrid>
+                            
+                        
                         <br/>
                         <br/>
                         <p:dataTable widgetVar="cellMaterias" editMode="cell" editable="true" id="basicDT" var="mate" value="#{materiaBean.materias}">
@@ -42,18 +40,6 @@
                             </p:column>
 
 
-                            <p:column headerText="Estado" class="c">
-                                <p:cellEditor>
-                                    <f:facet name="output"><h:outputText value="#{mate.estado}" /></f:facet>
-                                    <f:facet name="input">
-                                        <p:selectOneMenu id="estadoCarrera" required="true"
-                                                         value="#{materiaFormBean.estado}">
-                                            <f:selectItem itemLabel="Habilitar" itemValue="h" />
-                                            <f:selectItem itemLabel="Desabilitar" itemValue="d" /> <!--Esta propiedad guarda al objeto que representa el texto del itemlabel anterior-->
-                                        </p:selectOneMenu>
-                                    </f:facet>
-                                </p:cellEditor>
-                            </p:column>
                             <p:column headerText="Carrera" class="c">
                                 <p:cellEditor>
                                     <f:facet name="output"><h:outputText value="#{mate.carrera.nombreCarrera}" /></f:facet>
@@ -69,9 +55,7 @@
                                 <p:commandButton value="Eliminar" update="basicDT @([id$=mensajes]" actionListener="#{materiaFormBean.eliminar(mate)}"/>
                             </p:column>
 
-                            <p:column headerText="Asignar Profesor">
-
-                            </p:column>
+                 
                         </p:dataTable>
                         <p:contextMenu for="basicDT" widgetVar="cMenu">   
                             <p:menuitem value="Edit Cell" icon="ui-icon-search" onclick="PF('cellMaterias').showCellEditor();return false;"/>  
@@ -81,27 +65,7 @@
                         <br />
 
 
-                        <p:dialog header="Asignación de Profesor" widgetVar="dlg_profesor" modal="true" >
-                            <p:panelGrid columns="2">
-                                <p:outputLabel value="Año" />
-                                <p:inputText value="#{docenteMateriaBean.docenteMateria.anio}"/>
-                                <p:outputLabel value="Habilitar" />
-                                <p:selectOneMenu id="estadodocente" required="true"
-                                                 value="#{docenteMateriaBean.estado}">
-                                    <f:selectItem itemLabel="Habilitar" itemValue="h" />
-                                    <f:selectItem itemLabel="Desabilitar" itemValue="d" />
-                                </p:selectOneMenu>
-                                <p:outputLabel value="Materia" />
-                                <h:selectOneMenu id="cmbmat" value="#{docenteMateriaBean.docenteMateria.materia}" converter="omnifaces.SelectItemsConverter">
-                                    <f:selectItems value="#{docenteMateriaBean.materias}" var="pr" itemLabel="#{pr.nombre}" itemValue="#{pr}"/><!--Esta propiedad guarda al objeto que representa el texto del itemlabel anterior-->
-                                </h:selectOneMenu>
-                                <p:outputLabel value="Profesor:" />
-                                <h:selectOneMenu id="cmbpro" value="#{docenteMateriaBean.docenteMateria.docente}" converter="omnifaces.SelectItemsConverter">
-                                    <f:selectItems value="#{docenteMateriaBean.docentes}" var="o" itemLabel="#{o.perfil.nombres}" itemValue="#{o}"/><!--Esta propiedad guarda al objeto que representa el texto del itemlabel anterior-->
-                                </h:selectOneMenu>
-                                <p:commandButton value="Guardar" actionListener="#{docenteMateriaBean.registrarDocenteMateria()}"  onclick="PF('dlg_profesor').hide();"/>
-                            </p:panelGrid>
-                        </p:dialog>
+                   
                     </h:form>
                     <h:form>
                         <p:growl id="mensajes1"/>
@@ -110,12 +74,7 @@
 
                                 <p:outputLabel for="txtnomMateria" value="Nombre de la Materia" />
                                 <p:inputText id="txtnomMateria"  value="#{materiaFormBean.materiaBean.materia.nombre}" required="true"/>
-                                <p:outputLabel  value="Estado" />
-                                <p:selectOneMenu id="estadoCarrera" required="true"
-                                                 value="#{materiaFormBean.materiaBean.estado}">
-                                    <f:selectItem itemLabel="Habilitar" itemValue="h" />
-                                    <f:selectItem itemLabel="Desabilitar" itemValue="d" /> <!--Esta propiedad guarda al objeto que representa el texto del itemlabel anterior-->
-                                </p:selectOneMenu>
+                                
                                 <p:outputLabel value="Carrera:" />
                                 <h:selectOneMenu id="cmbCarrera" value="#{materiaFormBean.materiaBean.materia.carrera}" converter="omnifaces.SelectItemsConverter">
                                     <f:selectItems value="#{materiaFormBean.materiaBean.carreras}" var="p" itemLabel="#{p.nombreCarrera}" itemValue="#{p}"/><!--Esta propiedad guarda al objeto que representa el texto del itemlabel anterior-->

@@ -34,6 +34,11 @@
                                <h:outputText value="#{mate.docenteMateria.materia.nombre}" />
                                 
                        </p:column>
+                       <p:column headerText="Carrera" class="c">
+                            
+                           <h:outputText value="#{mate.docenteMateria.materia.carrera.nombreCarrera}" />
+                                
+                       </p:column>
                        <p:column  class="c">
                            <p:commandButton value="Dar de Baja" update="basicDT @([id$=mensajes])" actionListener="#{inscripcionAlumnoBean.eliminar(mate)}"/>
                        </p:column>

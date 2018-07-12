@@ -75,6 +75,7 @@ public class CarreraDaoImp implements CarreraDAO, Serializable {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Criteria criteria = session.createCriteria(Carrera.class);
+        criteria.add(Restrictions.like("estado", true));
         carreras=(List<Carrera>) criteria.list();
         session.close();
         return  carreras;

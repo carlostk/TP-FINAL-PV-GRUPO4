@@ -21,7 +21,7 @@ public class AulasMaterias  implements java.io.Serializable {
      private String amHorarioHasta;
      private boolean amEstado;
      private String amFranjaHoraria;
-     private Set asistenciases = new HashSet(0);
+    
 
     public AulasMaterias() {
     }
@@ -38,18 +38,7 @@ public class AulasMaterias  implements java.io.Serializable {
         this.amEstado = amEstado;
         this.amFranjaHoraria = amFranjaHoraria;
     }
-    public AulasMaterias(Aula aulas, DocenteMateria docentesMaterias, String amPeriodo, String amComentario, String amDia, String amHorarioDesde, String amHorarioHasta, boolean amEstado, String amFranjaHoraria, Set asistenciases) {
-       this.aulas = aulas;
-       this.docentesMaterias = docentesMaterias;
-       this.amPeriodo = amPeriodo;
-       this.amComentario = amComentario;
-       this.amDia = amDia;
-       this.amHorarioDesde = amHorarioDesde;
-       this.amHorarioHasta = amHorarioHasta;
-       this.amEstado = amEstado;
-       this.amFranjaHoraria = amFranjaHoraria;
-       this.asistenciases = asistenciases;
-    }
+    
    
     public Integer getAmCodigo() {
         return this.amCodigo;
@@ -121,13 +110,7 @@ public class AulasMaterias  implements java.io.Serializable {
     public void setAmFranjaHoraria(String amFranjaHoraria) {
         this.amFranjaHoraria = amFranjaHoraria;
     }
-    public Set getAsistenciases() {
-        return this.asistenciases;
-    }
-    
-    public void setAsistenciases(Set asistenciases) {
-        this.asistenciases = asistenciases;
-    }
+   
 
  @Override
     public boolean equals(Object other) {

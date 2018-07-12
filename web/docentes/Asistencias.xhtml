@@ -14,17 +14,17 @@
                     <h:form >
                           <p:growl id="mensaje" />
                                 <br/>                                     
-                                <p:panelGrid columns="2" >
+                                <h:panelGrid columns="2" >
                                     <p:outputLabel value="Materias:"/>
                                     <p:selectOneMenu id="mnuMateria" value="#{asistenciaFormBean.docenteMateria}"
-                                                     converter="omnifaces.SelectItemsConverter" required="true"  >
+                                                     converter="omnifaces.SelectItemsConverter" required="true" >
                                         <f:selectItems value="#{docenteMateriaBean.obtenerdocenteMaterias()}" var="mat"
                                                        itemLabel="#{mat.materia.nombre}" itemValue="#{mat}" />
                                     </p:selectOneMenu>
-                                    
+                                    </h:panelGrid> 
                                     <p:commandButton value="Ver Asistencias" update="tblAsistencia" 
                                                      actionListener="#{asistenciaFormBean.obtenerAsistenciaAlumnosPorDocenteMateria()}" />
-                                 </p:panelGrid> 
+                                 
                                     <br/>
                                      <br/>
                                     <p:dataTable id="tblAsistencia" var="alu" value="#{asistenciaFormBean.asistenciaMaterias}"

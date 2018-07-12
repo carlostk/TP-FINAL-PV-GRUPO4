@@ -63,6 +63,8 @@ public class InscripcionAlumnoDaoImp implements InscripcionAlumnoDAO, Serializab
         inscripciones=(List<InscripcionAlumno>) criteria.list();
         for (InscripcionAlumno dm : inscripciones) {
             Hibernate.initialize(dm.getDocenteMateria());
+            Hibernate.initialize(dm.getDocenteMateria().getMateria());
+            Hibernate.initialize(dm.getDocenteMateria().getMateria().getCarrera());
             Hibernate.initialize(dm.getAlumno());
         }
         session.close();
@@ -77,7 +79,6 @@ public class InscripcionAlumnoDaoImp implements InscripcionAlumnoDAO, Serializab
         Criteria criteria = session.createCriteria(InscripcionAlumno.class);
         criteria.createAlias("docenteMateria.docente", "us");
         criteria.add(Restrictions.like("us.legajo", legajo));
-        System.out.println("PPPPPPPPPPPPPPPPPPPPPPPPPPPPERR"+criteria.list().isEmpty());
         inscripciones=(List<InscripcionAlumno>) criteria.list();
         for (InscripcionAlumno dm : inscripciones) {
             Hibernate.initialize(dm.getDocenteMateria());

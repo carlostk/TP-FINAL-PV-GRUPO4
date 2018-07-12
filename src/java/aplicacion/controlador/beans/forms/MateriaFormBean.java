@@ -11,7 +11,6 @@ import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
@@ -26,7 +25,7 @@ public class MateriaFormBean implements Serializable{
 @ManagedProperty(value = "#{materiaBean}")
     
 private MateriaBean materiaBean;
-private String estado="";
+
     public MateriaFormBean() {
     }
 public void agregar()
@@ -47,15 +46,7 @@ public void modificar(Materia materia)
   }
   else
   {
-    if(estado.equals("h"))
-         {
-       
-           materia.setEstado(true);
-         }
-         if(estado.equals("d"))
-         {
-           materia.setEstado(false);
-         }
+    
           materiaBean.getMateriaDao().modificarMateria(materia);
           FacesMessage mensaje = new FacesMessage(FacesMessage.SEVERITY_INFO,"Modificado","Modificado");
           FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -81,13 +72,7 @@ public void eliminar(Materia materia)
         this.materiaBean = materiaBean;
     }
 
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
+    
     
     
 }

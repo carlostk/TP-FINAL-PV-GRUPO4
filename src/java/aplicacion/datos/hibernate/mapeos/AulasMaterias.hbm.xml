@@ -40,11 +40,6 @@
         <comment>{MAÑANA-MEDIA MAÑANA-MEDIA TARDE-TARDE-NOCHE}</comment>
       </column>
     </property>
-    <set fetch="select" inverse="true" lazy="true" name="asistenciases" table="asistencias">
-      <key>
-        <column name="asi_aula_materia" not-null="true"/>
-      </key>
-      <one-to-many class="aplicacion.modelo.dominio.Asistencias"/>
-    </set>
+    
   </class>
 </hibernate-mapping>

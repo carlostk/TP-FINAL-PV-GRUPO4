@@ -71,6 +71,7 @@ public class MateriaDaoImp implements MateriaDAO, Serializable{
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Criteria criteria = session.createCriteria(Materia.class);
+        criteria.add(Restrictions.like("estado", true));
         materias=(List<Materia>) criteria.list();
         for(Materia m : materias)
         {

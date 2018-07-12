@@ -27,7 +27,16 @@ public class InscripcionFormBeans {
     private InscripcionAlumnoBean inscripcionAlumnoBean;
     @ManagedProperty(value = "#{carreraBean}")
     private CarreraBean carreraBean;
+    private String buscado="";
     public InscripcionFormBeans() {
+    }
+
+    public String getBuscado() {
+        return buscado;
+    }
+
+    public void setBuscado(String buscado) {
+        this.buscado = buscado;
     }
 
     public InscripcionAlumnoBean getInscripcionAlumnoBean() {
@@ -63,4 +72,24 @@ public class InscripcionFormBeans {
       }
     
     }
+    
+     public void buscar()
+    {
+      if(buscado.equals(""))
+      {
+       FacesMessage mensaje = new FacesMessage(FacesMessage.SEVERITY_ERROR,"ingrese un valor","ingrese un valor");
+       FacesContext facesContext = FacesContext.getCurrentInstance();
+       facesContext.addMessage(null, mensaje);
+      }
+      else
+      {
+        if(inscripcionAlumnoBean.buscarInscripcionAlumno(buscado)==false)
+        {
+           FacesMessage mensaje = new FacesMessage(FacesMessage.SEVERITY_INFO,"No Existe","No Existe");
+           FacesContext facesContext = FacesContext.getCurrentInstance();
+           facesContext.addMessage(null, mensaje);
+        }
+      }
+    }
+    
 }

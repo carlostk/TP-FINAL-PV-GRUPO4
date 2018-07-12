@@ -8,31 +8,19 @@ package aplicacion.controlador.beans.forms;
 import aplicacion.controlador.beans.AsistenciaBean;
 import aplicacion.controlador.beans.AulasMateriasBean;
 import aplicacion.controlador.beans.InscripcionAlumnoBean;
-
 import aplicacion.controlador.beans.MateriaBean;
 import aplicacion.datos.hibernate.dao.AsistenciaDAO;
 import aplicacion.datos.hibernate.dao.AulasMateriasDAO;
-
-
-import aplicacion.datos.hibernate.dao.InscripcionAlumnoDAO;
 import aplicacion.datos.hibernate.dao.imp.AsistenciaDAOImp;
-
 import aplicacion.datos.hibernate.dao.imp.AulasMateriasDAOImp;
-
-import aplicacion.datos.hibernate.dao.imp.DocenteMateriaDAOImp;
-
 import aplicacion.modelo.dominio.Asistencias;
 import aplicacion.modelo.dominio.AulasMaterias;
-
-
 import aplicacion.modelo.dominio.Docente;
 import aplicacion.modelo.dominio.DocenteMateria;
 import aplicacion.modelo.dominio.InscripcionAlumno;
-import aplicacion.modelo.dominio.Perfil;
 import aplicacion.modelo.dominio.Usuario;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.faces.application.FacesMessage;
@@ -75,69 +63,42 @@ public class AsistenciaFormBean implements Serializable {
         aulaMaterias = new ArrayList<>();
        
     }
-       
-    public void registrarAsistencia2() {
-        /*FacesContext jsfCtx= FacesContext.getCurrentInstance();
-        ResourceBundle bundle = jsfCtx.getApplication().getResourceBundle(jsfCtx, "msg");*/
+    //registra la asistencia atravez del profesor.   
+    public void registrarAsistenciaPorElProfesor() {
+        
         asistenciaBean.getAsistencia().setAsiEstado(true);
         if (validarAsistencia() == true) {
             asistenciaBean.agregarAsistencia();
-            /*FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("men.asistenciaAgreCorrect"), null);
-            FacesContext.getCurrentInstance().addMessage(null, facesMessage);*/
+            FacesMessage mensaje = new FacesMessage(FacesMessage.SEVERITY_INFO,"Asistencia Registrada","Asistencia Registrada");
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.addMessage(null, mensaje);
             asistenciaBean.getAsistencia().setInscripcionesAlumnos(new InscripcionAlumno());
             asistenciaBean.getAsistencia().setAulasMaterias(new AulasMaterias());
             asistenciaBean.setAsistencia(new Asistencias());
             
         } else {
-            FacesMessage mensaje = new FacesMessage(FacesMessage.SEVERITY_INFO,"Materia ya inscripta","Materia ya inscripta");
+        FacesMessage mensaje = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Su asistencia ya esta registrada","Su asistencia ya esta registrada");
         FacesContext facesContext = FacesContext.getCurrentInstance();
         facesContext.addMessage(null, mensaje);
         }
     }
       
     
-    /**
-     *
-     * @return
-     */
+   //valida la aistencia en la base de datos de acuerdo a su fecha.
     public boolean validarAsistencia() {
         return asistenciaBean.validarAsistencia() == null;
     }
     
-    /**
-     *
-     */
+    
     public void modificarAsistencia() {
-        FacesContext jsfCtx= FacesContext.getCurrentInstance();
-        ResourceBundle bundle = jsfCtx.getApplication().getResourceBundle(jsfCtx, "msg");
+        
         asistenciaBean.modificarAsistencia();
-        FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("men.asistenciaModificada"), null);
+        FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,"modificado", null);
         FacesContext.getCurrentInstance().addMessage(null, facesMessage);
         asistenciaBean.setAsistencia(new Asistencias());
     }
     
-    /**
-     *
-     * @return
-     */
-    /*public Docente getDocenteSesion() {
-        Perfil perfil = (Perfil) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("perfilValidado");
-        IDocenteDAO docenteDAO = new DocenteDAOImp();
-        return docenteDAO.obtenerDocentePorPerfil(perfil);
-    }*/
-    
-    /**
-     *
-     * @return
-     */
-    /*public DocenteMateria obtenerDocenteMateria() {
-        IDocenteMateriaDAO docMatDAO = new DocenteMateriaDAOImp();
-        return docMatDAO.obtenerDocenteMateria(getDocenteSesion());
-    }*/
-    
-    /**
-     *
-     */
+   
     
     public void obtenerAulaMateriaPorDocenteMateria() {
         aulaMaterias = new ArrayList<>();
@@ -159,7 +120,7 @@ public class AsistenciaFormBean implements Serializable {
            }
         }
     }
-    
+    //obtine todos las inscripciones de la materia.
     public void obtenerAlumnosPorMateria() {
         inscripcionAlumnos = new ArrayList<>();
         
@@ -173,34 +134,48 @@ public class AsistenciaFormBean implements Serializable {
         }
     }
     
-    /**
-     *
-     * @return
-     */
-   /* public List<Asistencia> obtenerAsistencia() {
-        return asistenciaBean.obtenerAsistencia();
+   
+    //obtiene los docentematerias que tengan aulas asignadas y donde esta inscripto el ususario.
+    public List<DocenteMateria> obtenerdocenteMaterias()
+    {
+        AulasMateriasDAO aulaMateriaDAO = new AulasMateriasDAOImp();
+        List<DocenteMateria>docentem= new ArrayList<>();
+      for(InscripcionAlumno i:inscripcionAlumnoBean.obtenerInscripcionesAlumno())
+      {
+        for(AulasMaterias a:aulaMateriaDAO.obtenerTodoAulasMaterias())
+        {
+          if(a.getDocentesMaterias().getCodigo()==i.getDocenteMateria().getCodigo())
+          {
+            docentem.add(a.getDocentesMaterias());
+          }
+        }
+      }
+    return docentem;
     }
     
-    public List<Date> obtenerFecha() {
-        List<Date> fecha = new ArrayList<>();
-        InscripcionAlumnoDAO iadao = new InscripcionAlumnoDAOImp();
-        for (Asistencia asi: asistenciaBean.obtenerAsistencia()) {
-            if (fecha.isEmpty()) {
-                System.out.println("fecha 1 " + asi.getFecha());
-                fecha.add(asi.getFecha());
-            } else {
-                for (Date dat: fecha) {
-                    if (!dat.equals(asi.getFecha())) {
-                        System.out.println("fecha adentro " + asi.getFecha());
-                        fecha.add(asi.getFecha());
-                    }
-                }
-            }
-        }
-        return fecha;
-    }*/
-    
-    
+  public void registrarAsistenciaporAlumno()
+  {
+   AulasMateriasDAO aulaMateriaDAO = new AulasMateriasDAOImp(); 
+    for(InscripcionAlumno i:inscripcionAlumnoBean.obtenerInscripcionesAlumno())
+      {
+          if(i.getDocenteMateria().getCodigo()==docenteMateria.getCodigo())
+          {
+            asistenciaBean.getAsistencia().setInscripcionesAlumnos(i);
+          }
+      }
+    for(AulasMaterias a:aulaMateriaDAO.obtenerTodoAulasMaterias())
+    {
+       if(a.getDocentesMaterias().getCodigo()== docenteMateria.getCodigo())
+       {
+         System.out.println("sdddddddddddddddddddssssssssssssssssssssssssssds");
+         asistenciaBean.getAsistencia().setAulasMaterias(a);
+       }
+       
+       
+    }
+     registrarAsistenciaPorElProfesor(); 
+  
+  }
    
     public void obtenerAsistenciaAlumnosPorDocenteMateria() {
         asistenciaMaterias = new ArrayList<>();
@@ -215,15 +190,7 @@ public class AsistenciaFormBean implements Serializable {
       
     }
     
-    /*public List<AulaMateria> obtenerAulaMateria() {
-        return aulaMateriaBean.obtenerAulaMateria();
-    }
-    */ 
-
-    /**
-     *
-     * @return
-     */
+   
  
     public AsistenciaBean getAsistenciaBean() {
         return asistenciaBean;

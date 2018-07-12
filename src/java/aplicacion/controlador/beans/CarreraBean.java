@@ -28,7 +28,6 @@ public class CarreraBean implements Serializable{
     private Carrera carrera;
     private CarreraDAO carreraDao;
     private List<Carrera> carreras;
-    private String estado;
     public CarreraBean() {
         carrera=new Carrera();
         carreraDao=new CarreraDaoImp();
@@ -63,25 +62,9 @@ public class CarreraBean implements Serializable{
         this.carreras = carreras;
     }
 
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-    
-    
     public void registrarCarrera()
     {
-       if(estado.equals("h"))
-      {
-       
-        carrera.setEstado(true);
-      }else
-          {
-            carrera.setEstado(false);
-          }
+      carrera.setEstado(true);
       carreraDao.agregarCarrera(carrera);
       carreras=carreraDao.obtenerTodoCarreras();
     }
@@ -99,7 +82,8 @@ public class CarreraBean implements Serializable{
     }
     public void eliminarCarrera(Carrera carrera)
     {
-      carreraDao.eliminarCarrera(carrera);
+      carrera.setEstado(false);
+      carreraDao.modificarCarrera(carrera);
       carreras=carreraDao.obtenerTodoCarreras();
     }
    

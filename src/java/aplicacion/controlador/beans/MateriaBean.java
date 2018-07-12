@@ -33,7 +33,6 @@ public class MateriaBean implements Serializable{
 
     private Materia materia;
     private MateriaDAO materiaDao;
-    private String estado;
     private Carrera carrera;
     private List<Carrera> carreras;
     private CarreraDAO carreraDao;
@@ -46,7 +45,6 @@ public class MateriaBean implements Serializable{
     @PostConstruct
     public void init(){
        materia = new Materia();
-       
        materiaDao= new MateriaDaoImp();
        carreraDao=new CarreraDaoImp();
        carrera=new Carrera();
@@ -70,14 +68,6 @@ public class MateriaBean implements Serializable{
 
     public void setMateriaDao(MateriaDAO materiaDao) {
         this.materiaDao = materiaDao;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
     }
 
     public Carrera getCarrera() {
@@ -115,20 +105,16 @@ public class MateriaBean implements Serializable{
      public void registrarMateria()
    {
      System.out.println("vALORRRRRRR"+materias.get(0).getCarrera().getNombreCarrera());
-     if(estado.equals("h"))
-      {
-       
+     
         materia.setEstado(true);
-      }else
-          {
-            materia.setEstado(false);
-          }
+    
      materiaDao.agregarMateria(materia);
      materias=materiaDao.obtenerTodoMateria();
    }
     public void eliminarMateria(Materia materia)
     {
-      materiaDao.eliminarMateria(materia);
+      materia.setEstado(false);
+      materiaDao.modificarMateria(materia);
       materias=materiaDao.obtenerTodoMateria();
     }
     public void buscarCarrera()

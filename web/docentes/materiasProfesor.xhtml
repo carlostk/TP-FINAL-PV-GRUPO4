@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <body>
+         <ui:composition template="./../templates/template.xhtml">
+
+            <ui:define name="content">
+                <br/>
+                
+                <p:panel header=" Materias" >
+                  <h:form id="form">
+                   <p:growl id="mensajes"/>
+                    
+                    <br/>
+                    <br/>
+                    <p:dataTable   id="basicDT" var="mate" value="#{inscripcionAlumnoBean.obtenerMateriasProfesor()}">
+                        
+                        <p:column  headerText="Codigo" style="width: 70px" class="c">
+                            <h:outputText  value="#{mate.amCodigo}" />
+                        </p:column>
+
+                        <p:column headerText="Materia" class="c">
+                            <h:outputText value="#{mate.docentesMaterias.materia.nombre}" />
+                               
+                        </p:column>
+                                      
+                        <p:column headerText="Aula" class="c">
+                            
+                            <h:outputText value="#{mate.aulas.aulNombre}" />
+                                
+                       </p:column>
+                         <p:column headerText="Horario" class="c">
+                            
+                             <h:outputText value="#{mate.amHorarioDesde}-#{mate.amHorarioHasta}" />
+                                
+                       </p:column>
+                        <p:column headerText="Dia" class="c">
+                            
+                            <h:outputText value="#{mate.amDia}" />
+                                
+                       </p:column>
+                        <p:column headerText="Carrera" class="c">
+                            
+                            <h:outputText value="#{mate.docentesMaterias.materia.carrera.nombreCarrera}" />
+                                
+                       </p:column>
+                   </p:dataTable>
+                   
+                    <br />
+                    <br />
+                    
+                    
+
+                   
+                 </h:form>
+                  
+                   
+                </p:panel>
+            </ui:define>
+
+        </ui:composition>
+    </body>
+</html>

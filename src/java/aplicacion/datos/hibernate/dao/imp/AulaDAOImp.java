@@ -50,11 +50,12 @@ public class AulaDAOImp implements Serializable, AulaDAO{
 
     @Override
     public List<Aula> obtenerTodoAula() {
-           List<Aula> aulas;
+        List<Aula> aulas;
         List<Aula> aux= null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Criteria criteria = session.createCriteria(Aula.class);
+        criteria.add(Restrictions.like("aulEstado", true));
         aulas=(List<Aula>) criteria.list();
         
         session.close();

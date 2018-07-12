@@ -6,12 +6,14 @@
 package aplicacion.controlador.beans.forms;
 
 import aplicacion.controlador.beans.AulaBean;
+import aplicacion.modelo.dominio.Aula;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -38,5 +40,21 @@ public class AulaFormBean {
 
     public void setAulaBean(AulaBean aulaBean) {
         this.aulaBean = aulaBean;
+    }
+     public void agregar()
+    {
+      aulaBean.registrarAula();
+      FacesMessage mensaje = new FacesMessage(FacesMessage.SEVERITY_INFO,"Agregado correctamente","Agregado correctamente");
+      FacesContext facesContext = FacesContext.getCurrentInstance();
+      facesContext.addMessage(null, mensaje);
+    
+    }
+      public void eliminar(Aula aula)
+    {
+      aulaBean.eliminarAula(aula);
+      FacesMessage mensaje = new FacesMessage(FacesMessage.SEVERITY_INFO,"Eliminado","Eliminado");
+      FacesContext facesContext = FacesContext.getCurrentInstance();
+      facesContext.addMessage(null, mensaje);
+      RequestContext.getCurrentInstance().update("form:mensajes1");
     }
 }

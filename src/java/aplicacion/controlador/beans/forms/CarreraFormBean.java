@@ -11,7 +11,6 @@ import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
@@ -50,16 +49,7 @@ private String buscado="";
      }
      else
      {
-         if(estado.equals("h"))
-         {
-       
-           carrera.setEstado(true);
-         }
-         if(estado.equals("d"))
-         {
-           carrera.setEstado(false);
-         }
-         carreraBean.getCarreraDao().modificarCarrera(carrera);
+          carreraBean.getCarreraDao().modificarCarrera(carrera);
           FacesMessage mensaje = new FacesMessage(FacesMessage.SEVERITY_INFO,"Modificado","Modificado");
           FacesContext facesContext = FacesContext.getCurrentInstance();
           facesContext.addMessage(null, mensaje);

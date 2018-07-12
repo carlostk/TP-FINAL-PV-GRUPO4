@@ -14,6 +14,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -59,6 +60,7 @@ public class DocenteMateriaDAOImp implements DocenteMateriaDAO, Serializable{
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Criteria criteria = session.createCriteria(DocenteMateria.class);
+        criteria.add(Restrictions.like("estado", true));
         docenteMaterias=(List<DocenteMateria>) criteria.list();
         for (DocenteMateria dm : docenteMaterias) {
             Hibernate.initialize(dm.getDocente());
